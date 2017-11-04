@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using LearnIt.Models;
+using LearnIt.Data.Context;
+using LearnIt.Data.Models;
 
 namespace LearnIt
 {

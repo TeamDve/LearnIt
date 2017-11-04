@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using LearnIt.Models;
+using LearnIt.Data.Models;
+using LearnIt.Data.Context;
 
 namespace LearnIt
 {
