@@ -14,7 +14,7 @@ namespace LearnIt.Data.Models
         
         //Base64 implementation
         //[Column(TypeName = "varchar(MAX)")]
-        //public string ImageBase { get; set; }
+        public string ImageBase { get; set; }
 
         //Image as Binary (varbinary(MAX))
         public byte[] ImageBinary { get; set; }

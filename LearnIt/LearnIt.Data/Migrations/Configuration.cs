@@ -1,11 +1,12 @@
 using LearnIt.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.Migrations;
-
+using LearnIt.Data.Context;
+using System.Linq;
 
 namespace LearnIt.Data.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<LearnIt.Data.Context.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -13,11 +14,21 @@ namespace LearnIt.Data.Migrations
             ContextKey = "LearnIt.Data.Context.ApplicationDbContext";
         }
 
-        protected override void Seed(LearnIt.Data.Context.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //The almighty dollar
-            context.Users.AddOrUpdate(new ApplicationUser() { UserName = "headAdmin", })
-            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Admin"})
+            if (!context.Roles.Any())
+            {
+                context.Roles.Add(new IdentityRole() { Name = "Admin" });
+                context.SaveChanges();
+                var role = context.Roles.Single();
+                var user = context.Users.Single();
+                user.Roles.Add(new IdentityUserRole()
+                {
+                    RoleId = role.Id,
+                    UserId = user.Id
+                });
+            }
+
         }
     }
 }
