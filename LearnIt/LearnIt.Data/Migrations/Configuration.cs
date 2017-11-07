@@ -11,6 +11,7 @@ namespace LearnIt.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
             ContextKey = "LearnIt.Data.Context.ApplicationDbContext";
         }
 
