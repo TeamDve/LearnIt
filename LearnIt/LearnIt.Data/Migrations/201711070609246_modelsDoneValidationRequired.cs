@@ -1,0 +1,18 @@
+namespace LearnIt.Data.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class modelsDoneValidationRequired : DbMigration
+    {
+        public override void Up()
+        {
+            DropColumn("dbo.Images", "ImageBase");
+        }
+        
+        public override void Down()
+        {
+            AddColumn("dbo.Images", "ImageBase", c => c.String());
+        }
+    }
+}

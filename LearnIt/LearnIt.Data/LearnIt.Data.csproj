@@ -86,6 +86,10 @@
     <Compile Include="Migrations\201711062058490_bastunV7.Designer.cs">
       <DependentUpon>201711062058490_bastunV7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711070609246_modelsDoneValidationRequired.cs" />
+    <Compile Include="Migrations\201711070609246_modelsDoneValidationRequired.Designer.cs">
+      <DependentUpon>201711070609246_modelsDoneValidationRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711062058490_bastunV7.resx">
       <DependentUpon>201711062058490_bastunV7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070609246_modelsDoneValidationRequired.resx">
+      <DependentUpon>201711070609246_modelsDoneValidationRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

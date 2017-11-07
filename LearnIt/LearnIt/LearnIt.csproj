@@ -301,6 +301,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.DataServices.csproj">
+      <Project>{6e9b02b7-d566-4bf0-ba1d-53e51d189887}</Project>
+      <Name>LearnIt.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LearnIt.Data\LearnIt.Data.csproj">
       <Project>{862da882-5e3a-4368-a132-f4cc8c4ffdb8}</Project>
       <Name>LearnIt.Data</Name>
