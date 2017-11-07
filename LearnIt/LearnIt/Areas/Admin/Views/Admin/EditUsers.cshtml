@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "EditUsers";
+}
+
+@model IEnumerable<LearnIt.Areas.Admin.Models.UserViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditUsers</h2>
+
+@foreach (var user in Model)
+{
+    <div>
+        @user.Username
+    </div>
+}

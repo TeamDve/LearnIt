@@ -13,7 +13,7 @@ namespace LearnIt
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.LowercaseUrls = true;//dada
+            routes.LowercaseUrls = true;
 
             routes.MapRoute(
                 name: "Default",

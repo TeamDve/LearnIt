@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{49
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnIt.Services", "LearnIt.Services\LearnIt.Services.csproj", "{86D4B3DC-80E8-400B-A6E7-C03993014D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnIt.DataServices", "LearnIt.Data.Services\LearnIt.DataServices.csproj", "{6E9B02B7-D566-4BF0-BA1D-53E51D189887}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,10 +37,6 @@ Global
 		{86D4B3DC-80E8-400B-A6E7-C03993014D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D4B3DC-80E8-400B-A6E7-C03993014D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86D4B3DC-80E8-400B-A6E7-C03993014D66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E9B02B7-D566-4BF0-BA1D-53E51D189887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E9B02B7-D566-4BF0-BA1D-53E51D189887}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E9B02B7-D566-4BF0-BA1D-53E51D189887}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E9B02B7-D566-4BF0-BA1D-53E51D189887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,7 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{862DA882-5E3A-4368-A132-F4CC8C4FFDB8} = {E514C81F-0679-4CA0-8ED0-A4AA123B40F7}
 		{86D4B3DC-80E8-400B-A6E7-C03993014D66} = {49DCE734-7E06-47B7-AB9E-167DB1896887}
-		{6E9B02B7-D566-4BF0-BA1D-53E51D189887} = {49DCE734-7E06-47B7-AB9E-167DB1896887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3625DE6D-9759-4FEE-8E96-EC7E077DECF3}

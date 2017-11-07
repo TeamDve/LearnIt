@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LearnIt.Data.Models
 {
@@ -9,7 +14,7 @@ namespace LearnIt.Data.Models
         
         //Base64 implementation
         //[Column(TypeName = "varchar(MAX)")]
-        //public string ImageBase { get; set; }
+        public string ImageBase { get; set; }
 
         //Image as Binary (varbinary(MAX))
         public byte[] ImageBinary { get; set; }

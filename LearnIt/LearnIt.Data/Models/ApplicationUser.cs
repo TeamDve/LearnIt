@@ -17,11 +17,6 @@ namespace LearnIt.Data.Models
             this.usersCourses = new HashSet<UserCourse>();
         }
 
-        public int? RoleId { get; set; }
-
-        [ForeignKey("RoleId")]
-        public virtual Role Role { get; set; }
-
         public int? DepartmentId { get; set; }
 
         [ForeignKey("DepartmentId")]
