@@ -28,5 +28,15 @@ namespace LearnIt.Areas.Admin.Controllers
                 }).ToList();
             return this.View(usersViewModel);
         }
+
+        public ActionResult UploadProject()
+        {
+            return this.View();
+        }
+
+        public ActionResult AssignProject()
+        {
+            return this.View();
+        }
     }
 }

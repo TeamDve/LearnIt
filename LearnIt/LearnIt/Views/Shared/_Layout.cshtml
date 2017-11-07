@@ -33,7 +33,13 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     @Html.ActionLink("EditUsers", "EditUsers", "Admin", new { area = "Admin" }, null)
-                            </li>
+                                </li>
+                                <li>
+                                    @Html.ActionLink("UploadProject", "UploadProject", "Admin", new { area = "Admin" }, null)
+                                </li>
+                                <li>
+                                    @Html.ActionLink("AssignProject", "AssignProject", "Admin", new { area = "Admin" }, null)
+                                </li>
                         </ul>
                     </li>
                     }
@@ -46,7 +52,6 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 
