@@ -8,7 +8,7 @@ namespace LearnIt
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);//dwqd
+            ConfigureAuth(app);
         }
     }
 }

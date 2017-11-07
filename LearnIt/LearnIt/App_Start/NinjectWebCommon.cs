@@ -68,11 +68,23 @@ namespace LearnIt.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ApplicationUserManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+            kernel.Bind<ApplicationUserManager>()
+                .ToMethod(_ => HttpContext
+                .Current
+                .GetOwinContext()
+                .GetUserManager<ApplicationUserManager>());
+
+            kernel.Bind<ApplicationDbContext>()
+                .ToMethod(_ => HttpContext
+                .Current
+                .GetOwinContext()
+                .GetUserManager<ApplicationDbContext>());
 
             //kernel.Bind<ApplicationDbContext>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationDbContext>());
 
-            kernel.Bind<ICourseService>().To<CourseService>().InRequestScope();
+            kernel.Bind<ICourseService>()
+                .To<CourseService>()
+                .InRequestScope();
         }        
     }
 }

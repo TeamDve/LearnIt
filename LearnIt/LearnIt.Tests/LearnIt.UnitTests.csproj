@@ -117,6 +117,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.DataServices.csproj">
+      <Project>{6e9b02b7-d566-4bf0-ba1d-53e51d189887}</Project>
+      <Name>LearnIt.DataServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearnIt.Data\LearnIt.Data.csproj">
+      <Project>{862da882-5e3a-4368-a132-f4cc8c4ffdb8}</Project>
+      <Name>LearnIt.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearnIt.Services\LearnIt.Services.csproj">
+      <Project>{86d4b3dc-80e8-400b-a6e7-c03993014d66}</Project>
+      <Name>LearnIt.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LearnIt\LearnIt.csproj">
       <Project>{CF7FFD49-886D-416D-A95B-383280B3CA49}</Project>
       <Name>LearnIt</Name>

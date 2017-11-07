@@ -27,8 +27,8 @@ namespace LearnIt.Data.Migrations
                     RoleId = role.Id,
                     UserId = user.Id
                 });
+                context.SaveChanges();
             }
-
         }
     }
 }
