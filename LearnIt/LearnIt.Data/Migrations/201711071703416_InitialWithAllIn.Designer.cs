@@ -7,13 +7,13 @@ namespace LearnIt.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class initialmigration : IMigrationMetadata
+    public sealed partial class InitialWithAllIn : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialWithAllIn));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711071420541_initialmigration"; }
+            get { return "201711071703416_InitialWithAllIn"; }
         }
         
         string IMigrationMetadata.Source

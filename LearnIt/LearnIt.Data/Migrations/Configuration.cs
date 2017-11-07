@@ -1,39 +1,34 @@
-﻿using LearnIt.Data.Context;
+using LearnIt.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using LearnIt.Data.Context;
 using System.Linq;
 
 namespace LearnIt.Data.Migrations
 {
-
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = false;
+            ContextKey = "LearnIt.Data.Context.ApplicationDbContext";
         }
 
         protected override void Seed(ApplicationDbContext context)
         {
             if (!context.Roles.Any())
             {
-                var role = context.Roles.Add(new IdentityRole("Admin"));
+                context.Roles.Add(new IdentityRole() { Name = "Admin" });
                 context.SaveChanges();
-
-
-                role = context.Roles.Single();
+                var role = context.Roles.Single();
                 var user = context.Users.Single();
-
-                user.Roles.Add(new IdentityUserRole
+                user.Roles.Add(new IdentityUserRole()
                 {
                     RoleId = role.Id,
                     UserId = user.Id
                 });
-                context.SaveChanges();
             }
+
         }
     }
 }

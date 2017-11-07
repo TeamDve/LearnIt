@@ -11,6 +11,8 @@ namespace LearnIt.Data.Context
         {
         }
 
+        public IDbSet<Position> DeptRoles { get; set; }
+
         public IDbSet<Department> Departments { get; set; }
 
         public IDbSet<Course> Courses { get; set; }

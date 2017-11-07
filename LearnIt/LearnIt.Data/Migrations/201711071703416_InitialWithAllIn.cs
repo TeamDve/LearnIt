@@ -3,7 +3,7 @@ namespace LearnIt.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialmigration : DbMigration
+    public partial class InitialWithAllIn : DbMigration
     {
         public override void Up()
         {
@@ -25,7 +25,6 @@ namespace LearnIt.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ImageBase = c.String(),
                         ImageBinary = c.Binary(),
                         Position = c.Int(nullable: false),
                         CourseId = c.Int(nullable: false),
@@ -69,6 +68,7 @@ namespace LearnIt.Data.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        PositionId = c.Int(),
                         DepartmentId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
@@ -84,6 +84,8 @@ namespace LearnIt.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Departments", t => t.DepartmentId)
+                .ForeignKey("dbo.Positions", t => t.PositionId)
+                .Index(t => t.PositionId)
                 .Index(t => t.DepartmentId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
@@ -122,6 +124,15 @@ namespace LearnIt.Data.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.Positions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
                     {
@@ -152,6 +163,7 @@ namespace LearnIt.Data.Migrations
             DropForeignKey("dbo.UserCourses", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.UserCourses", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUsers", "PositionId", "dbo.Positions");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "DepartmentId", "dbo.Departments");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -164,12 +176,14 @@ namespace LearnIt.Data.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUsers", new[] { "DepartmentId" });
+            DropIndex("dbo.AspNetUsers", new[] { "PositionId" });
             DropIndex("dbo.UserCourses", new[] { "UserId" });
             DropIndex("dbo.UserCourses", new[] { "CourseId" });
             DropIndex("dbo.Questions", new[] { "CourseId" });
             DropIndex("dbo.Images", new[] { "CourseId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.Positions");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.Departments");
             DropTable("dbo.AspNetUserClaims");

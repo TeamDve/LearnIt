@@ -1,5 +1,11 @@
+using Microsoft.AspNet.Identity.Owin;
+using LearnIt.Data.Services.Contracts;
+using LearnIt.Data.Services;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LearnIt.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(LearnIt.App_Start.NinjectWebCommon), "Stop")]
+
+
 
 namespace LearnIt.App_Start
 {
@@ -10,7 +16,6 @@ namespace LearnIt.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using Microsoft.AspNet.Identity.Owin;
     using LearnIt.Data.Context;
 
     public static class NinjectWebCommon 
@@ -63,18 +68,11 @@ namespace LearnIt.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<ApplicationUserManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
 
-            kernel.Bind<ApplicationUserManager>()
-               .ToMethod(_ => HttpContext
-               .Current
-               .GetOwinContext()
-               .GetUserManager<ApplicationUserManager>());
+            //kernel.Bind<ApplicationDbContext>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationDbContext>());
 
-            kernel.Bind<ApplicationDbContext>()
-                .ToMethod(_ => HttpContext
-                .Current
-                .GetOwinContext()
-                .GetUserManager<ApplicationDbContext>());
+            kernel.Bind<ICourseService>().To<CourseService>().InRequestScope();
         }        
     }
 }
