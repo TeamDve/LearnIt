@@ -23,14 +23,15 @@ namespace LearnIt.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            courseService.GetUsersCourseInfo("userthree@userthree.userthree");
             return View();
         }
 
-        public async Task<ActionResult> Contact()
+        public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            await courseService.UnassignCourseFromUser(1, "a3245ccb-b660-44b3-877e-869b9e159bc6");
+
+
             return View();
         }
     }

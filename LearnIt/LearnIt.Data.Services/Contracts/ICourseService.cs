@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using LearnIt.Data.DataModels;
 
 namespace LearnIt.Data.Services.Contracts
 {
@@ -9,18 +10,18 @@ namespace LearnIt.Data.Services.Contracts
     {
         IEnumerable<Course> GetAllCourses();
 
-        IEnumerable<Course> GetUserCourses(string userId);
+        IEnumerable<Course> GetUserCourses(string username);
 
         Course GetCourseById(int courseId);
 
         Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required);
 
-        Task AssignCourseToUser(int courseId, string userId, DateTime date, int status);
+        Task AssignCourseToUser(int courseId, string username, DateTime date, int status);
 
-        Task UnassignCourseFromUser(int courseId, string userId);
+        Task UnassignCourseFromUser(int courseId, string username);
 
         Task AssignExistingCourseToPosAndDept(int courseId, int deptId, int posId, DateTime date, int status);
 
-        //IEnumerable<Course> GetUserCoursesStatus(int courseId);
+        IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username);
     }
 }

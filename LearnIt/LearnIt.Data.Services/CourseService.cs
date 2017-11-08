@@ -1,4 +1,5 @@
 ﻿using LearnIt.Data.Context;
+using LearnIt.Data.DataModels;
 using LearnIt.Data.Models;
 using LearnIt.Data.Services.Contracts;
 using System;
@@ -31,9 +32,9 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin && User use
-        public IEnumerable<Course> GetUserCourses(string userId)
+        public IEnumerable<Course> GetUserCourses(string username)
         {
-            var user = dbContext.Users.First(x => x.Id == userId);
+            var user = GetUserByName(username);
 
             var listOfUsersWithCourses = dbContext.UsersCourses.Where(x => x.UserId == user.Id).Select(x=>x.CourseId).ToList();
 
@@ -84,10 +85,10 @@ namespace LearnIt.Data.Services
         
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
-        public async Task AssignCourseToUser(int courseId, string userId, DateTime date, int status)
+        public async Task AssignCourseToUser(int courseId, string username, DateTime date, int status)
         {
             var course = dbContext.Courses.First(x => x.Id == courseId);
-            var user = dbContext.Users.First(x => x.Id == userId);
+            var user = GetUserByName(username);
             UserCourse usrToCourse = new UserCourse()
             {
                 AssignmentDate = DateTime.Now,
@@ -102,11 +103,11 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
-        public async Task UnassignCourseFromUser(int courseId, string userId)
+        public async Task UnassignCourseFromUser(int courseId, string username)
         {
             var course = dbContext.Courses.First(x => x.Id == courseId);
-            var user = dbContext.Users.First(x => x.Id == userId);
-            UserCourse usrFromCourse = dbContext.UsersCourses.First(x => x.UserId == userId && x.CourseId == courseId);
+            var user = GetUserByName(username);
+            UserCourse usrFromCourse = dbContext.UsersCourses.First(x => x.UserId == user.Id && x.CourseId == courseId);
             dbContext.UsersCourses.Remove(usrFromCourse);
             await ExecuteQuery();
         }
@@ -132,6 +133,45 @@ namespace LearnIt.Data.Services
             }
             await ExecuteQuery();
            
+        }
+
+        public IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username)
+        {
+            var user = GetUserByName(username);
+
+            List<UserCourse> usersCourses = dbContext.UsersCourses.Where(x => x.UserId == user.Id).Select(x => x).ToList();
+            List<UserCourseInfo> resultList = new List<UserCourseInfo>();
+            if (usersCourses.Count == 0)
+            {
+                return resultList;
+            }
+            int courseId = usersCourses.First().CourseId;
+            var course = dbContext.Courses.Where(x => x.Id == courseId).Select(x => x.Name).ToList<string>();
+
+            foreach(var item in usersCourses)
+            {
+                resultList.Add(new UserCourseInfo()
+                {
+                    Name = course[0],
+                    Id = item.Id,
+                    Status = item.Status,
+                    AssignmentDate = item.AssignmentDate,
+                    DueDate = item.DueDate,
+                    CompletionDate = item.CompletionDate
+                });
+            }
+
+            return resultList;
+        }
+
+        private ApplicationUser GetUserByName(string username)
+        {
+            var user = dbContext.Users.First(x => x.UserName == username);
+            if (user == null)
+            {
+                throw new ArgumentException($"{username} does not exist");
+            }
+            return user;
         }
 
         private async Task ExecuteQuery()

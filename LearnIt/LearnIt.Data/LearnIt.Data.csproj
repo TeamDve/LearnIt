@@ -54,9 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="DataModels\UserCourseInfo.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.Designer.cs">
       <DependentUpon>201711071703416_InitialWithAllIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081011380_changesToTheUsersCourses.cs" />
+    <Compile Include="Migrations\201711081011380_changesToTheUsersCourses.Designer.cs">
+      <DependentUpon>201711081011380_changesToTheUsersCourses.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -75,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711071703416_InitialWithAllIn.resx">
       <DependentUpon>201711071703416_InitialWithAllIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081011380_changesToTheUsersCourses.resx">
+      <DependentUpon>201711081011380_changesToTheUsersCourses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
