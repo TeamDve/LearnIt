@@ -17,7 +17,11 @@ namespace LearnIt.Data.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public DateTime AssignmentDate { get; set; }
+
         public DateTime DueDate { get; set; }
+
+        public DateTime CompletionDate { get; set; }
 
         public int Status { get; set; }
     }

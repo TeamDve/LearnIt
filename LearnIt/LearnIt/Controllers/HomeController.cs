@@ -27,10 +27,10 @@ namespace LearnIt.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public async Task<ActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";
-            //await courseService.AssignExistingCourseToPosAndDept(1, 1, 2, System.DateTime.Now, 1);
+            await courseService.UnassignCourseFromUser(1, "a3245ccb-b660-44b3-877e-869b9e159bc6");
             return View();
         }
     }

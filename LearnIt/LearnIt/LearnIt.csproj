@@ -319,10 +319,6 @@
       <Project>{862da882-5e3a-4368-a132-f4cc8c4ffdb8}</Project>
       <Name>LearnIt.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LearnIt.Services\LearnIt.Services.csproj">
-      <Project>{86d4b3dc-80e8-400b-a6e7-c03993014d66}</Project>
-      <Name>LearnIt.Services</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

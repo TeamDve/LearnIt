@@ -81,15 +81,17 @@ namespace LearnIt.Data.Services
             await ExecuteQuery();
 
         }
+        
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
-        public async Task AssingCourseToUser(int courseId, string userId, DateTime date, int status)
+        public async Task AssignCourseToUser(int courseId, string userId, DateTime date, int status)
         {
             var course = dbContext.Courses.First(x => x.Id == courseId);
             var user = dbContext.Users.First(x => x.Id == userId);
             UserCourse usrToCourse = new UserCourse()
             {
-                DueDate = DateTime.Now,
+                AssignmentDate = DateTime.Now,
+                DueDate = date,
                 ApplicationUser = user,
                 Course = course,
                 Status = 1
@@ -97,7 +99,18 @@ namespace LearnIt.Data.Services
             dbContext.UsersCourses.Add(usrToCourse);
             await ExecuteQuery();
         }
-        
+
+        //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
+        //Admin
+        public async Task UnassignCourseFromUser(int courseId, string userId)
+        {
+            var course = dbContext.Courses.First(x => x.Id == courseId);
+            var user = dbContext.Users.First(x => x.Id == userId);
+            UserCourse usrFromCourse = dbContext.UsersCourses.First(x => x.UserId == userId && x.CourseId == courseId);
+            dbContext.UsersCourses.Remove(usrFromCourse);
+            await ExecuteQuery();
+        }
+
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
         public async Task AssignExistingCourseToPosAndDept(int courseId, int deptId, int posId, DateTime date, int status)
