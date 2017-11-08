@@ -1,13 +1,9 @@
 ﻿
 
-@{
-    ViewBag.Title = "EditUsers";
-}
-
 @model IEnumerable<UserViewModel>
 
 
-<h2>EditUsers</h2>
+<h2>Search user</h2>
 
 
 
@@ -36,7 +32,7 @@
                 $("#UserView").keyup(function (e){
                     if (e.which == 13 &&
                         !(names.indexOf($("#UserView").val()) === -1)){
-                        console.log($("#UserView").val());
+                        //our searchy users thingy launches from here
                     }
                 });
             }
