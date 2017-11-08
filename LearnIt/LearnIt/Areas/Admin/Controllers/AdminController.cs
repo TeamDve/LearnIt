@@ -29,9 +29,20 @@ namespace LearnIt.Areas.Admin.Controllers
             return this.View(usersViewModel);
         }
 
+        [HttpGet]
         public ActionResult UploadProject()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public string UploadProject(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "Error";
+            }
+            return file.ContentType;
         }
 
         public ActionResult AssignProject()

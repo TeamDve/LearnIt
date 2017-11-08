@@ -1,5 +1,11 @@
 ﻿
 <h2>UploadProject</h2>
+@using (@Html.BeginForm("UploadProject", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="file" name="file" id="file" />
+    <input type="submit" value ="Upload a course" class="btn btn-primary btn-lg" />
 
-<button type="button" class="btn btn-primary btn-lg">Upload a project</button>
+}
+@*<button type="button" class="btn btn-primary btn-lg">Upload a project</button>*@
 
