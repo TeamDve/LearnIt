@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LearnIt.Areas.Projects.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
 

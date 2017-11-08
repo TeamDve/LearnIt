@@ -22,7 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    @if (this.User.IsInRole("Admin"))
+                    @if (this.User.Identity.IsAuthenticated)
                     {
                         <li class="dropdown">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
