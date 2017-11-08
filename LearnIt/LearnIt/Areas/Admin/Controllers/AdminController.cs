@@ -17,7 +17,7 @@ namespace LearnIt.Areas.Admin.Controllers
             this.userManager = userManager;
         }
 
-        public ActionResult EditUsers()
+        public ActionResult ViewUsers()
         {
             var usersViewModel = this.userManager
                 .Users
@@ -30,13 +30,13 @@ namespace LearnIt.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult UploadProject()
+        public ActionResult UploadCourse()
         {
             return this.View();
         }
 
         [HttpPost]
-        public string UploadProject(HttpPostedFileBase file)
+        public string UploadCourse(HttpPostedFileBase file)
         {
             if (file == null)
             {
@@ -45,7 +45,7 @@ namespace LearnIt.Areas.Admin.Controllers
             return file.ContentType;
         }
 
-        public ActionResult AssignProject()
+        public ActionResult AssignCourse()
         {
             return this.View();
         }

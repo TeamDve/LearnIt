@@ -23,7 +23,7 @@ namespace LearnIt.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            courseService.GetUsersCourseInfo("userthree@userthree.userthree");
+            //courseService.GetUsersCourseInfo("userthree@userthree.userthree");
             return View();
         }
 

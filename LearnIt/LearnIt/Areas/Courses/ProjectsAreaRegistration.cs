@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace LearnIt.Areas.Projects
+namespace LearnIt.Areas.Courses
 {
-    public class ProjectsAreaRegistration : AreaRegistration 
+    public class CoursesAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Projects";
+                return "Courses";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Projects_default",
-                "Projects/{controller}/{action}/{id}",
+                "Courses_default",
+                "Courses/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

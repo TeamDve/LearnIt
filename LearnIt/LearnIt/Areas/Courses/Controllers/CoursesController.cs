@@ -4,18 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LearnIt.Areas.Projects.Controllers
+namespace LearnIt.Areas.Courses.Controllers
 {
     [Authorize]
-    public class ProjectsController : Controller
+    public class CoursesController : Controller
     {
 
-        public ActionResult AllProjects()
+        public ActionResult AllCourses()
         {
             return this.View();
         }
 
-        public ActionResult MyProjects()
+        public ActionResult MyCourses()
         {
             return this.View();
         }

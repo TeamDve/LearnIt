@@ -217,8 +217,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
-    <Compile Include="Areas\Projects\Controllers\ProjectsController.cs" />
-    <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
+    <Compile Include="Areas\Courses\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Courses\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -244,14 +244,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Admin\EditUsers.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\UploadProject.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ViewUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\UploadCourse.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\AssignProject.cshtml" />
-    <Content Include="Areas\Projects\Views\web.config" />
-    <Content Include="Areas\Projects\Views\Projects\AllProjects.cshtml" />
-    <Content Include="Areas\Projects\Views\Projects\MyProjects.cshtml" />
-    <Content Include="Areas\Projects\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AssignCourse.cshtml" />
+    <Content Include="Areas\Courses\Views\web.config" />
+    <Content Include="Areas\Courses\Views\Courses\AllCourses.cshtml" />
+    <Content Include="Areas\Courses\Views\Courses\MyCourses.cshtml" />
+    <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -300,8 +300,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Projects\Models\" />
-    <Folder Include="Areas\Projects\Views\Shared\" />
+    <Folder Include="Areas\Courses\Models\" />
+    <Folder Include="Areas\Courses\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
