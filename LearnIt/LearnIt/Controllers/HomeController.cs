@@ -30,7 +30,7 @@ namespace LearnIt.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            //await courseService.AssingCourseToUser(2, "59b37e0f-ff22-47ba-90da-405755ea2dbf", System.DateTime.Now,0);
+            //await courseService.AssignExistingCourseToPosAndDept(1, 1, 2, System.DateTime.Now, 1);
             return View();
         }
     }

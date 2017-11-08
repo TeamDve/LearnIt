@@ -16,5 +16,7 @@ namespace LearnIt.Data.Services.Contracts
         Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required);
 
         Task AssingCourseToUser(int courseId, string userId, DateTime date, int status);
+
+        Task AssignExistingCourseToPosAndDept(int courseId, int deptId, int posId, DateTime date, int status);
     }
 }

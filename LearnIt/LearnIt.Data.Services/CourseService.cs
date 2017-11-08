@@ -97,6 +97,29 @@ namespace LearnIt.Data.Services
             dbContext.UsersCourses.Add(usrToCourse);
             await ExecuteQuery();
         }
+        
+        //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
+        //Admin
+        public async Task AssignExistingCourseToPosAndDept(int courseId, int deptId, int posId, DateTime date, int status)
+        {
+            var affectedUsers = dbContext.Users
+                            .Where(x => x.PositionId == posId && x.DepartmentId == deptId)
+                            .Select(x => x.Id)
+                            .ToList<string>();
+            foreach(var usr in affectedUsers)
+            {
+                UserCourse usrCourseEntry = new UserCourse()
+                {
+                    CourseId = courseId,
+                    UserId = usr,
+                    DueDate = date,
+                    Status = status
+                };
+                dbContext.UsersCourses.Add(usrCourseEntry);
+            }
+            await ExecuteQuery();
+           
+        }
 
         private async Task ExecuteQuery()
         {
