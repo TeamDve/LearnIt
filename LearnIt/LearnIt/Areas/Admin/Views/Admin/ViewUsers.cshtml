@@ -9,9 +9,38 @@
 
 <h2>EditUsers</h2>
 
-@foreach (var user in Model)
-{
-    <div>
-        @user.Username
-    </div>
-}
+
+
+
+<div class="ui-widget">
+    <label for="UserView"> Input Username: </label>
+    <input id="UserView" placeholder="It will autocomplete it">
+</div>
+
+
+<script>
+    $(document).ready(() => {
+        let jsonModel = '@Html.Raw(Json.Encode(Model))';
+        let modelLenght = '@Model.Count()';
+        let model = JSON.parse(jsonModel);
+        let names = [];
+        for (let i = 0; i < modelLenght; i += 1) {
+            names.push(model[i].Username);
+        }
+        $("#UserView").autocomplete({
+            source: names
+        });
+        console.log(names);
+        $(window).keydown(function (e) {
+            if (e.which == 13) {
+                $("#UserView").keyup(function (e){
+                    if (e.which == 13 &&
+                        !(names.indexOf($("#UserView").val()) === -1)){
+                        console.log($("#UserView").val());
+                    }
+                });
+            }
+        });
+    });
+
+</script>
