@@ -16,8 +16,8 @@ namespace LearnIt.Areas.Admin
         {
             context.MapRoute(
                 "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Admin/{controller}/{action}/{user}",
+                new { action = "Index", user = UrlParameter.Optional }
             );
         }
     }
