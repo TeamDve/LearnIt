@@ -1,14 +1,10 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LearnIt.Data.Models;
 
 namespace LearnIt.Data.Services.Contracts
 {
     public interface IJsonParserService
     {
-        void Execute();
+        Course Execute(byte[] fileStream);
 
     }
 }

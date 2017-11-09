@@ -1,6 +1,6 @@
 ﻿
 <h2>UploadProject</h2>
-@using (@Html.BeginForm("UploadProject", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (@Html.BeginForm("UploadCourse", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <input type="file" name="file" id="file" />

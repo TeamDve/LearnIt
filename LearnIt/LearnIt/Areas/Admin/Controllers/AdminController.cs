@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LearnIt.Areas.Admin.Models;
+using LearnIt.Data.Context;
+using LearnIt.Data.Services.Contracts;
+using System.IO;
+using LearnIt.Data.Models;
 
 namespace LearnIt.Areas.Admin.Controllers
 {
@@ -11,10 +15,14 @@ namespace LearnIt.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationUserManager userManager;
+        private readonly IJsonParserService jsonParser;
+        private readonly ICourseService courseService;
 
-        public AdminController(ApplicationUserManager userManager)
+        public AdminController(ApplicationUserManager userManager, IJsonParserService jsonParser, ICourseService courseService)
         {
             this.userManager = userManager;
+            this.jsonParser = jsonParser;
+            this.courseService = courseService;
         }
 
         public ActionResult ViewUsers()
@@ -36,13 +44,19 @@ namespace LearnIt.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UploadCourse(HttpPostedFileBase file)
+        public ActionResult UploadCourse(HttpPostedFileBase file)
         {
             if (file == null)
             {
-                return "Error";
+               return RedirectToAction("ViewUsers");
             }
-            return file.ContentType;
+
+            BinaryReader b = new BinaryReader(file.InputStream);
+            byte[] binData = b.ReadBytes(file.ContentLength);
+
+            var test = jsonParser.Execute(binData);
+
+            return this.View(); 
         }
 
         public ActionResult AssignCourse()

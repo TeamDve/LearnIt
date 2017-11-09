@@ -12,12 +12,12 @@ using Newtonsoft.Json.Linq;
 
 namespace LearnIt.Data.Services
 {
-    class JsonParserService : IJsonParserService
+    public class JsonParserService : IJsonParserService
     {
 
-        public void Execute()
+        public Course Execute(byte[] fileStream)
         {
-            using (StreamReader reader = new StreamReader("JSon.JSON"))
+            using (StreamReader reader = new StreamReader(new MemoryStream(fileStream)))
             {
                 using (JsonTextReader jsonReader = new JsonTextReader(reader))
                 {
@@ -41,16 +41,19 @@ namespace LearnIt.Data.Services
                             qstnModel.Qstn = enter.SelectToken("Question").ToString();
                             qstnModel.Answers = enter.SelectToken("Answers").ToString();
                             qstnModel.RightAnswer = enter.SelectToken("RightAnswer").ToString();
-                          courseModel.Questions.Add(qstnModel);
+                            courseModel.Questions.Add(qstnModel);
                         }
-                     
-                       //  this.dbContext.Course.add(courseModel);
-                         // this.dbContext.Question.add(qstnModel);
-                       //  Context.SaveChanges();
-                      
+
+                        //  this.dbContext.Course.add(courseModel);
+                        // this.dbContext.Question.add(qstnModel);
+                        //  Context.SaveChanges();
+
+
+                        return courseModel;
                     }
                 }
             }
+            return null;
         }
     }
 }
