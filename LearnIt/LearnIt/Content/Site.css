@@ -26,3 +26,6 @@ textarea {
     margin-left:5px;
     margin-top:7px;
 }
+#hiddenSearch {
+    display: none;
+}

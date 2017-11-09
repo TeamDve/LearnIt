@@ -31,10 +31,7 @@ namespace LearnIt.Areas.Admin.Controllers
             var usersViewModel = this.userManager
                 .Users
                 .Select
-                (u => new UserViewModel()
-                {
-                    Username = u.UserName
-                }).ToList();
+                (UserViewModel.Create).ToList();
             return this.View(usersViewModel);
         }
 
@@ -42,6 +39,31 @@ namespace LearnIt.Areas.Admin.Controllers
         public ActionResult UploadCourse()
         {
             return this.View();
+        }
+
+        public async Task<ActionResult> LoadUser(string username)
+        {
+            var user = await this.userManager.FindByNameAsync(username);
+            var userViewModel = UserViewModel.Create.Compile()(user);
+            userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
+
+            return this.View("_LoadUser", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(UserViewModel userViewModel)
+        {
+            if (userViewModel.IsAdmin)
+            {
+                await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
+            }
+            else
+            {
+                await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
+            }
+
+            return this.RedirectToAction("ViewUsers");
         }
 
         [HttpPost]
