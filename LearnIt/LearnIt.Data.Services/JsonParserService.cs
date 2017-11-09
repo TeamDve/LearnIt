@@ -32,7 +32,7 @@ namespace LearnIt.Data.Services
                         courseModel.Name = course.SelectToken("Name").ToString();
                         courseModel.DateAdded = DateTime.Now;
                         courseModel.Description = course.SelectToken("Description").ToString();
-                        courseModel.Required = bool.Parse(course.SelectToken("Requirred").ToString());
+                        courseModel.Required = bool.Parse(course.SelectToken("Required").ToString());
                         courseModel.ScoreToPass = int.Parse(course.SelectToken("ScoreToPass").ToString());
 
                         var questions = course.SelectToken("Questions");

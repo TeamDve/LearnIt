@@ -82,7 +82,15 @@ namespace LearnIt.Data.Services
             await ExecuteQuery();
 
         }
-        
+
+        //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
+        //Admin
+        public async Task AddCourseToDb(Course courseToAdd)
+        {
+            dbContext.Courses.Add(courseToAdd);
+            await ExecuteQuery();
+        }
+
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
         public async Task AssignCourseToUser(int courseId, string username, DateTime date, int status)

@@ -8,6 +8,7 @@ using LearnIt.Data.Context;
 using LearnIt.Data.Services.Contracts;
 using System.IO;
 using LearnIt.Data.Models;
+using System.Threading.Tasks;
 
 namespace LearnIt.Areas.Admin.Controllers
 {
@@ -44,7 +45,7 @@ namespace LearnIt.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadCourse(HttpPostedFileBase file)
+        public async Task<ActionResult> UploadCourse(HttpPostedFileBase file)
         {
             if (file == null)
             {
@@ -55,6 +56,7 @@ namespace LearnIt.Areas.Admin.Controllers
             byte[] binData = b.ReadBytes(file.ContentLength);
 
             var test = jsonParser.Execute(binData);
+            await courseService.AddCourseToDb(test);
 
             return this.View(); 
         }

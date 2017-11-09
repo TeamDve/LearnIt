@@ -12,14 +12,14 @@ namespace LearnIt.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(150, MinimumLength = 10)]
+        [StringLength(150, MinimumLength = 5)]
         public string Qstn { get; set; }
         [Required]
-        [StringLength(150, MinimumLength = 10)]
+        [StringLength(150, MinimumLength = 5)]
         public string Answers { get; set; }
 
         [Required]
-        [StringLength(150, MinimumLength = 10)]
+        [StringLength(150, MinimumLength = 5)]
         public string RightAnswer { get; set; }
 
         public int CourseId { get; set; }
