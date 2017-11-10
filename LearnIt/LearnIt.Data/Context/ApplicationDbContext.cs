@@ -11,17 +11,17 @@ namespace LearnIt.Data.Context
         {
         }
 
-        public IDbSet<Position> DeptRoles { get; set; }
+        public virtual IDbSet<Position> DeptRoles { get; set; }
 
-        public IDbSet<Department> Departments { get; set; }
+        public virtual IDbSet<Department> Departments { get; set; }
 
-        public IDbSet<Course> Courses { get; set; }
+        public virtual IDbSet<Course> Courses { get; set; }
 
-        public IDbSet<Image> Images { get; set; }
+        public virtual IDbSet<Image> Images { get; set; }
 
-        public IDbSet<Question> Questions { get; set; }
+        public virtual IDbSet<Question> Questions { get; set; }
 
-        public IDbSet<UserCourse> UsersCourses { get; set; }
+        public virtual IDbSet<UserCourse> UsersCourses { get; set; }
 
         public static ApplicationDbContext Create()
         {

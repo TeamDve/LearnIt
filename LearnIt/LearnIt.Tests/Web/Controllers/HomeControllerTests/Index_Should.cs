@@ -11,14 +11,8 @@ using LearnIt.Data.Services.Contracts;
 
 namespace LearnIt.Tests.Controllers
 {
-    [TestClass]
     public class Index_Should_Dummy
     {
-        [TestMethod]
-        public void ShouldBeSuccessfull()
-        {
-            bool success = false;
-            Assert.IsFalse(success);
-        }
+
     }
 }

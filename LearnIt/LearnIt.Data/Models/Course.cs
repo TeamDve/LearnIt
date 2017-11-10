@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace LearnIt.Data.Models
         public DateTime DateAdded { get; set; }
 
         [Required]
+        [Index(IsUnique = true)]
         [StringLength(50, MinimumLength = 5)]
         public string Name { get; set; }
 

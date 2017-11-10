@@ -15,7 +15,7 @@ namespace LearnIt.Data.Services
 
         public CourseService(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
@@ -23,10 +23,6 @@ namespace LearnIt.Data.Services
         public IEnumerable<Course> GetAllCourses()
         {
             var list = dbContext.Courses.Select(x=>x).ToList();
-            if (list == null)
-            {
-                list = new List<Course>();
-            }
             return list;
         }
 
