@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201711081011380_changesToTheUsersCourses.Designer.cs">
       <DependentUpon>201711081011380_changesToTheUsersCourses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711101728280_CourseNamesCHanges.cs" />
+    <Compile Include="Migrations\201711101728280_CourseNamesCHanges.Designer.cs">
+      <DependentUpon>201711101728280_CourseNamesCHanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081011380_changesToTheUsersCourses.resx">
       <DependentUpon>201711081011380_changesToTheUsersCourses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711101728280_CourseNamesCHanges.resx">
+      <DependentUpon>201711101728280_CourseNamesCHanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
