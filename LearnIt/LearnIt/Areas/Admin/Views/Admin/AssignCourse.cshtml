@@ -1,5 +1,26 @@
 ﻿
 <h2>AssignProject</h2>
 
-<p>Some magic happens here.</p>
 
+
+@Ajax.ActionLink("Single Person Course", "SinglePersonCourse",
+       new AjaxOptions
+       {
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "generateUserArea"
+       });
+
+
+
+@Ajax.ActionLink("Bulk Course", "BulkCourse",
+       new AjaxOptions
+       {
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "generateUserArea"
+       });
+
+<div id="generateUserArea">
+
+</div>
+
+@Scripts.Render("~/bundles/jqueryajax")
