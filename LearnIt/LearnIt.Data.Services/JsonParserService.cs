@@ -24,7 +24,8 @@ namespace LearnIt.Data.Services
                     JObject jasonObject = (JObject)JToken.ReadFrom(jsonReader);
 
                     Course courseModel = new Course();
-                    Question qstnModel = new Question();
+                    
+                    
                     var info = jasonObject.SelectToken("Info");
                     foreach (var entry in info)
                     {
@@ -38,12 +39,22 @@ namespace LearnIt.Data.Services
                         var questions = course.SelectToken("Questions");
                         foreach (var enter in questions)
                         {
+                            Question qstnModel = new Question();
                             qstnModel.Qstn = enter.SelectToken("Question").ToString();
                             qstnModel.Answers = enter.SelectToken("Answers").ToString();
                             qstnModel.RightAnswer = enter.SelectToken("RightAnswer").ToString();
                             courseModel.Questions.Add(qstnModel);
                         }
-
+                        var images = course.SelectToken("Images");
+                        int position = 0;
+                        foreach (var enter in images)
+                        {
+                            Image image = new Image();
+                            position++;
+                            image.ImageBinary = Convert.FromBase64String(enter.ToString());
+                            image.Position = position;
+                            courseModel.Images.Add(image);
+                        }
                         //  this.dbContext.Course.add(courseModel);
                         // this.dbContext.Question.add(qstnModel);
                         //  Context.SaveChanges();
