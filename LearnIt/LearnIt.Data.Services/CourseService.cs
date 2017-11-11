@@ -48,7 +48,7 @@ namespace LearnIt.Data.Services
         //Admin && User use
         public Course GetCourseById(int courseId)
         {
-            var course = dbContext.Courses.First(x => x.Id == courseId);
+            var course = dbContext.Courses.FirstOrDefault(x => x.Id == courseId);
 
             return course;
         }
@@ -91,7 +91,11 @@ namespace LearnIt.Data.Services
         //Admin
         public async Task AssignCourseToUser(int courseId, string username, DateTime date, int status)
         {
-            var course = dbContext.Courses.First(x => x.Id == courseId);
+            var course = dbContext.Courses.FirstOrDefault(x => x.Id == courseId);
+            if (course == null)
+            {
+                throw new ArgumentException($"course does not exist");
+            }
             var user = GetUserByName(username);
             UserCourse usrToCourse = new UserCourse()
             {
@@ -109,7 +113,11 @@ namespace LearnIt.Data.Services
         //Admin
         public async Task UnassignCourseFromUser(int courseId, string username)
         {
-            var course = dbContext.Courses.First(x => x.Id == courseId);
+            var course = dbContext.Courses.FirstOrDefault(x => x.Id == courseId);
+            if(course == null)
+            {
+                throw new ArgumentException("no course found");
+            }
             var user = GetUserByName(username);
             UserCourse usrFromCourse = dbContext.UsersCourses.First(x => x.UserId == user.Id && x.CourseId == courseId);
             dbContext.UsersCourses.Remove(usrFromCourse);
@@ -170,7 +178,7 @@ namespace LearnIt.Data.Services
 
         private ApplicationUser GetUserByName(string username)
         {
-            var user = dbContext.Users.First(x => x.UserName == username);
+            var user = dbContext.Users.FirstOrDefault(x => x.UserName == username);
             if (user == null)
             {
                 throw new ArgumentException($"{username} does not exist");

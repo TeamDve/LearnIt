@@ -114,10 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\AddCoursesToDb_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\AssignCourseToUser_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\AssignExistingCourseToPosAndDept_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\Constructor_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetAllCourses_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetCourseById_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\GetLast_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetUserCourses_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfo_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Web\Controllers\HomeControllerTests\Index_Should.cs" />
   </ItemGroup>
   <ItemGroup>

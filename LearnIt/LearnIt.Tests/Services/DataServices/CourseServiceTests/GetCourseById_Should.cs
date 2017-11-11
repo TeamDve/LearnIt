@@ -39,5 +39,24 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             //Assert
             Assert.AreEqual(courseList.First(),courseService.GetCourseById(idConst));
         }
+
+        [TestMethod]
+        public void ReturnEmptyCourse_WhenNoCourseIsFound()
+        {
+            //Arrange
+            var dateTime = DateTime.Now;
+            int idConst = 12;
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            List<Course> courseList = new List<Course>()
+            {
+
+            };
+            var courseDbSetMock = new Mock<DbSet<Course>>().SetupData(courseList);
+            dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(courseDbSetMock.Object);
+            //Act
+            CourseService courseService = new CourseService(dbContextMock.Object);
+            //Assert
+            Assert.IsNull(courseService.GetCourseById(idConst));
+        }
     }
 }
