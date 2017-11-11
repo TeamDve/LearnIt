@@ -1,6 +1,6 @@
 ﻿
 
-@model IEnumerable<UserViewModel>
+@model IEnumerable<UserViewModelNameOnly>
 
 
 <h2>Search user</h2>
@@ -9,13 +9,13 @@
 
 
 <div class="ui-widget">
-    <label for="UserView"> Input Username: </label>
-    <input id="UserView" placeholder="It will autocomplete it">
+    <label for="UserSearchName"> Input Username: </label>
+    <input id="UserSearchName" placeholder="It will autocomplete it">
 </div>
 
 
 <div id="hiddenSearch">
-    @Ajax.ActionLink("Admin", "LoadUser",
+    @Ajax.ActionLink("This Is Invis", "LoadUser",
        new { username = "ThisPartIsReplacedLater" },
        new AjaxOptions
        {
@@ -29,37 +29,10 @@
 </div>
 
 
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryajax")
-}
+@Scripts.Render("~/bundles/jqueryajax")
 <script>
-    $(document).ready(() => {
-        let jsonModel = '@Html.Raw(Json.Encode(Model))';
-        let modelLenght = '@Model.Count()';
-        let model = JSON.parse(jsonModel);
-        let names = [];
-        for (let i = 0; i < modelLenght; i += 1) {
-            names.push(model[i].Username);
-        }
-        $("#UserView").autocomplete({
-            source: names
-        });
-        $(window).keydown(function (e) {
-            if (e.which == 13) {
-                $("#UserView").keyup(function (e){
-                    if (e.which == 13 &&
-                        !(names.indexOf($("#UserView").val()) === -1)) {
 
-                        let cleanUrl = $('#hiddenSearch a').attr('href')
-                                       .substring(0, $('#hiddenSearch a').attr('href').indexOf('?username=') + 10);
-
-                        let searchUrl = cleanUrl + $("#UserView").val();
-                        $('#hiddenSearch a').attr("href", searchUrl)
-                        $('#hiddenSearch a').click();
-                    }
-                });
-            }
-        });
-    });
-
+    LearnItAutocompleteAndSearch("#UserSearchName", "Username",@Html.Raw(Json.Encode(Model)), "#hiddenSearch a");
+    //there is also only a LearnItAutocomplete which uses only the first 3 variables and gives out suggestions in a 
+    //input field based on which field u want to use
 </script>

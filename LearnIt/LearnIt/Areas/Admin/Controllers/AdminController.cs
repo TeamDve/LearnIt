@@ -31,23 +31,11 @@ namespace LearnIt.Areas.Admin.Controllers
             var usersViewModel = this.userManager
                 .Users
                 .Select
-                (UserViewModel.Create).ToList();
+                (u => new UserViewModelNameOnly()
+                {
+                    Username = u.UserName
+                }).ToList();
             return this.View(usersViewModel);
-        }
-
-        [HttpGet]
-        public ActionResult UploadCourse()
-        {
-            return this.View();
-        }
-
-        public async Task<ActionResult> LoadUser(string username)
-        {
-            var user = await this.userManager.FindByNameAsync(username);
-            var userViewModel = UserViewModel.Create.Compile()(user);
-            userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
-
-            return this.View("_LoadUser", userViewModel);
         }
 
         [HttpPost]
@@ -64,6 +52,21 @@ namespace LearnIt.Areas.Admin.Controllers
             }
 
             return this.RedirectToAction("ViewUsers");
+        }
+
+        public async Task<ActionResult> LoadUser(string username)
+        {
+            var user = await this.userManager.FindByNameAsync(username);
+            var userViewModel = UserViewModel.Create.Compile()(user);
+            userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
+
+            return this.View("_LoadUser", userViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult UploadCourse()
+        {
+            return this.View();
         }
 
         [HttpPost]
@@ -87,5 +90,40 @@ namespace LearnIt.Areas.Admin.Controllers
         {
             return this.View();
         }
+
+        public  ViewResult SinglePersonCourse()
+        {
+        //    UserNameAndProjectNameModel usernamesAndProjectNames = new UserNameAndProjectNameModel();
+        //    usernamesAndProjectNames.UsernameList = this.userManager
+        //        .Users
+        //        .Select(u => u.UserName)
+        //        .ToList();
+        //    i need work with the db here
+
+        //    usernamesAndProjectNames.ProjectNameList= 
+
+            return this.View("_SinglePersonCourse");
+        }
+
+        public async Task<ActionResult> BulkCourse(string something)
+        {
+            return this.View("_BulkCourse");
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> AddCourseToUser()
+
+
+        //    return this.RedirectToAction();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> AddCOurseToBulk()
+
+
+        //    return this.RedirectToAction();
+        //}
     }
 }
