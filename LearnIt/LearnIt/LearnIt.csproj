@@ -222,6 +222,8 @@
     <Compile Include="Areas\Admin\Models\UserNameAndProjectNameModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Areas\Courses\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Courses\Models\AllCourseInfo.cs" />
+    <Compile Include="Areas\Courses\Models\MyCourseInfo.cs" />
     <Compile Include="Areas\Courses\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -274,6 +276,8 @@
     <Content Include="Areas\Admin\Views\Shared\_LoadUser.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_BulkCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAsign.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -327,8 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Courses\Models\" />
-    <Folder Include="Areas\Courses\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

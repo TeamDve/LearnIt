@@ -19,7 +19,7 @@ namespace LearnIt.Data.Models
         public string Answers { get; set; }
 
         [Required]
-        [StringLength(150, MinimumLength = 5)]
+        [StringLength(150, MinimumLength = 3)]
         public string RightAnswer { get; set; }
 
         public int CourseId { get; set; }

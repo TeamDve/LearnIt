@@ -21,10 +21,24 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin use only
-        public IEnumerable<Course> GetAllCourses()
+        private IQueryable<Course> GetAllCoursesQuery()
         {
-            var list = this.dbContext.Courses.Select(x=>x).ToList();
+            var list = this.dbContext.Courses.Select(x=>x);
             return list;
+        }
+        public IEnumerable<CourseInfoData> GetAllCourses()
+        {
+            
+        return this.GetAllCoursesQuery()
+                        .Select(x => new CourseInfoData()
+                            {
+                                Name = x.Name,
+                                DateAdded = x.DateAdded,
+                                Description = x.Description,
+                                ScoreToPass = x.ScoreToPass
+
+                            })
+                        .ToList(); ;
         }
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
@@ -45,13 +59,15 @@ namespace LearnIt.Data.Services
             }
 
             var listOfUsersCourses = this.dbContext
-                .Courses.Select(x => x)
+                .Courses
+                .Select(x => x)
                 .Where(x => listOfUsersWithCourses.Contains(x.Id))
                 .ToList();
 
             return listOfUsersCourses;
         }
 
+      
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin && User use
         public Course GetCourseById(int courseId)
@@ -180,39 +196,19 @@ namespace LearnIt.Data.Services
         {
             var user = GetUserByName(username);
 
-            List<UserCourse> usersCourses = this.dbContext
-                .UsersCourses
+            List<UserCourseInfo> resultList = dbContext.UsersCourses
                 .Where(x => x.UserId == user.Id)
-                .Select(x => x)
+                .Select(x => new UserCourseInfo()
+                                {
+                                    Name = x.Course.Name,
+                                    Id = x.Id,
+                                    Status = x.Status,
+                                    AssignmentDate = x.AssignmentDate,
+                                    DueDate = x.DueDate,
+                                    isMandatory = x.IsMandatory,
+                                    CompletionDate = x.CompletionDate
+                                })
                 .ToList();
-
-            List<UserCourseInfo> resultList = new List<UserCourseInfo>();
-            if (usersCourses.Count == 0)
-            {
-                return resultList;
-            }
-            int courseId = usersCourses
-                .First()
-                .CourseId;
-            var course = dbContext
-                .Courses
-                .Where(x => x.Id == courseId)
-                .Select(x => x.Name)
-                .ToList<string>();
-
-            foreach(var item in usersCourses)
-            {
-                resultList.Add(new UserCourseInfo()
-                {
-                    Name = course[0],
-                    Id = item.Id,
-                    Status = item.Status,
-                    AssignmentDate = item.AssignmentDate,
-                    DueDate = item.DueDate,
-                    CompletionDate = item.CompletionDate
-                });
-            }
-
             return resultList;
         }
 

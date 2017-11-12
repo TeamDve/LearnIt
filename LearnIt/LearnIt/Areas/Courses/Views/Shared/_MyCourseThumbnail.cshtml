@@ -1,0 +1,13 @@
+﻿@model MyCourseInfo
+
+<div>
+    <div class="ui-widget">
+        @Model.Name
+    </div>
+    <div class="ui-widget">
+        @Model.DueDate.ToString()
+    </div>
+    <div class="ui-widget">
+        @(Model.IsMandatory ? "Mandatory" : "Optional")
+    </div>
+</div>

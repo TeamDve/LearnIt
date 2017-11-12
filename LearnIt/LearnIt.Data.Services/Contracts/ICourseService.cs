@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using LearnIt.Data.DataModels;
+using System.Linq;
 
 namespace LearnIt.Data.Services.Contracts
 {
     public interface ICourseService
     {
-        IEnumerable<Course> GetAllCourses();
+        IEnumerable<CourseInfoData> GetAllCourses();
 
         IEnumerable<Course> GetUserCourses(string username);
 
