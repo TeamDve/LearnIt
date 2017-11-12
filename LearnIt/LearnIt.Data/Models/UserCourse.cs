@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using LearnIt.Data.Enums;
 
 namespace LearnIt.Data.Models
 {
@@ -21,8 +22,10 @@ namespace LearnIt.Data.Models
 
         public DateTime DueDate { get; set; }
 
-        public DateTime CompletionDate { get; set; }
+        public DateTime? CompletionDate { get; set; }
 
-        public int Status { get; set; }
+        public bool IsMandatory { get; set; }
+
+        public CourseStatus Status { get; set; }
     }
 }

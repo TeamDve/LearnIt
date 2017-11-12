@@ -89,6 +89,18 @@ namespace LearnIt.App_Start
             kernel.Bind<IJsonParserService>()
                 .To<JsonParserService>()
                 .InRequestScope();
+
+            kernel.Bind<IUserServices>()
+                .To<UserServices>()
+                .InRequestScope();
+
+            kernel.Bind<IPossitionService>()
+                .To<PossitionService>()
+                .InRequestScope();
+
+            kernel.Bind<IDepartmenService>()
+                .To<DepartmentService>()
+                .InRequestScope();
         }        
     }
 }

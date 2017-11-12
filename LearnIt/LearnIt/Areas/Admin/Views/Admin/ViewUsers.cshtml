@@ -1,10 +1,7 @@
 ﻿
 
-@model IEnumerable<UserViewModelNameOnly>
-
 
 <h2>Search user</h2>
-
 
 
 
@@ -32,7 +29,7 @@
 @Scripts.Render("~/bundles/jqueryajax")
 <script>
 
-    LearnItAutocompleteAndSearch("#UserSearchName", "Username",@Html.Raw(Json.Encode(Model)), "#hiddenSearch a");
-    //there is also only a LearnItAutocomplete which uses only the first 3 variables and gives out suggestions in a 
+    LearnItAutocompleteAndSearch("#UserSearchName", "Username",@Html.Raw(Json.Encode(ViewBag.UserNames)), "#hiddenSearch a");
+    //there is also only a LearnItAutocomplete which uses only the first 3 variables and gives out suggestions in a
     //input field based on which field u want to use
 </script>

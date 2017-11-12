@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearnIt.Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,12 @@ namespace LearnIt.Data.DataModels
         //UserCourseId
         public int Id { get; set; }
 
-        public int Status { get; set; }
+        public CourseStatus Status { get; set; }
 
         public DateTime AssignmentDate { get; set; }
 
         public DateTime DueDate { get; set; }
 
-        public DateTime CompletionDate { get; set; }
+        public DateTime? CompletionDate { get; set; }
     }
 }

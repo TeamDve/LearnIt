@@ -5,10 +5,12 @@ using System.Web;
 
 namespace LearnIt.Areas.Admin.Models
 {
-    public class UserNameAndProjectNameModel
+    public class DepartPossitionAndCourseNames
     {
-        public IEnumerable<Object> UsernameList { get; set; }
+        public IEnumerable<Object> DepartmentList { get; set; }
 
         public IEnumerable<Object> CourseNameList { get; set; }
+
+        public IEnumerable<Object> PossitionList { get; set; }
     }
 }

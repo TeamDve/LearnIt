@@ -18,12 +18,14 @@ namespace LearnIt.Data.Services.Contracts
 
         Task AddCourseToDb(Course courseToAdd);
 
-        Task AssignCourseToUser(int courseId, string username, DateTime date, int status);
+        Task AssignCourseToUser(string courseName, string username, DateTime date, bool isMandatory);
 
         Task UnassignCourseFromUser(int courseId, string username);
 
-        Task AssignExistingCourseToPosAndDept(int courseId, int deptId, int posId, DateTime date, int status);
+        Task AssignExistingCourseToPosAndDept(string courseName, string depName, string posName, DateTime dueDate, bool isMandatory);
 
         IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username);
+
+        IEnumerable<CourseCourseNames> ReturnAllCourseNames();
     }
 }

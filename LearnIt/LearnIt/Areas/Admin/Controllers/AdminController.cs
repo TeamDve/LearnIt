@@ -15,27 +15,40 @@ namespace LearnIt.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly ApplicationUserManager userManager;
         private readonly IJsonParserService jsonParser;
         private readonly ICourseService courseService;
+        private readonly IUserServices userServices;
+        private readonly IDepartmenService departmentService;
+        private readonly IPossitionService possitionService;
 
-        public AdminController(ApplicationUserManager userManager, IJsonParserService jsonParser, ICourseService courseService)
+        public AdminController(
+            IJsonParserService jsonParser,
+            ICourseService courseService,
+            IUserServices userServices,
+            IDepartmenService departmentService,
+            IPossitionService possitionService)
         {
-            this.userManager = userManager;
             this.jsonParser = jsonParser;
             this.courseService = courseService;
+            this.userServices = userServices;
+            this.departmentService = departmentService;
+            this.possitionService = possitionService;
         }
 
         public ActionResult ViewUsers()
         {
-            var usersViewModel = this.userManager
-                .Users
-                .Select
-                (u => new UserViewModelNameOnly()
-                {
-                    Username = u.UserName
-                }).ToList();
-            return this.View(usersViewModel);
+            var usersViewModel = this.userServices.ReturnAllUserNames();
+            ViewBag.UserNames = usersViewModel;
+            return this.View();
+        }
+
+        public ActionResult LoadUser(string username)
+        {
+            var user = this.userServices.ReturnUserByUsername(username);
+            var userViewModel = UserViewModel.Create.Compile()(user);
+            userViewModel.IsAdmin = this.userServices.IsUserAdmin(user.Id);
+
+            return this.View("_LoadUser", userViewModel);
         }
 
         [HttpPost]
@@ -44,23 +57,14 @@ namespace LearnIt.Areas.Admin.Controllers
         {
             if (userViewModel.IsAdmin)
             {
-                await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
+                await this.userServices.AsignUserToAdmin(userViewModel.Id);
             }
             else
             {
-                await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
+                await this.userServices.DeasignUserFromAdmin(userViewModel.Id);
             }
 
             return this.RedirectToAction("ViewUsers");
-        }
-
-        public async Task<ActionResult> LoadUser(string username)
-        {
-            var user = await this.userManager.FindByNameAsync(username);
-            var userViewModel = UserViewModel.Create.Compile()(user);
-            userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
-
-            return this.View("_LoadUser", userViewModel);
         }
 
         [HttpGet]
@@ -91,39 +95,59 @@ namespace LearnIt.Areas.Admin.Controllers
             return this.View();
         }
 
-        public  ViewResult SinglePersonCourse()
+
+        public ViewResult SinglePersonCourseAsign()
         {
-        //    UserNameAndProjectNameModel usernamesAndProjectNames = new UserNameAndProjectNameModel();
-        //    usernamesAndProjectNames.UsernameList = this.userManager
-        //        .Users
-        //        .Select(u => u.UserName)
-        //        .ToList();
-        //    i need work with the db here
+            UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+            {
+                UsernameList = this.userServices.ReturnAllUserNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
+            };
 
-        //    usernamesAndProjectNames.ProjectNameList= 
+            ViewBag.userAndProjectNames = userAndProjectNames;
 
-            return this.View("_SinglePersonCourse");
+            return this.View("_SinglePersonCourseAsign");
         }
 
-        public async Task<ActionResult> BulkCourse(string something)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SinglePersonCourseAsign(AddCourseToUser singleCourseAsignModel)
         {
+            await this.courseService.AssignCourseToUser(
+                singleCourseAsignModel.CourseName,
+                singleCourseAsignModel.Username,
+                singleCourseAsignModel.DueDate,
+                singleCourseAsignModel.IsMandatory);
+
+            return this.RedirectToAction("AssignCourse");
+        }
+
+        public ActionResult BulkCourse(string something)
+        {
+            DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+            {
+                DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                PossitionList=this.possitionService.ReturnAllPossitionNames(),
+                CourseNameList=this.courseService.ReturnAllCourseNames()
+            };
+
+            ViewBag.courseDepPosNames = courseDepPosNames;
+
             return this.View("_BulkCourse");
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> AddCourseToUser()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> BulkCourse(AddCourseToPosDep singleCourseAsignModel)
+        {
+            await this.courseService.AssignExistingCourseToPosAndDept(
+                singleCourseAsignModel.CourseName,
+                singleCourseAsignModel.Department,
+                singleCourseAsignModel.Possition,
+                singleCourseAsignModel.DueDate,
+                singleCourseAsignModel.IsMandatory);
 
-
-        //    return this.RedirectToAction();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> AddCOurseToBulk()
-
-
-        //    return this.RedirectToAction();
-        //}
+            return this.RedirectToAction("AssignCourse");
+        }
     }
 }

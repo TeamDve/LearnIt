@@ -54,7 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="DataModels\CourseCourseNames.cs" />
+    <Compile Include="DataModels\DepartmentNames.cs" />
+    <Compile Include="DataModels\PositionNames.cs" />
     <Compile Include="DataModels\UserCourseInfo.cs" />
+    <Compile Include="DataModels\UsersUsernames.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.Designer.cs">
       <DependentUpon>201711071703416_InitialWithAllIn.cs</DependentUpon>
@@ -67,10 +71,15 @@
     <Compile Include="Migrations\201711101728280_CourseNamesCHanges.Designer.cs">
       <DependentUpon>201711101728280_CourseNamesCHanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711120152371_UserCoursesChanges.cs" />
+    <Compile Include="Migrations\201711120152371_UserCoursesChanges.Designer.cs">
+      <DependentUpon>201711120152371_UserCoursesChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Enums\CourseStatus.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Role.cs" />
@@ -90,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711101728280_CourseNamesCHanges.resx">
       <DependentUpon>201711101728280_CourseNamesCHanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711120152371_UserCoursesChanges.resx">
+      <DependentUpon>201711120152371_UserCoursesChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
