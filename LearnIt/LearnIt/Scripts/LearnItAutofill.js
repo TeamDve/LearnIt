@@ -1,4 +1,4 @@
-﻿console.log(1);
+﻿
 function LearnItAutocomplete
    (myInputId,
     myModelSearchField,
