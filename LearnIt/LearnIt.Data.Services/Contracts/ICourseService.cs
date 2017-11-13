@@ -24,7 +24,18 @@ namespace LearnIt.Data.Services.Contracts
 
         Task DeassignCourseFromUser(string courseName, string username, DateTime dueDate);
 
-        Task AssignExistingCourseToPosAndDept(string courseName, string depName, string posName, DateTime dueDate, bool isMandatory);
+        Task AssignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate,
+            bool isMandatory);
+
+        Task DeassignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate);
 
         IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username);
 

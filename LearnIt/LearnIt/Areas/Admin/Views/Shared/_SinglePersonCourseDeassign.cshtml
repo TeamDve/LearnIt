@@ -2,12 +2,12 @@
 @{
     Layout = "";
 }
-@model CourseToUser
+@model CourseToUserDeassign
 
 <h2>Single Person Course</h2>
 
 
-@using (Html.BeginForm("SinglePersonCourseAssign", "Admin", FormMethod.Post))
+@using (Html.BeginForm("SinglePersonCourseDeassign", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -23,10 +23,6 @@
     <div class="ui-widget">
         <label class="label-input" for="DateInputField"> Due Date: </label>
         @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
-    </div>
-    <div>
-        @Html.LabelFor(model => model.IsMandatory)
-        @Html.EditorFor(model => model.IsMandatory)
     </div>
     <div>
         <input type="submit" value="Save" />

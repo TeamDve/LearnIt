@@ -141,7 +141,7 @@ namespace LearnIt.Data.Services
                     AssignmentDate = DateTime.Now,
                     IsMandatory = isMandatory
                 };
-                dbContext.UsersCourses.Add(usrToCourse);
+                this.dbContext.UsersCourses.Add(usrToCourse);
             }
             await ExecuteQuery();
         }
@@ -151,9 +151,14 @@ namespace LearnIt.Data.Services
         public async Task DeassignCourseFromUser(string courseName, string username,DateTime dueDate)
         {
             var user = this.GetUserByName(username);
-            if(user.UsersCourses.Any(courses=>courses.Course.Name == courseName && courses.DueDate==dueDate))
+            if(user.UsersCourses
+                .Any(courses=>courses.Course.Name == courseName 
+                && courses.DueDate==dueDate))
             {
-                var course = user.UsersCourses.Single(courses => courses.Course.Name == courseName && courses.DueDate == dueDate);
+                var course = user.UsersCourses
+                    .Where(courses => courses.Course.Name == courseName 
+                    && courses.DueDate == dueDate).First();
+
                 user.UsersCourses.Remove(course);
             }
             await ExecuteQuery();
@@ -206,28 +211,26 @@ namespace LearnIt.Data.Services
         {
             var affectedUsers = dbContext.Users
                             .Where(u => u.Position.Name == posName && u.Department.Name == depName)
-                            .Select(u => u.Id)
+                            .Select(u => u.UserName)
                             .ToList<string>();
+            foreach(var username in affectedUsers)
+            {
+                var user = this.GetUserByName(username);
+                if (user.UsersCourses
+                    .Any(courses => courses.Course.Name == courseName
+                    && courses.DueDate == dueDate))
+                {
+                    var course = user.UsersCourses
+                        .Where(courses => courses.Course.Name == courseName
+                        && courses.DueDate == dueDate).First();
 
-            var course = dbContext.Courses.Any(c => c.Name == courseName);
-            //foreach (var usr in affectedUsers)
-            //{
-            //    UserCourse usrToCourse = new UserCourse()
-            //    {
-            //        CourseId = course.,
-            //        UserId = usr,
-            //        DueDate = dueDate,
-            //        Status = CourseStatus.Pending,
-            //        AssignmentDate = DateTime.Now
-            //    };
-            //    if (dbContext.UsersCourses.Single(
-            //    c => c.CourseId == usrToCourse.CourseId
-            //    && c.UserId == usrToCourse.UserId
-            //    && c.DueDate == usrToCourse.DueDate) != null)
-            //    {
-            //        this.dbContext.UsersCourses.Remove(usrToCourse);
-            //    }
-            //}
+                    user.UsersCourses.Remove(course);
+                }
+                await ExecuteQuery();
+
+            }
+
+
             await ExecuteQuery();
 
         }
