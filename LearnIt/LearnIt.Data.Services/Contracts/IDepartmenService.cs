@@ -9,6 +9,6 @@ namespace LearnIt.Data.Services.Contracts
 {
     public interface IDepartmenService
     {
-        IEnumerable<DepartmentNames> ReturnAllDepartmentNames();
+        IEnumerable<NameHolder> ReturnAllDepartmentNames();
     }
 }

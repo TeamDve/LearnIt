@@ -216,8 +216,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Models\AddCourseToPosDep.cs" />
-    <Compile Include="Areas\Admin\Models\AddCourseToUser.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToPosDep.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToUser.cs" />
+    <Compile Include="Areas\Admin\Models\UserCourseInfo.cs" />
     <Compile Include="Areas\Admin\Models\DepartPossitionAndCourseNames.cs" />
     <Compile Include="Areas\Admin\Models\UserNameAndProjectNameModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -274,10 +275,12 @@
     <Content Include="Areas\Courses\Views\Courses\MyCourses.cshtml" />
     <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoadUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourse.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAsign.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BulkCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAssign.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_VisualiseCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DeassignCourse.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -54,12 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
-    <Compile Include="DataModels\CourseCourseNames.cs" />
     <Compile Include="DataModels\CourseInfoData.cs" />
-    <Compile Include="DataModels\DepartmentNames.cs" />
-    <Compile Include="DataModels\PositionNames.cs" />
+    <Compile Include="DataModels\NameHolder.cs" />
     <Compile Include="DataModels\UserCourseInfo.cs" />
-    <Compile Include="DataModels\UsersUsernames.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.Designer.cs">
       <DependentUpon>201711071703416_InitialWithAllIn.cs</DependentUpon>

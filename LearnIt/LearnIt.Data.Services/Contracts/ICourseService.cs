@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System;
 using LearnIt.Data.DataModels;
 using System.Linq;
+using LearnIt.Data.Enums;
 
 namespace LearnIt.Data.Services.Contracts
 {
@@ -27,6 +28,8 @@ namespace LearnIt.Data.Services.Contracts
 
         IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username);
 
-        IEnumerable<CourseCourseNames> ReturnAllCourseNames();
+        IEnumerable<NameHolder> ReturnAllCourseNames();
+
+        IEnumerable<UserCourseInfo> GetUsersCourseInfoByStatus(string username, CourseStatus status);
     }
 }

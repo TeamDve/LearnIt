@@ -137,7 +137,13 @@ namespace LearnIt.Data.Services
                 AssignmentDate = DateTime.Now,
                 IsMandatory = isMandatory
             };
-            dbContext.UsersCourses.Add(usrToCourse);
+            if (dbContext.UsersCourses.Single(
+                c=>c.CourseId==usrToCourse.CourseId
+                && c.UserId==usrToCourse.UserId
+                && c.DueDate==usrToCourse.DueDate) == null)
+            {
+                dbContext.UsersCourses.Add(usrToCourse);
+            }
             await ExecuteQuery();
         }
 
@@ -192,12 +198,48 @@ namespace LearnIt.Data.Services
 
         }
 
+        public async Task DeassignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate,
+            bool isMandatory)
+        {
+            var affectedUsers = dbContext.Users
+                            .Where(u => u.Position.Name == posName && u.Department.Name == depName)
+                            .Select(u => u.Id)
+                            .ToList<string>();
+
+            var course = dbContext.Courses.First(c => c.Name == courseName);
+            foreach (var usr in affectedUsers)
+            {
+                UserCourse usrToCourse = new UserCourse()
+                {
+                    CourseId = course.Id,
+                    UserId = usr,
+                    DueDate = dueDate,
+                    Status = CourseStatus.Pending,
+                    AssignmentDate = DateTime.Now,
+                    IsMandatory = isMandatory
+                };
+                if (dbContext.UsersCourses.Single(
+                c => c.CourseId == usrToCourse.CourseId
+                && c.UserId == usrToCourse.UserId
+                && c.DueDate == usrToCourse.DueDate) != null)
+                {
+                    this.dbContext.UsersCourses.Remove(usrToCourse);
+                }
+            }
+            await ExecuteQuery();
+
+        }
+
         public IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username)
         {
             var user = GetUserByName(username);
 
             List<UserCourseInfo> resultList = dbContext.UsersCourses
-                .Where(x => x.UserId == user.Id)
+                .Where(u => u.UserId == user.Id)
                 .Select(x => new UserCourseInfo()
                                 {
                                     Name = x.Course.Name,
@@ -212,15 +254,30 @@ namespace LearnIt.Data.Services
             return resultList;
         }
 
-
-        public IEnumerable<CourseCourseNames> ReturnAllCourseNames()
+        public IEnumerable<UserCourseInfo> GetUsersCourseInfoByStatus(string username, CourseStatus status)
         {
-            IEnumerable<CourseCourseNames> courseNames = this.dbContext
+            var completedCourses = this.GetUsersCourseInfo(username)
+                .Where(c => c.Status == status)
+                .ToList();
+
+            if (completedCourses.Count() <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                return completedCourses;
+            }
+        }
+
+        public IEnumerable<NameHolder> ReturnAllCourseNames()
+        {
+            IEnumerable<NameHolder> courseNames = this.dbContext
                 .Courses
                 .Select
-                (c => new CourseCourseNames()
+                (c => new NameHolder()
                 {
-                    CourseCoursenames = c.Name
+                    Names = c.Name
                 }).ToList();
             return courseNames;
         }
