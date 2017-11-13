@@ -155,7 +155,7 @@ namespace LearnIt.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> BulkCourseAssgn(CourseToPosDep singleCourseAsignModel)
+        public async Task<ActionResult> BulkCourseAssign(CourseToPosDep singleCourseAsignModel)
         {
             await this.courseService.AssignExistingCourseToPosAndDept(
                 singleCourseAsignModel.CourseName,

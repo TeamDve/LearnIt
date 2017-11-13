@@ -22,7 +22,7 @@ namespace LearnIt.Data.Services.Contracts
 
         Task AssignCourseToUser(string courseName, string username, DateTime date, bool isMandatory);
 
-        Task UnassignCourseFromUser(int courseId, string username);
+        Task DeassignCourseFromUser(string courseName, string username, DateTime dueDate);
 
         Task AssignExistingCourseToPosAndDept(string courseName, string depName, string posName, DateTime dueDate, bool isMandatory);
 
