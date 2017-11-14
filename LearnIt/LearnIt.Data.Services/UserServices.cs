@@ -20,14 +20,14 @@ namespace LearnIt.Data.Services
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
 
-        public IEnumerable<UsersUsernames> ReturnAllUserNames()
+        public IEnumerable<NameHolder> ReturnAllUserNames()
         {
-            IEnumerable<UsersUsernames> userNames = this.dbContext
+            IEnumerable<NameHolder> userNames = this.dbContext
                 .Users
                 .Select
-                (u => new UsersUsernames()
+                (u => new NameHolder()
                 {
-                    Username = u.UserName
+                    Names = u.UserName
                 }).ToList();
             return userNames;
         }

@@ -9,6 +9,6 @@ namespace LearnIt.Data.Services.Contracts
 {
     public interface IPossitionService
     {
-        IEnumerable<PositionNames> ReturnAllPossitionNames();
+        IEnumerable<NameHolder> ReturnAllPossitionNames();
     }
 }

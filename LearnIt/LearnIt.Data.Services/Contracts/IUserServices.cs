@@ -10,7 +10,7 @@ namespace LearnIt.Data.Services.Contracts
 {
     public interface IUserServices
     {
-        IEnumerable<UsersUsernames> ReturnAllUserNames();
+        IEnumerable<NameHolder> ReturnAllUserNames();
 
         Task AsignUserToAdmin(string username);
 

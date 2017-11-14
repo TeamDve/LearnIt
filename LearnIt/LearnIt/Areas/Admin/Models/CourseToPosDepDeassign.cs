@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LearnIt.Areas.Admin.Models
 {
-    public class AddCourseToPosDep
+    public class CourseToPosDepDeassign
     {
         public string Possition { get; set; }
 
@@ -14,7 +14,5 @@ namespace LearnIt.Areas.Admin.Models
         public string Department { get; set; }
 
         public DateTime DueDate { get; set; }
-
-        public bool IsMandatory { get; set; }
     }
 }

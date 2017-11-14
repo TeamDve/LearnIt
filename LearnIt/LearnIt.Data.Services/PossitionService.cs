@@ -18,14 +18,14 @@ namespace LearnIt.Data.Services
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
 
-        public IEnumerable<PositionNames> ReturnAllPossitionNames()
+        public IEnumerable<NameHolder> ReturnAllPossitionNames()
         {
-            IEnumerable<PositionNames> positionNames = this.dbContext
+            IEnumerable<NameHolder> positionNames = this.dbContext
                 .DeptRoles
                 .Select
-                (d => new PositionNames()
+                (d => new NameHolder()
                 {
-                    PosNames = d.Name
+                    Names = d.Name
                 }).ToList();
             return positionNames;
         }

@@ -1,0 +1,17 @@
+﻿
+@{
+    Layout = "";
+}
+@model UserCourseInfo
+
+<tr>
+    <td>@Model.Name </td>
+    <td>@Model.isMandatory </td>
+    <td>@Model.AssignmentDate.ToString("dd/MM/yyyy") </td>
+    <td>@Model.CompletionDate </td>
+    <td>@Model.DueDate.ToString("dd/MM/yyyy") </td>
+    <td>@Model.Status</td>
+</tr>
+    
+
+

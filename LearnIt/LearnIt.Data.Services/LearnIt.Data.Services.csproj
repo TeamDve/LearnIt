@@ -64,7 +64,6 @@
     <Compile Include="Contracts\IUserServices.cs" />
     <Compile Include="CourseService.cs" />
     <Compile Include="DepartmentService.cs" />
-    <Compile Include="Enums\CourseStatus.cs" />
     <Compile Include="JsonParserService.cs" />
     <Compile Include="PossitionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,7 +75,6 @@
       <Name>LearnIt.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

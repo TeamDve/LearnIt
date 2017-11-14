@@ -22,10 +22,28 @@ select,
 textarea {
     max-width: 280px;
 }
+
 .dropdown{
     margin-left:5px;
     margin-top:7px;
 }
+
 #hiddenSearch {
     display: none;
+}
+
+.label-input{
+    width: 150px;
+    margin-bottom:10px;
+}
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+td,th{
+    width: 150px;
 }

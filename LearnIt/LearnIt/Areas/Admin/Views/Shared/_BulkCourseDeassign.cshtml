@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = "";
+}
+@model CourseToPosDep
+
+<h2>Bulk gaga</h2>
+
+
+@using (Html.BeginForm("BulkCourseDeassign", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="ui-widget">
+        <label class="label-input" for="DepNameInputField"> Department: </label>
+        @Html.TextBoxFor(model => model.Department, new { id = "DepNameInputField" })
+    </div>
+    <div class="ui-widget">
+        <label class="label-input" for="PosNameInputField"> Possition: </label>
+        @Html.TextBoxFor(model => model.Possition, new { id = "PosNameInputField" })
+    </div>
+    <div class="ui-widget">
+        <label class="label-input" for="CourseNameInputField"> Course Name: </label>
+        @Html.TextBoxFor(model => model.CourseName, new { id = "CourseNameInputField" })
+    </div>
+    <div class="ui-widget">
+        <label class="label-input" for="DateInputField"> Due Date: </label>
+        @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jqueryajax")
+<script>
+    LearnItAutocomplete("#DepNameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.courseDepPosNames.DepartmentList)));
+    LearnItAutocomplete("#PosNameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.courseDepPosNames.PossitionList)));
+    LearnItAutocomplete("#CourseNameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.courseDepPosNames.CourseNameList)));
+    //there is also only a LearnItAutocomplete which uses only the first 3 variables and gives out suggestions in a
+    //input field based on which field u want to use
+</script>

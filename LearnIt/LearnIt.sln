@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnIt.Data", "LearnIt.Dat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{49DCE734-7E06-47B7-AB9E-167DB1896887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnIt.DataServices", "LearnIt.Data.Services\LearnIt.DataServices.csproj", "{6E9B02B7-D566-4BF0-BA1D-53E51D189887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnIt.Data.Services", "LearnIt.Data.Services\LearnIt.Data.Services.csproj", "{6E9B02B7-D566-4BF0-BA1D-53E51D189887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LearnIt.Data.DataModels
 {
-    public class DepartmentNames
+    public class NameHolder
     {
-        public string DepNames{get;set;}
+        public string Names { get; set; }
     }
 }
+

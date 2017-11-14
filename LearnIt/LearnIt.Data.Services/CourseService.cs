@@ -176,34 +176,39 @@ namespace LearnIt.Data.Services
         {
             var course = dbContext.Courses.First(c => c.Name == courseName);
             var user = this.GetUserByName(username);
-            UserCourse usrToCourse = new UserCourse()
+            if (!user.UsersCourses
+                .Any(courses =>courses.Course.Name==courseName 
+                && courses.DueDate==dueDate))
             {
-                CourseId = course.Id,
-                UserId = user.Id,
-                DueDate = dueDate,
-                Status = CourseStatus.Pending,
-                AssignmentDate = DateTime.Now,
-                IsMandatory = isMandatory
-            };
-            dbContext.UsersCourses.Add(usrToCourse);
+                UserCourse usrToCourse = new UserCourse()
+                {
+                    CourseId = course.Id,
+                    UserId = user.Id,
+                    DueDate = dueDate,
+                    Status = CourseStatus.Pending,
+                    AssignmentDate = DateTime.Now,
+                    IsMandatory = isMandatory
+                };
+                this.dbContext.UsersCourses.Add(usrToCourse);
+            }
             await ExecuteQuery();
         }
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
-        public async Task UnassignCourseFromUser(int courseId, string username)
+        public async Task DeassignCourseFromUser(string courseName, string username,DateTime dueDate)
         {
-            var course = dbContext
-                .Courses
-                .First(x => x.Id == courseId);
+            var user = this.GetUserByName(username);
+            if(user.UsersCourses
+                .Any(courses=>courses.Course.Name == courseName 
+                && courses.DueDate==dueDate))
+            {
+                var course = user.UsersCourses
+                    .Where(courses => courses.Course.Name == courseName 
+                    && courses.DueDate == dueDate).First();
 
-            var user = GetUserByName(username);
-
-            UserCourse usrFromCourse = dbContext
-                .UsersCourses
-                .First(x => x.UserId == user.Id && x.CourseId == courseId);
-
-            this.dbContext.UsersCourses.Remove(usrFromCourse);
+                user.UsersCourses.Remove(course);
+            }
             await ExecuteQuery();
         }
 
@@ -224,18 +229,56 @@ namespace LearnIt.Data.Services
             var course = dbContext.Courses.First(c => c.Name == courseName);
             foreach (var usr in affectedUsers)
             {
-                UserCourse usrToCourse = new UserCourse()
+                var user = this.dbContext.Users.Where(u => u.Id == usr).Single();
+                if (!user.UsersCourses
+                .Any(courses => courses.Course.Name == courseName
+                && courses.DueDate == dueDate))
                 {
-                    CourseId = course.Id,
-                    UserId = usr,
-                    DueDate = dueDate,
-                    Status = CourseStatus.Pending,
-                    AssignmentDate = DateTime.Now,
-                    IsMandatory = isMandatory
-                };
+                    UserCourse usrToCourse = new UserCourse()
+                    {
+                        CourseId = course.Id,
+                        UserId = usr,
+                        DueDate = dueDate,
+                        Status = CourseStatus.Pending,
+                        AssignmentDate = DateTime.Now,
+                        IsMandatory = isMandatory
+                    };
 
-                this.dbContext.UsersCourses.Add(usrToCourse);
+                    this.dbContext.UsersCourses.Add(usrToCourse);
+                }
             }
+            await ExecuteQuery();
+
+        }
+
+        public async Task DeassignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate)
+        {
+            var affectedUsers = dbContext.Users
+                            .Where(u => u.Position.Name == posName && u.Department.Name == depName)
+                            .Select(u => u.UserName)
+                            .ToList<string>();
+            foreach(var username in affectedUsers)
+            {
+                var user = this.GetUserByName(username);
+                if (user.UsersCourses
+                    .Any(courses => courses.Course.Name == courseName
+                    && courses.DueDate == dueDate))
+                {
+                    var course = user.UsersCourses
+                        .Where(courses => courses.Course.Name == courseName
+                        && courses.DueDate == dueDate).First();
+
+                    user.UsersCourses.Remove(course);
+                }
+                await ExecuteQuery();
+
+            }
+
+
             await ExecuteQuery();
 
         }
@@ -245,7 +288,7 @@ namespace LearnIt.Data.Services
             var user = GetUserByName(username);
 
             List<UserCourseInfo> resultList = dbContext.UsersCourses
-                .Where(x => x.UserId == user.Id)
+                .Where(u => u.UserId == user.Id)
                 .Select(x => new UserCourseInfo()
                 {
                     Name = x.Course.Name,
@@ -260,15 +303,30 @@ namespace LearnIt.Data.Services
             return resultList;
         }
 
-
-        public IEnumerable<CourseCourseNames> ReturnAllCourseNames()
+        public IEnumerable<UserCourseInfo> GetUsersCourseInfoByStatus(string username, CourseStatus status)
         {
-            IEnumerable<CourseCourseNames> courseNames = this.dbContext
+            var completedCourses = this.GetUsersCourseInfo(username)
+                .Where(c => c.Status == status)
+                .ToList();
+
+            if (completedCourses.Count() <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                return completedCourses;
+            }
+        }
+
+        public IEnumerable<NameHolder> ReturnAllCourseNames()
+        {
+            IEnumerable<NameHolder> courseNames = this.dbContext
                 .Courses
                 .Select
-                (c => new CourseCourseNames()
+                (c => new NameHolder()
                 {
-                    CourseCoursenames = c.Name
+                    Names = c.Name
                 }).ToList();
             return courseNames;
         }

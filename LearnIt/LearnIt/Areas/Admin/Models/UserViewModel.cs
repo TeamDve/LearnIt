@@ -12,6 +12,10 @@ namespace LearnIt.Areas.Admin.Models
 
         public string Username { get; set; }
 
+        public string Department { get; set; }
+
+        public string Position { get; set; }
+
         public bool IsAdmin { get; set; }
 
 
@@ -22,7 +26,9 @@ namespace LearnIt.Areas.Admin.Models
                 return u => new UserViewModel()
                 {
                     Id = u.Id,
-                    Username = u.UserName
+                    Username = u.UserName,
+                    Department=u.Department.Name,
+                    Position=u.Position.Name
                 };
             }
         }

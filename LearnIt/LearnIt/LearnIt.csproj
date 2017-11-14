@@ -216,8 +216,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Models\AddCourseToPosDep.cs" />
-    <Compile Include="Areas\Admin\Models\AddCourseToUser.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToPosDep.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToPosDepDeassign.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToUserDeassign.cs" />
+    <Compile Include="Areas\Admin\Models\CourseToUser.cs" />
+    <Compile Include="Areas\Admin\Models\UserCourseInfo.cs" />
     <Compile Include="Areas\Admin\Models\DepartPossitionAndCourseNames.cs" />
     <Compile Include="Areas\Admin\Models\UserNameAndProjectNameModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -279,13 +282,17 @@
     <Content Include="Areas\Courses\Views\Courses\MyCourses.cshtml" />
     <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoadUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourse.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAsign.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BulkCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAssign.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\GoStudy.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_Questions.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_Slides.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_VisualiseCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DeassignCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BulkCourseDeassign.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseDeassign.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.1-vsdoc.js" />
@@ -349,9 +356,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.DataServices.csproj">
+    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.Data.Services.csproj">
       <Project>{6e9b02b7-d566-4bf0-ba1d-53e51d189887}</Project>
-      <Name>LearnIt.DataServices</Name>
+      <Name>LearnIt.Data.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\LearnIt.Data\LearnIt.Data.csproj">
       <Project>{862da882-5e3a-4368-a132-f4cc8c4ffdb8}</Project>

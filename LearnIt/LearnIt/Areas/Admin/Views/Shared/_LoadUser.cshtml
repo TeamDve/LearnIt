@@ -6,19 +6,169 @@
 
 
 <h3>Edit user:</h3>
+<div>
+    @Model.Username
+</div>
+
+<div>
+    <p>Works as <b>@Model.Position</b> at <b>@Model.Department</b></p>
+</div>
 @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.Id)
+
     <div>
-        @Model.Username
-    </div>
-    <div>
-        @Html.LabelFor(m => m.IsAdmin)
-        @Html.EditorFor(m => m.IsAdmin)
+        @Html.LabelFor(model => model.IsAdmin)
+        @Html.EditorFor(model => model.IsAdmin)
     </div>
     <div>
         <input type="submit" value="Save" />
     </div>
 }
+
+
+<hr>
+<div>
+    <h2>Started Courses</h2>
+    @if (ViewBag.StartedCourses == null)
+    {
+        <h3>No Courses here</h3>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.CompletedCourses)
+            {
+                UserCourseInfo oneCourse = new UserCourseInfo
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    isMandatory = course.isMandatory,
+                    DueDate = course.DueDate
+                };
+                Html.RenderPartial("_VisualiseCourse", oneCourse);
+            }
+        </table>
+    }
+
+</div>
+
+<hr>
+<div>
+    <h2>Pending Courses</h2>
+    @if (ViewBag.PendingCourses == null)
+    {
+        <h3>No Courses here</h3>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.PendingCourses)
+            {
+                UserCourseInfo oneCourse = new UserCourseInfo
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    isMandatory = course.isMandatory,
+                    DueDate = course.DueDate
+                };
+                Html.RenderPartial("_VisualiseCourse", oneCourse);
+            }
+        </table>
+    }
+
+</div>
+
+<hr>
+<div>
+    <h2>Completed Courses</h2>
+    @if (ViewBag.CompletedCourses== null)
+    {
+        <h3>No Courses here</h3>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.CompletedCourses)
+            {
+                UserCourseInfo oneCourse = new UserCourseInfo
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    isMandatory = course.isMandatory,
+                    DueDate= course.DueDate
+                };
+                Html.RenderPartial("_VisualiseCourse", oneCourse);
+            }
+        </table>
+    }
+
+</div>

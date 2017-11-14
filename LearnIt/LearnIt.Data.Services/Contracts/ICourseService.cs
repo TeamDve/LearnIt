@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System;
 using LearnIt.Data.DataModels;
 using System.Linq;
+using LearnIt.Data.Enums;
 
 namespace LearnIt.Data.Services.Contracts
 {
@@ -27,12 +28,25 @@ namespace LearnIt.Data.Services.Contracts
 
         Task AssignCourseToUser(string courseName, string username, DateTime date, bool isMandatory);
 
-        Task UnassignCourseFromUser(int courseId, string username);
+        Task DeassignCourseFromUser(string courseName, string username, DateTime dueDate);
 
-        Task AssignExistingCourseToPosAndDept(string courseName, string depName, string posName, DateTime dueDate, bool isMandatory);
+        Task AssignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate,
+            bool isMandatory);
+
+        Task DeassignExistingCourseToPosAndDept(
+            string courseName,
+            string depName,
+            string posName,
+            DateTime dueDate);
 
         IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username);
 
-        IEnumerable<CourseCourseNames> ReturnAllCourseNames();
+        IEnumerable<NameHolder> ReturnAllCourseNames();
+
+        IEnumerable<UserCourseInfo> GetUsersCourseInfoByStatus(string username, CourseStatus status);
     }
 }

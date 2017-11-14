@@ -2,31 +2,31 @@
 @{
     Layout = "";
 }
-@model LearnIt.Areas.Admin.Models.AddCourseToUser
+@model CourseToUser
 
 <h2>Single Person Course</h2>
 
 
-@using (Html.BeginForm("SinglePersonCourseAsign", "Admin", FormMethod.Post))
+@using (Html.BeginForm("SinglePersonCourseAssign", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
 
     <div class="ui-widget">
-        <label for="UsernameInputField"> Username: </label>
+        <label class="label-input" for="UsernameInputField"> Username: </label>
         @Html.TextBoxFor(model => model.Username, new { id = "UsernameInputField" })
     </div>
     <div class="ui-widget">
-        <label for="CourseNameInputField"> Course Name </label>
+        <label class="label-input" for="CourseNameInputField"> Course Name </label>
         @Html.TextBoxFor(model => model.CourseName, new { id = "CourseNameInputField" })
     </div>
     <div class="ui-widget">
-        <label for="DateInputField"> Due Date: </label>
+        <label class="label-input" for="DateInputField"> Due Date: </label>
         @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
     </div>
     <div>
-        @Html.LabelFor(m => m.IsMandatory)
-        @Html.EditorFor(m => m.IsMandatory)
+        @Html.LabelFor(model => model.IsMandatory)
+        @Html.EditorFor(model => model.IsMandatory)
     </div>
     <div>
         <input type="submit" value="Save" />
@@ -37,8 +37,8 @@
 @Scripts.Render("~/bundles/jqueryajax")
 <script>
 
-    LearnItAutocomplete("#UsernameInputField", "Username",@Html.Raw(Json.Encode(ViewBag.userAndProjectNames.UsernameList)));
-    LearnItAutocomplete("#CourseNameInputField", "CourseCoursenames",@Html.Raw(Json.Encode(ViewBag.userAndProjectNames.CourseNameList)));
+    LearnItAutocomplete("#UsernameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.userAndProjectNames.UsernameList)));
+    LearnItAutocomplete("#CourseNameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.userAndProjectNames.CourseNameList)));
     //there is also only a LearnItAutocomplete which uses only the first 3 variables and gives out suggestions in a
     //input field based on which field u want to use
 </script>
