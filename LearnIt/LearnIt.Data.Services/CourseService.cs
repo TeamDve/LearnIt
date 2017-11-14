@@ -221,7 +221,7 @@ namespace LearnIt.Data.Services
             DateTime dueDate,
             bool isMandatory)
         {
-            var affectedUsers = dbContext.Users
+            var affectedUsers = this.dbContext.Users
                             .Where(u => u.Position.Name == posName && u.Department.Name == depName)
                             .Select(u => u.Id)
                             .ToList<string>();
