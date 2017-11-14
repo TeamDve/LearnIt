@@ -205,9 +205,9 @@ namespace LearnIt.Data.Services
             {
                 var course = user.UsersCourses
                     .Where(courses => courses.Course.Name == courseName 
-                    && courses.DueDate == dueDate).First();
+                    && courses.DueDate == dueDate).FirstOrDefault();
 
-                user.UsersCourses.Remove(course);
+                this.dbContext.UsersCourses.Remove(course);
             }
             await ExecuteQuery();
         }
@@ -272,7 +272,7 @@ namespace LearnIt.Data.Services
                         .Where(courses => courses.Course.Name == courseName
                         && courses.DueDate == dueDate).First();
 
-                    user.UsersCourses.Remove(course);
+                    this.dbContext.UsersCourses.Remove(course);
                 }
                 await ExecuteQuery();
 
