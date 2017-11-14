@@ -35,10 +35,6 @@ namespace LearnIt
             bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
                          "~/Scripts/jquery.unobtrusive-ajax.js",
                          "~/Scripts/learnItAutofill.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/presenteer").Include(
-                            "~/Scripts/presenteer.js",
-                            "~/Scripts/Sylvester.js"));
         }
     }
 }

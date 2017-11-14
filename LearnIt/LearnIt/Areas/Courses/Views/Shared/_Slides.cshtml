@@ -1,19 +1,12 @@
 ﻿@model IEnumerable<SlideImage>
 
-<div class="presentationcontainer" id="presentationcontainerSlides">
-    <div class="presentation" id="presentationSlides">
         @foreach (var img in Model)
         {
             <div>
                 <img alt="Embedded Image" src="data:image/png;base64,@(img.ImageBase64)" />
             </div>
         }
-    </div>
-</div>
-<div class="presentationcontainer" id="presentationcontainerSlides_counter">
-    <div class="presentation" id="presentationSlides_counter">
-    </div>
-</div>
+
 
 
 
