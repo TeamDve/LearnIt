@@ -42,5 +42,38 @@ namespace LearnIt.Areas.Courses.Controllers
                                         });
             return this.View(viewModel);
         }
+
+        [ActionName("GoStudy")]
+        public ActionResult StartPresentation(string name)
+        {
+            ViewBag.smth = courseService.GetCourseCompletionRate(name);
+            return this.View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Questions(string name)
+        {
+            IEnumerable<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions(name)
+                                                               .Select(x => new QuestionInfo()
+                                                               {
+                                                                   Qstn = x.Qstn,
+                                                                   Answers = (x.Answers).Split('/'),
+                                                                   RightAnswer = x.RightAnswer
+                                                               });
+            return this.PartialView("_Questions",questionsAndAnswers);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Slides(string name)
+        {
+            IEnumerable<SlideImage> slideImages = courseService.GetAllCourseSlides(name)
+                                                    .Select(x => new SlideImage()
+                                                    {
+                                                        Order = x.Order,
+                                                        ImageBase64 = Convert.ToBase64String(x.ImageBinary)
+                                                    });
+            return this.PartialView("_Slides", slideImages);
+        }
+
     }
 }

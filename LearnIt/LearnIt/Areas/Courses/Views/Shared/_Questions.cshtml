@@ -1,0 +1,15 @@
+﻿@model IEnumerable<QuestionInfo>
+    <h2>Questions</h2>
+
+@foreach(var qstn in Model)
+{
+   <h3>@(qstn.Qstn)</h3>
+    foreach (var answer in qstn.Answers)
+    {
+        <div>
+            @Html.RadioButton(qstn.Qstn, answer) @answer
+            <br />
+        </div>
+    }
+
+}

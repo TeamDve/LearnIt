@@ -23,22 +23,70 @@ namespace LearnIt.Data.Services
         //Admin use only
         private IQueryable<Course> GetAllCoursesQuery()
         {
-            var list = this.dbContext.Courses.Select(x=>x);
+            var list = this.dbContext.Courses.Select(x => x);
             return list;
         }
         public IEnumerable<CourseInfoData> GetAllCourses()
         {
-            
-        return this.GetAllCoursesQuery()
-                        .Select(x => new CourseInfoData()
+
+            return this.GetAllCoursesQuery()
+                            .Select(x => new CourseInfoData()
                             {
                                 Name = x.Name,
                                 DateAdded = x.DateAdded,
                                 Description = x.Description,
                                 ScoreToPass = x.ScoreToPass
-
                             })
-                        .ToList(); ;
+                            .ToList(); ;
+        }
+        public IEnumerable<CourseSlidesBinary> GetAllCourseSlides(string courseName)
+        {
+
+            var enumerableOfImages = this.GetAllCoursesQuery()
+                            .Where(x => x.Name == courseName)
+                            .Select(x => x.Images)
+                            .First();
+
+            List<CourseSlidesBinary> listOfImages = new List<CourseSlidesBinary>();
+            foreach (var item in enumerableOfImages)
+            {
+                listOfImages.Add(new CourseSlidesBinary()
+                {
+                    ImageBinary = item.ImageBinary
+                });
+            }
+            listOfImages.Sort((a, b) => (a.Order.CompareTo(b.Order)));
+            return listOfImages;
+        }
+
+        public bool GetCourseCompletionRate(string courseName)
+        {
+            bool result = this.dbContext.UsersCourses
+                                        .Where(x => x.Course.Name == courseName)
+                                        .Select(x => x.areQuestionsOpened)
+                                        .First();
+            return result;
+        }
+
+        public IEnumerable<CourseQuestions> GetAllCourseQuestions(string courseName)
+        {
+
+            var enumerableOfQuestions = this.GetAllCoursesQuery()
+                            .Where(x => x.Name == courseName)
+                            .Select(x => x.Questions)
+                            .First();
+
+            List<CourseQuestions> listOfQuestions = new List<CourseQuestions>();
+            foreach (var item in enumerableOfQuestions)
+            {
+                listOfQuestions.Add(new CourseQuestions()
+                {
+                    Qstn = item.Qstn,
+                    Answers = item.Answers,
+                    RightAnswer = item.RightAnswer
+                });
+            }
+            return listOfQuestions;
         }
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
@@ -50,7 +98,7 @@ namespace LearnIt.Data.Services
             var listOfUsersWithCourses = this.dbContext
                 .UsersCourses
                 .Where(x => x.UserId == user.Id)
-                .Select(x=>x.CourseId)
+                .Select(x => x.CourseId)
                 .ToList();
 
             if (listOfUsersWithCourses == null)
@@ -67,7 +115,7 @@ namespace LearnIt.Data.Services
             return listOfUsersCourses;
         }
 
-      
+
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin && User use
         public Course GetCourseById(int courseId)
@@ -199,15 +247,15 @@ namespace LearnIt.Data.Services
             List<UserCourseInfo> resultList = dbContext.UsersCourses
                 .Where(x => x.UserId == user.Id)
                 .Select(x => new UserCourseInfo()
-                                {
-                                    Name = x.Course.Name,
-                                    Id = x.Id,
-                                    Status = x.Status,
-                                    AssignmentDate = x.AssignmentDate,
-                                    DueDate = x.DueDate,
-                                    isMandatory = x.IsMandatory,
-                                    CompletionDate = x.CompletionDate
-                                })
+                {
+                    Name = x.Course.Name,
+                    Id = x.Id,
+                    Status = x.Status,
+                    AssignmentDate = x.AssignmentDate,
+                    DueDate = x.DueDate,
+                    isMandatory = x.IsMandatory,
+                    CompletionDate = x.CompletionDate
+                })
                 .ToList();
             return resultList;
         }

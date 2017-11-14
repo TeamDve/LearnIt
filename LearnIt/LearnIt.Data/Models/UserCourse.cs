@@ -27,5 +27,7 @@ namespace LearnIt.Data.Models
         public bool IsMandatory { get; set; }
 
         public CourseStatus Status { get; set; }
+
+        public bool areQuestionsOpened { get; set; }
     }
 }

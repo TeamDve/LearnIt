@@ -1,0 +1,43 @@
+﻿<h2>StartPresentation</h2>
+@*@Html.Action("Questions")
+@Html.Action("Slides")*@
+
+@if (ViewBag.smth)
+    {
+        @Html.Action("Questions")
+        <input type="submit" value ="Upload a course" class="btn btn-primary btn-lg" />
+    }
+    else
+    {
+        @Html.Action("Slides")
+    }
+
+@section scripts{
+    @Scripts.Render("~/bundles/presenteer")
+    <script>
+        $(window).load(function () {
+            // Create the HTML for the indicator
+            $("#presentationSlides > div").each(function (index, elm) {
+                $("#presentationSlides_counter").append("<div>" + (index + 1) + "</div>");
+            });
+            var presentationSlides_counter = new Presenteer(
+                "#presentationSlides_counter",
+                $("#presentationSlides_counter > div"),
+                { centerHorizontally: false }
+            );
+
+            var presentationSlides = new Presenteer(
+                "#presentationSlides",
+                $("#presentationSlides > div"),
+                { onAfterEnter: function (elm) { setTimeout(function () { presentationSlides_counter.show(presentationSlides.getCurrentIndex()) }, 1); } }
+            );
+
+            $("#presentationcontainerSlides_counter").on("click", function () { presentationSlides.next(); });
+            $("#presentationcontainerSlides").on("click", function () { presentationSlides.next(); });
+            presentationSlides_counter.start();
+            presentationSlides_counter.prev();
+            presentationSlides.start();
+        });
+    </script>
+}
+
