@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using LearnIt.Data.Services.Contracts;
 using System.Threading.Tasks;
+using LearnIt.Models;
 
 namespace LearnIt.Controllers
 {
@@ -17,8 +19,31 @@ namespace LearnIt.Controllers
 
         public ActionResult Index()
         {
-            return View();
+
+            var viewmodel = this.courseService.GetLast(3).Select(x => new CourseViewModels()
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                    DateAdded = x.DateAdded
+                }
+            );
+
+            return View(viewmodel);
         }
+
+        public ActionResult LastCourses()
+        {
+            var viewmodel = this.courseService.GetLast(3).Select(x => new CourseViewModels()
+                {
+                    Name = x.Name,
+                    Description =x.Description,
+                    DateAdded = x.DateAdded
+                }
+            );
+
+            return View(viewmodel);
+        }
+            
 
         public ActionResult About()
         {

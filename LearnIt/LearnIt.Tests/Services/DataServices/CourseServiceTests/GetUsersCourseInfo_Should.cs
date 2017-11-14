@@ -8,39 +8,96 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using LearnIt.Data.DataModels;
+using LearnIt.Data.Enums;
+
 
 namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
 {
-    //[TestClass]
+    [TestClass]
     public class GetUsersCourseInfo_Should
     {
-        //To Be continued, smth wrong with the method itself
-        //[TestMethod]
+        [TestMethod]
         public void ReturnUserCourseInfo_WhenParameterIsCorrect()
         {
-            
-            //var dbContextMock = new Mock<ApplicationDbContext>();
+            //Arrange
+            var dateTime = DateTime.Now;
+            string userName = "test@test.test";
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            var course = new Course()
+            {
+                Id = 12,
+                Name = "eklerEkler",
+                Description = "NeshtoSiNeshtoSi",
+                DateAdded = dateTime,
+                
+                Required = false,
+                ScoreToPass = 40
+            };
+              List<Course> courseList = new List<Course>()
+              {
+                  course
+             };
+            var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
+            dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
 
-            //List<Course> courseList = new List<Course>()
-            //{
-            //    new Course()
-            //    {
-            //        Id = 1,
-            //        Name = "testCourse",
-            //        Required = true,
-            //        ScoreToPass = 55
-            //    }
-            //};
-            //var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData<Course>(courseList);
-            //dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
+            List<ApplicationUser> userList = new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    UserName=userName,
+                    Id = "asd"
+                }
+            };
+            var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(userList);
+            dbContextMock.SetupGet<IDbSet<ApplicationUser>>(x => x.Users).Returns(usersDbSetMock.Object);
 
-            //List<UserCourse> userCourseList = new List<UserCourse>()
-            //{
+            List<UserCourse> userCourseList = new List<UserCourse>()
+            {
+                new UserCourse()
+                {
+                    UserId = "asd",
+                    CourseId = 12,
+                    Course = course,
+                    AssignmentDate =dateTime,
+                    CompletionDate =dateTime,
+                    DueDate = dateTime,
+                    Id = 1,
+                    IsMandatory = true,
+                    Status = CourseStatus.Pending
+                   
 
-            //};
-            //var userCoursesDbSetMock = new Mock<DbSet<UserCourse>>().SetupData<UserCourse>(userCourseList);
-            //dbContextMock.SetupGet<IDbSet<UserCourse>>(x => x.UsersCourses).Returns(userCoursesDbSetMock.Object);
+                }
+            };
+            var UserCourseDbSetMock = new Mock<DbSet<UserCourse>>().SetupData(userCourseList);
+            dbContextMock.SetupGet<IDbSet<UserCourse>>(x => x.UsersCourses).Returns(UserCourseDbSetMock.Object);
 
+            List<UserCourseInfo> userCourseInfoList = new List<UserCourseInfo>()
+            {
+                new UserCourseInfo()
+                {
+                    AssignmentDate = dateTime,
+                    CompletionDate = dateTime,
+                    DueDate = dateTime,
+                    Id = 1,
+                    isMandatory = true,
+                    Name = "eklerEkler",
+                    Status = CourseStatus.Pending
+                }
+            };
+     
+            //Act
+            CourseService courseService = new CourseService(dbContextMock.Object);
+            var valueToAssertAgainst = userCourseInfoList.Single();
+            var testedObject = courseService.GetUsersCourseInfo(userName).Single();
+         
+            //Assert
+            Assert.AreEqual(valueToAssertAgainst.DueDate, testedObject.DueDate);
+            Assert.AreEqual(valueToAssertAgainst.CompletionDate, testedObject.CompletionDate);
+            Assert.AreEqual(valueToAssertAgainst.AssignmentDate, testedObject.AssignmentDate);
+            Assert.AreEqual(valueToAssertAgainst.Name, testedObject.Name);
+            Assert.AreEqual(valueToAssertAgainst.Status, testedObject.Status);
+            Assert.AreEqual(valueToAssertAgainst.isMandatory, testedObject.isMandatory);
         }
     }
 }

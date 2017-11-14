@@ -1,5 +1,15 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<LearnIt.Models.CourseViewModels>
+    @{
+        ViewBag.Title = "Home Page";
+    }
+
+@foreach (var item in Model)
+{
+    <div>@item.Name <br>
+         @item.Description<br>
+         @item.DateAdded</div>
+
+
 }
 
-<h2>Some other infor should be here</h2>
+<h2>Some other info should be here</h2>

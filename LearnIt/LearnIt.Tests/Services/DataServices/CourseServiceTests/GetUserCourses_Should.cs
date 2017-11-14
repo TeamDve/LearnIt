@@ -20,6 +20,7 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             var dateTime = DateTime.Now;
             string userName = "test@test.test";
             var dbContextMock = new Mock<ApplicationDbContext>();
+
             List<Course> courseList = new List<Course>()
             {
                 new Course()
@@ -32,7 +33,6 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
                     ScoreToPass = 40
                 }
             };
-
             var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
             dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
 
@@ -56,6 +56,7 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             };
             var UserCourseDbSetMock = new Mock<DbSet<UserCourse>>().SetupData(userCourseList);
             dbContextMock.SetupGet<IDbSet<UserCourse>>(x => x.UsersCourses).Returns(UserCourseDbSetMock.Object);
+
             //Act
             CourseService courseService = new CourseService(dbContextMock.Object);
             var valueToAssertAgainst = courseList.Single();

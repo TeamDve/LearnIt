@@ -8,61 +8,71 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using LearnIt.Data.Enums;
 
 namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
 {
     [TestClass]
     public class UnassignCourseFromUser_Should
     {
-        //[TestMethod]
-        //public async Task RemoveCourseFrom_WhenParametersAreCorrect()
-        //{
-        //    //Arrange
-        //    int courseId = 1;
-        //    string username = "testUser";
-        //    string userId = "guidStandIn";
-        //    DateTime date = DateTime.Now;
-        //    int status = 1;
-        //    var user = new ApplicationUser()
-        //    {
-        //        Id = userId,
-        //        UserName = username
-        //    };
-        //    var course = new Course()
-        //    {
-        //        Id = courseId,
-        //        Name = "1",
-        //        Description = "NeshtoSiNeshtoSi",
-        //        DateAdded = date,
-        //        Required = true,
-        //        ScoreToPass = 40
-        //    };
+       // [TestMethod]
+        public async Task RemoveCourseFrom_WhenParametersAreCorrect()
+        {
+            //Arrange
+            int courseId = 1;
+            string username = "testUser";
+            string userId = "guidStandIn";
+            DateTime date = DateTime.Now;
+            //int status = 1;
+            var user = new ApplicationUser()
+            {
+                Id = userId,
+                UserName = username
+            };
+            var course = new Course()
+            {
+                Id = courseId,
+                Name = "1",
+                Description = "NeshtoSiNeshtoSi",
+                DateAdded = date,
+               
+                
+                Required = true,
+                ScoreToPass = 40
+            };
+            var userCourse = new UserCourse()
+            {
+                CourseId = courseId,
+                UserId = userId,
+                DueDate = date,
+                Course = course,
+                AssignmentDate = date,
+                Id = 1,
+                IsMandatory = true,
+                Status = CourseStatus.Pending
+            };
 
-        //    var userCourse = new UserCourse()
-        //    {
-        //        CourseId = courseId,
-        //        UserId = userId
-        //    };
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            List<ApplicationUser> usersList = new List<ApplicationUser>() { user };
+            var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
+            dbContextMock.SetupGet<IDbSet<ApplicationUser>>(x => x.Users).Returns(usersDbSetMock.Object);
 
-        //    var dbContextMock = new Mock<ApplicationDbContext>();
-        //    List<UserCourse> usersCoursesList = new List<UserCourse>() { userCourse };
-        //    var usersCoursesDbSetMock = new Mock<DbSet<UserCourse>>().SetupData(usersCoursesList);
-        //    dbContextMock.SetupGet<IDbSet<UserCourse>>(x => x.UsersCourses).Returns(usersCoursesDbSetMock.Object);
+            List<Course> coursesList = new List<Course>() { course };
+            var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
+            dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
 
-        //    List<ApplicationUser> usersList = new List<ApplicationUser>() { user };
-        //    var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
-        //    dbContextMock.SetupGet<IDbSet<ApplicationUser>>(x => x.Users).Returns(usersDbSetMock.Object);
+            List<UserCourse> usersCoursesList = new List<UserCourse>() { userCourse };
+            var usersCoursesDbSetMock = new Mock<DbSet<UserCourse>>().SetupData(usersCoursesList);
+            dbContextMock.SetupGet<IDbSet<UserCourse>>(x => x.UsersCourses).Returns(usersCoursesDbSetMock.Object);
 
-        //    List<Course> coursesList = new List<Course>() { course };
-        //    var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
-        //    dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
+            //CourseService courseService = new CourseService(dbContextMock.Object);
+            //Act
+      //      await courseService.DeassignCourseFromUser(course.Name, user.UserName, date);
+            //Assert
 
-        //    CourseService courseService = new CourseService(dbContextMock.Object);
-        //    //Act
-        //    await courseService.UnassignCourseFromUser(courseId, username);
-        //    //Assert
-        //    Assert.AreEqual(0, dbContextMock.Object.UsersCourses.Count<UserCourse>());
-        //}
+            Assert.AreEqual(0, dbContextMock.Object.UsersCourses.Count<UserCourse>());
+
+        }
 
         //[TestMethod]
         //public async Task ThrowException_WhenNoCoursesAreFound()

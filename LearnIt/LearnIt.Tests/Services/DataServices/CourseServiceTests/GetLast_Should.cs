@@ -67,7 +67,7 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
                     Required = true,
                     ScoreToPass = 40
                 },
-                        new Course()
+            new Course()
                 {
                     Id = 12,
                     Name = "6",
@@ -89,31 +89,31 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             Assert.AreEqual(ExpectedOrder, ActualOrder);
         }
 
-        //[TestMethod]
-        //[DataRow(0)]
-        //[DataRow(1)]
-        //[DataRow(2)]
-        //[DataRow(3)]
-        //[DataRow(4)]
-        //public void ReturnCourses_WhenBetweenZeroAndFiveCoursesInTheDb(int howMany)
-        //{
-        //    //Arrange
-        //    var dbContextMock = new Mock<ApplicationDbContext>();
-        //    var dateTime = DateTime.Now;
-        //    List<Course> coursesList = new List<Course>()
-        //    {
-        //    };
-        //    for(int i = 0; i < howMany; i++)
-        //    {
-        //        coursesList.Add(new Course());
-        //    }
-        //    var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
-        //    dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
-        //    CourseService courseService = new CourseService(dbContextMock.Object);
-        //    //Act
-        //    var expectedResult = courseService.GetLast(howMany);
-        //    //Assert
-        //    Assert.AreEqual(howMany, expectedResult.Count<Course>());
-        //}
+        [TestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(4)]
+        public void ReturnCourses_WhenBetweenZeroAndFiveCoursesInTheDb(int howMany)
+        {
+            //Arrange
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            var dateTime = DateTime.Now;
+            List<Course> coursesList = new List<Course>()
+            {
+            };
+            for (int i = 0; i < howMany; i++)
+            {
+                coursesList.Add(new Course());
+            }
+            var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
+            dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
+            CourseService courseService = new CourseService(dbContextMock.Object);
+            //Act
+            var expectedResult = courseService.GetLast(howMany);
+            //Assert
+            Assert.AreEqual(howMany, expectedResult.Count<Course>());
+        }
     }
 }

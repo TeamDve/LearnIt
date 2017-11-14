@@ -13,7 +13,7 @@ namespace LearnIt.Data.Services
     public class CourseService : ICourseService
     {
         private readonly ApplicationDbContext dbContext;
-
+        //Tested
         public CourseService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
@@ -26,6 +26,7 @@ namespace LearnIt.Data.Services
             var list = this.dbContext.Courses.Select(x=>x);
             return list;
         }
+        //Tested
         public IEnumerable<CourseInfoData> GetAllCourses()
         {
             
@@ -43,6 +44,7 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin && User use
+        //Tested
         public IEnumerable<Course> GetUserCourses(string username)
         {
             var user = GetUserByName(username);
@@ -70,6 +72,7 @@ namespace LearnIt.Data.Services
       
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin && User use
+        //Tested
         public Course GetCourseById(int courseId)
         {
             var course = this.dbContext
@@ -81,6 +84,7 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Home
+        //Tested
         public IEnumerable<Course> GetLast(int count)
         {
             var list = this.dbContext
@@ -95,6 +99,7 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
+        //Tested
         public async Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required)
         {
             Course course = new Course()
@@ -112,6 +117,7 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
+        //Tested
         public async Task AddCourseToDb(Course courseToAdd)
         {
             dbContext.Courses.Add(courseToAdd);
@@ -120,13 +126,20 @@ namespace LearnIt.Data.Services
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them
         //Admin
+        //Tested
         public async Task AssignCourseToUser(
             string courseName,
             string username,
             DateTime dueDate,
             bool isMandatory)
         {
-            var course = dbContext.Courses.First(c => c.Name == courseName);
+
+
+            var course = dbContext.Courses.FirstOrDefault(c => c.Name == courseName) ??
+                         throw new ArgumentNullException("The course is not found! ");
+           
+           
+
             var user = this.GetUserByName(username);
             if (!user.UsersCourses
                 .Any(courses =>courses.Course.Name==courseName 
@@ -143,6 +156,10 @@ namespace LearnIt.Data.Services
                 };
                 this.dbContext.UsersCourses.Add(usrToCourse);
             }
+            else
+            {
+                    throw new ArgumentNullException("Arguments are not valid");
+            }
             await ExecuteQuery();
         }
 
@@ -151,15 +168,13 @@ namespace LearnIt.Data.Services
         public async Task DeassignCourseFromUser(string courseName, string username,DateTime dueDate)
         {
             var user = this.GetUserByName(username);
-            if(user.UsersCourses
-                .Any(courses=>courses.Course.Name == courseName 
-                && courses.DueDate==dueDate))
-            {
+           if(user.UsersCourses.Any(courses=>courses.Course.Name == courseName && courses.DueDate==dueDate))
+           {
                 var course = user.UsersCourses
                     .Where(courses => courses.Course.Name == courseName 
-                    && courses.DueDate == dueDate).First();
+                    && courses.DueDate == dueDate).FirstOrDefault();
 
-                user.UsersCourses.Remove(course);
+                this.dbContext.UsersCourses.Remove(course);
             }
             await ExecuteQuery();
         }
@@ -234,7 +249,7 @@ namespace LearnIt.Data.Services
             await ExecuteQuery();
 
         }
-
+       //Tested
         public IEnumerable<UserCourseInfo> GetUsersCourseInfo(string username)
         {
             var user = GetUserByName(username);
@@ -254,7 +269,7 @@ namespace LearnIt.Data.Services
                 .ToList();
             return resultList;
         }
-
+        //Tested
         public IEnumerable<UserCourseInfo> GetUsersCourseInfoByStatus(string username, CourseStatus status)
         {
             var completedCourses = this.GetUsersCourseInfo(username)
@@ -270,7 +285,7 @@ namespace LearnIt.Data.Services
                 return completedCourses;
             }
         }
-
+        //Tested
         public IEnumerable<NameHolder> ReturnAllCourseNames()
         {
             IEnumerable<NameHolder> courseNames = this.dbContext
@@ -279,7 +294,8 @@ namespace LearnIt.Data.Services
                 (c => new NameHolder()
                 {
                     Names = c.Name
-                }).ToList();
+                })
+                .ToList();
             return courseNames;
         }
 
