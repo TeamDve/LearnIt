@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace LearnIt.Data.Services.Contracts
 {
-    public interface IPossitionService
+    public interface IPositionService
     {
         IEnumerable<NameHolder> ReturnAllPossitionNames();
+
+        Task AddPosToUserPossition(string username, string position);
     }
 }

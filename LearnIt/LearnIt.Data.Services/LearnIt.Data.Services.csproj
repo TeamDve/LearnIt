@@ -60,12 +60,12 @@
     <Compile Include="Contracts\ICourseService.cs" />
     <Compile Include="Contracts\IDepartmenService.cs" />
     <Compile Include="Contracts\IJsonParserService.cs" />
-    <Compile Include="Contracts\IPossitionService.cs" />
+    <Compile Include="Contracts\IPositionService.cs" />
     <Compile Include="Contracts\IUserServices.cs" />
     <Compile Include="CourseService.cs" />
     <Compile Include="DepartmentService.cs" />
     <Compile Include="JsonParserService.cs" />
-    <Compile Include="PossitionService.cs" />
+    <Compile Include="PositionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserServices.cs" />
   </ItemGroup>
@@ -75,7 +75,6 @@
       <Name>LearnIt.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

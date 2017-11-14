@@ -55,10 +55,6 @@ namespace LearnIt.Data.Services
                             image.Position = position;
                             courseModel.Images.Add(image);
                         }
-                        //  this.dbContext.Course.add(courseModel);
-                        // this.dbContext.Question.add(qstnModel);
-                        //  Context.SaveChanges();
-
 
                         return courseModel;
                     }

@@ -227,6 +227,8 @@
     <Compile Include="Areas\Courses\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Courses\Models\AllCourseInfo.cs" />
     <Compile Include="Areas\Courses\Models\MyCourseInfo.cs" />
+    <Compile Include="Areas\Courses\Models\QuestionInfo.cs" />
+    <Compile Include="Areas\Courses\Models\SlideImage.cs" />
     <Compile Include="Areas\Courses\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +244,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -263,8 +267,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -282,13 +284,22 @@
     <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAssign.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
+    <Content Include="Areas\Courses\Views\Courses\GoStudy.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\_Questions.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\_Slides.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_VisualiseCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DeassignCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_BulkCourseDeassign.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseDeassign.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -299,8 +310,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\learnItAutofill.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\presenteer.js" />
+    <Content Include="Scripts\presenteer.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sylvester.js" />
+    <Content Include="Scripts\sylvester.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -342,22 +357,12 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.DataServices.csproj">
+    <ProjectReference Include="..\LearnIt.Data.Services\LearnIt.Data.Services.csproj">
       <Project>{6e9b02b7-d566-4bf0-ba1d-53e51d189887}</Project>
-      <Name>LearnIt.DataServices</Name>
+      <Name>LearnIt.Data.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\LearnIt.Data\LearnIt.Data.csproj">
       <Project>{862da882-5e3a-4368-a132-f4cc8c4ffdb8}</Project>

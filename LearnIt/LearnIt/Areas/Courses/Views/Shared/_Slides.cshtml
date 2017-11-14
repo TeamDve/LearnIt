@@ -1,0 +1,13 @@
+﻿@model IEnumerable<SlideImage>
+
+        @foreach (var img in Model)
+        {
+            <div>
+                <img alt="Embedded Image" src="data:image/png;base64,@(img.ImageBase64)" />
+            </div>
+        }
+
+
+
+
+

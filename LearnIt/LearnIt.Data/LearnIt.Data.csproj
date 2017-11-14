@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="DataModels\CourseInfoData.cs" />
+    <Compile Include="DataModels\CourseQuestions.cs" />
+    <Compile Include="DataModels\CourseSlidesBinary.cs" />
     <Compile Include="DataModels\NameHolder.cs" />
     <Compile Include="DataModels\UserCourseInfo.cs" />
     <Compile Include="Migrations\201711071703416_InitialWithAllIn.cs" />
@@ -72,6 +74,10 @@
     <Compile Include="Migrations\201711120152371_UserCoursesChanges.cs" />
     <Compile Include="Migrations\201711120152371_UserCoursesChanges.Designer.cs">
       <DependentUpon>201711120152371_UserCoursesChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711131537162_areQuestionsOpened.cs" />
+    <Compile Include="Migrations\201711131537162_areQuestionsOpened.Designer.cs">
+      <DependentUpon>201711131537162_areQuestionsOpened.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711120152371_UserCoursesChanges.resx">
       <DependentUpon>201711120152371_UserCoursesChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711131537162_areQuestionsOpened.resx">
+      <DependentUpon>201711131537162_areQuestionsOpened.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

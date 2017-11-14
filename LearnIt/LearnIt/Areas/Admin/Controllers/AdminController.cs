@@ -20,14 +20,14 @@ namespace LearnIt.Areas.Admin.Controllers
         private readonly ICourseService courseService;
         private readonly IUserServices userServices;
         private readonly IDepartmenService departmentService;
-        private readonly IPossitionService possitionService;
+        private readonly IPositionService possitionService;
 
         public AdminController(
             IJsonParserService jsonParser,
             ICourseService courseService,
             IUserServices userServices,
             IDepartmenService departmentService,
-            IPossitionService possitionService)
+            IPositionService possitionService)
         {
             this.jsonParser = jsonParser;
             this.courseService = courseService;

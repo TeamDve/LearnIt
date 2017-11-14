@@ -17,6 +17,12 @@ namespace LearnIt.Data.Services.Contracts
         Course GetCourseById(int courseId);
         IEnumerable<Course> GetLast(int count);
 
+        IEnumerable<CourseSlidesBinary> GetAllCourseSlides(string courseName);
+
+        IEnumerable<CourseQuestions> GetAllCourseQuestions(string courseName);
+
+        bool GetCourseCompletionRate(string courseName);
+
         Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required);
 
         Task AddCourseToDb(Course courseToAdd);

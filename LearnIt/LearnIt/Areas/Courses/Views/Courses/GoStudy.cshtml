@@ -1,0 +1,16 @@
+﻿<h2>StartPresentation</h2>
+@*@Html.Action("Questions")
+@Html.Action("Slides")*@
+
+@if (ViewBag.smth)
+    {
+        @Html.Action("Questions")
+        <input type="submit" value ="Upload a course" class="btn btn-primary btn-lg" />
+    }
+    else
+    {
+        @Html.Action("Slides")
+    }
+
+
+

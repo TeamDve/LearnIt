@@ -10,5 +10,7 @@ namespace LearnIt.Data.Services.Contracts
     public interface IDepartmenService
     {
         IEnumerable<NameHolder> ReturnAllDepartmentNames();
+
+        Task AddDepToUserDepartment(string username, string departmen);
     }
 }
