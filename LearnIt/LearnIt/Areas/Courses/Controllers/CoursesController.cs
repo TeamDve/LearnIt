@@ -94,7 +94,7 @@ namespace LearnIt.Areas.Courses.Controllers
                 
             }
             await courseService.SetCourseCompletionRate((string)Session["currentCourse"], examResults.Pass);
-            return this.View("Results",examResults);
+            return this.PartialView("_Results",examResults);
         }
 
 
