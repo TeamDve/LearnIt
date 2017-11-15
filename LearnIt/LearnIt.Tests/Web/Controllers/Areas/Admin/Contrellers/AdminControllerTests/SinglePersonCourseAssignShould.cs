@@ -17,28 +17,28 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
     [TestClass]
     public class SinglePersonCourseAssignShould
     {
-        [TestMethod]
-        public void RedirectToAssignCourse_WhenParamsAreCorrect()
-        {
-            //Arrange
-            var jsonParserMock = new Mock<IJsonParserService>();
-            var courseServiceMock = new Mock<ICourseService>();
-            var userServicesMock = new Mock<IUserServices>();
-            var departmentServiceMock = new Mock<IDepartmenService>();
-            var possitionServiceMock = new Mock<IPositionService>();
+        //[TestMethod]
+        //public void RedirectToAssignCourse_WhenParamsAreCorrect()
+        //{
+        //    //Arrange
+        //    var jsonParserMock = new Mock<IJsonParserService>();
+        //    var courseServiceMock = new Mock<ICourseService>();
+        //    var userServicesMock = new Mock<IUserServices>();
+        //    var departmentServiceMock = new Mock<IDepartmenService>();
+        //    var possitionServiceMock = new Mock<IPositionService>();
 
-            var adminContoller= new AdminController(
-                jsonParserMock.Object,
-                courseServiceMock.Object,
-                userServicesMock.Object,
-                departmentServiceMock.Object,
-                possitionServiceMock.Object);
+        //    var adminContoller= new AdminController(
+        //        jsonParserMock.Object,
+        //        courseServiceMock.Object,
+        //        userServicesMock.Object,
+        //        departmentServiceMock.Object,
+        //        possitionServiceMock.Object);
 
-            //Act & Assert
-            adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign())
-                .ShouldRedirectTo("AssignCourse");
-        }
+        //    //Act & Assert
+        //    adminContoller
+        //        .WithCallTo(c => c.SinglePersonCourseAssign())
+        //        .ShouldRedirectTo("AssignCourse");
+        //}
 
     }
 }

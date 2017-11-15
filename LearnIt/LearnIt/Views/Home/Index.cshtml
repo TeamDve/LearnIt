@@ -2,14 +2,24 @@
     @{
         ViewBag.Title = "Home Page";
     }
+<h2>Your hole life is a learning quest.Don`t let someone take the lead!</h2>
+
+<div  id="image-container" style="float:left">
+    <img id="learning" src="../../Content/images/Learning.png" margin-right:5px>
+  
+</div>
+
+
+
+
 
 @foreach (var item in Model)
 {
-    <div>@item.Name <br>
+    <div id ="course">@item.Name <br>
          @item.Description<br>
          @item.DateAdded</div>
 
 
 }
 
-<h2>Some other info should be here</h2>
+

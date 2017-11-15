@@ -129,6 +129,12 @@
     <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfo_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\ReturnAllCourseNames_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
+    <Compile Include="Services\DataServices\DepartmentTest\AddDepToUserDepartment_Should.cs" />
+    <Compile Include="Services\DataServices\DepartmentTest\Constructor_should.cs" />
+    <Compile Include="Services\DataServices\DepartmentTest\ReturnAllDepartmentNames_Should.cs" />
+    <Compile Include="Services\DataServices\PositionServiceTests\AddPosToUserPossition_Should.cs" />
+    <Compile Include="Services\DataServices\PositionServiceTests\Constructor_Should.cs" />
+    <Compile Include="Services\DataServices\PositionServiceTests\RetrunAllPossitionNames_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
   </ItemGroup>

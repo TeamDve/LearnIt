@@ -47,3 +47,51 @@ table, td, th {
 td,th{
     width: 150px;
 }
+#logo {
+    filter: contrast(60%);
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    margin: auto;
+}
+#learning {
+    filter: contrast(60%);
+    height:175px;
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+#logo-container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    text-align: center;
+    direction: rtl;
+}
+#image-container {
+    box-sizing: border-box;
+    
+   
+    overflow: hidden;
+    text-align: center;
+    direction: rtl;
+}
+#Oligofreni {
+    filter: contrast(60%);
+    height: 40%;
+    top: 0;
+    left: 5px;
+    bottom: 0;
+    right: 0;
+    display: block;
+    margin: 5px;
+}
+.side {
+    margin-left: 10px;
+    display:inline-block;
+     vertical-align:top;
+}

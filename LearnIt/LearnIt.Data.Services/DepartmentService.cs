@@ -14,12 +14,12 @@ namespace LearnIt.Data.Services
     {
 
         private readonly ApplicationDbContext dbContext;
-
+        //Tested
         public DepartmentService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
-
+        //Tested
         public IEnumerable<NameHolder> ReturnAllDepartmentNames()
         {
             IEnumerable<NameHolder> departmentNames = this.dbContext
@@ -31,6 +31,7 @@ namespace LearnIt.Data.Services
                 }).ToList();
             return departmentNames;
         }
+        //----------------------------------------------
         public async Task AddDepToUserDepartment(string username, string department)
         {
             var isDepartmentTrue = this.dbContext
