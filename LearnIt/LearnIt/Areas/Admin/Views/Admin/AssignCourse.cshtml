@@ -1,26 +1,14 @@
 ﻿
-<h2>AssignProject</h2>
+<h2>Assign Project</h2>
 
 
 
-@Ajax.ActionLink("Single Person Course", "SinglePersonCourseAssign",
-       new AjaxOptions
-       {
-           InsertionMode = InsertionMode.Replace,
-           UpdateTargetId = "generateUserArea"
-       })
+<a href="@Url.Action("SinglePersonCourseAssign", "Admin")"><p>Single person course assign</p></a>
 
+<a href="@Url.Action("BulkCourseAssign", "Admin")"><p>Bulk course assign</p></a>
 
-
-@Ajax.ActionLink("Bulk Course", "BulkCourseAssign",
-       new AjaxOptions
-       {
-           InsertionMode = InsertionMode.Replace,
-           UpdateTargetId = "generateUserArea"
-       })
-
-<div id="generateUserArea">
-
-</div>
 
 @Scripts.Render("~/bundles/jqueryajax")
+ @Scripts.Render("~/bundles/jqueryval")
+
+

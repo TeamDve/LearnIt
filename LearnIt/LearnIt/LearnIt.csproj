@@ -280,8 +280,8 @@
     <Content Include="Areas\Courses\Views\Courses\MyCourses.cshtml" />
     <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoadUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourseAssign.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\BulkCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SinglePersonCourseAssign.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\GoStudy.cshtml" />
@@ -289,8 +289,8 @@
     <Content Include="Areas\Courses\Views\Shared\_Slides.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_VisualiseCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DeassignCourse.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourseDeassign.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseDeassign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\BulkCourseDeassign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SinglePersonCourseDeassign.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />

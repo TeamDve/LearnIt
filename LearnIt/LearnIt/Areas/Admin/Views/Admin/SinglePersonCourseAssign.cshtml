@@ -1,35 +1,44 @@
 ﻿
-@{
-    Layout = "";
-}
-@model CourseToUserDeassign
+@model CourseToUser
 
 <h2>Single Person Course</h2>
 
 
-@using (Html.BeginForm("SinglePersonCourseDeassign", "Admin", FormMethod.Post))
+@using (Html.BeginForm("SinglePersonCourseAssign", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-
-    <div class="ui-widget">
+    <div>
         <label class="label-input" for="UsernameInputField"> Username: </label>
         @Html.TextBoxFor(model => model.Username, new { id = "UsernameInputField" })
+        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "text-danger" })
     </div>
-    <div class="ui-widget">
+    <div>
         <label class="label-input" for="CourseNameInputField"> Course Name </label>
         @Html.TextBoxFor(model => model.CourseName, new { id = "CourseNameInputField" })
+        @Html.ValidationMessageFor(m => m.CourseName, null, new { @class = "text-danger" })
     </div>
-    <div class="ui-widget">
+    <div>
         <label class="label-input" for="DateInputField"> Due Date: </label>
         @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
+        @Html.ValidationMessageFor(m => m.DueDate, null, new { @class = "text-danger" })
     </div>
+    <div>
+        @Html.LabelFor(model => model.IsMandatory)
+        @Html.EditorFor(model => model.IsMandatory)
+    </div>
+
+    if (ViewBag.Error != null)
+    {
+        <p class="col-form-label text-danger">@ViewBag.Error</p>
+    }
     <div>
         <input type="submit" value="Save" />
     </div>
 }
-
-
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @Scripts.Render("~/bundles/jqueryajax")
 <script>
 

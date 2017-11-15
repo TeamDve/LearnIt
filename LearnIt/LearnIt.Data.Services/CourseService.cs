@@ -184,7 +184,7 @@ namespace LearnIt.Data.Services
 
 
             var course = dbContext.Courses.FirstOrDefault(c => c.Name == courseName) ??
-                         throw new ArgumentNullException("The course is not found! ");
+                         throw new ArgumentNullException(null,"The course is not found!");
            
            
 
@@ -206,7 +206,7 @@ namespace LearnIt.Data.Services
             }
             else
             {
-                    throw new ArgumentNullException("Arguments are not valid");
+                    throw new ArgumentNullException(null,"A course with this date has been addedto this user already.");
             }
             await ExecuteQuery();
         }
@@ -215,7 +215,11 @@ namespace LearnIt.Data.Services
         //Admin
         public async Task DeassignCourseFromUser(string courseName, string username,DateTime dueDate)
         {
-            var user = this.GetUserByName(username);
+
+           var checkUser = this.GetUserByName(username);
+
+           var user = this.GetUserByName(username);
+
            if(user.UsersCourses.Any(courses=>courses.Course.Name == courseName && courses.DueDate==dueDate))
            {
                 var course = user.UsersCourses
@@ -223,6 +227,10 @@ namespace LearnIt.Data.Services
                     && courses.DueDate == dueDate).FirstOrDefault();
 
                 this.dbContext.UsersCourses.Remove(course);
+            }
+            else
+            {
+                throw new ArgumentNullException(null, "No such course was found");
             }
             await ExecuteQuery();
         }
@@ -240,8 +248,22 @@ namespace LearnIt.Data.Services
                             .Where(u => u.Position.Name == posName && u.Department.Name == depName)
                             .Select(u => u.Id)
                             .ToList<string>();
+            if (affectedUsers.Count <= 0)
+            {
+                throw new ArgumentNullException(null, "There are no users that have that position and that department.");
+            }
+
+            try
+            {
+                var checkCourse = dbContext.Courses.First(c => c.Name == courseName);
+            }
+            catch(Exception)
+            {
+                throw new ArgumentNullException(null, "No such course exists.");
+            }
 
             var course = dbContext.Courses.First(c => c.Name == courseName);
+
             foreach (var usr in affectedUsers)
             {
                 var user = this.dbContext.Users.Where(u => u.Id == usr).Single();
@@ -276,9 +298,16 @@ namespace LearnIt.Data.Services
                             .Where(u => u.Position.Name == posName && u.Department.Name == depName)
                             .Select(u => u.UserName)
                             .ToList<string>();
-            foreach(var username in affectedUsers)
+
+            if (affectedUsers.Count <= 0)
+            {
+                throw new ArgumentNullException(null, "There are no users that have that position and that department.");
+            }
+
+            foreach (var username in affectedUsers)
             {
                 var user = this.GetUserByName(username);
+
                 if (user.UsersCourses
                     .Any(courses => courses.Course.Name == courseName
                     && courses.DueDate == dueDate))
