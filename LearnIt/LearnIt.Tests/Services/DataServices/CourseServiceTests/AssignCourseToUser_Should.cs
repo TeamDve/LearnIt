@@ -18,10 +18,8 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
         public async Task AddCourseToUser_WhenParametersAreCorrect()
         {
             //Arrange
-            string coureseName = "CourseName";
             string username = "testUser";
             DateTime date = DateTime.Now;
-            int status = 1;
             var user = new ApplicationUser()
             {
                 Id = "guidStandIn",
@@ -66,7 +64,6 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             string courseId = "1";
             string username = "testUser";
             DateTime date = DateTime.Now;
-            int status = 1;
             var user = new ApplicationUser()
             {
                 Id = "guidStandIn",

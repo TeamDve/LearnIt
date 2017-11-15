@@ -82,7 +82,7 @@ namespace LearnIt.Areas.Admin.Controllers
         {
             if (userViewModel.IsAdmin)
             {
-                await this.userServices.AsignUserToAdmin(userViewModel.Id);
+                await this.userServices.AssignUserToAdmin(userViewModel.Id);
             }
             else
             {
