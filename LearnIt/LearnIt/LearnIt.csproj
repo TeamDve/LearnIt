@@ -263,6 +263,10 @@
     <Content Include="Content\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="ErrorPages\400.html" />
+    <Content Include="ErrorPages\404.html" />
+    <Content Include="ErrorPages\500.html" />
+    <Content Include="ErrorPages\503.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
