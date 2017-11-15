@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.AspNet, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
     </Reference>
@@ -239,6 +242,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CourseViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -264,6 +268,10 @@
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\swiper.min.css" />
+    <Content Include="ErrorPages\400.html" />
+    <Content Include="ErrorPages\404.html" />
+    <Content Include="ErrorPages\500.html" />
+    <Content Include="ErrorPages\503.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -281,8 +289,8 @@
     <Content Include="Areas\Courses\Views\Courses\MyCourses.cshtml" />
     <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoadUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourseAssign.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\BulkCourseAssign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SinglePersonCourseAssign.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_AllCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_MyCourseThumbnail.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\GoStudy.cshtml" />
@@ -290,8 +298,8 @@
     <Content Include="Areas\Courses\Views\Shared\_Slides.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_VisualiseCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DeassignCourse.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_BulkCourseDeassign.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_SinglePersonCourseDeassign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\BulkCourseDeassign.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SinglePersonCourseDeassign.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -354,6 +362,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\LastCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

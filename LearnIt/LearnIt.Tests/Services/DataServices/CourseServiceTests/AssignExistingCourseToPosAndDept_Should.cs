@@ -19,11 +19,21 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
         //public async Task AddCourseToPosAndDept_WhenParametersAreCorrect()
         //{
         //    //Arrange
-        //    int courseId = 1;
-        //    int deptId = 1;
-        //    int posId = 1;
+        //    string courseId = "1";
+        //    string deptId = "1";
+        //    string posId = "1";
         //    DateTime date = DateTime.Now;
-        //    int status = 1;
+        //    bool status = true;
+
+        //    var course = new Course()
+        //    {
+        //        Id = 1,
+        //        Name = "1",
+        //        Description = "NeshtoSiNeshtoSi",
+        //        DateAdded = date,
+        //        Required = true,
+        //        ScoreToPass = 40
+        //    };
 
         //    var dbContextMock = new Mock<ApplicationDbContext>();
         //    List<UserCourse> usersCoursesList = new List<UserCourse>() { };
@@ -56,6 +66,10 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
         //    };
         //    var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
         //    dbContextMock.SetupGet<IDbSet<ApplicationUser>>(x => x.Users).Returns(usersDbSetMock.Object);
+
+        //    List<Course> coursesList = new List<Course>() { course };
+        //    var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
+        //    dbContextMock.SetupGet<IDbSet<Course>>(x => x.Courses).Returns(coursesDbSetMock.Object);
 
         //    CourseService courseService = new CourseService(dbContextMock.Object);
         //    //Act

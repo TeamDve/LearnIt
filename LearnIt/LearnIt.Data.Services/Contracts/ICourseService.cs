@@ -15,6 +15,7 @@ namespace LearnIt.Data.Services.Contracts
         IEnumerable<Course> GetUserCourses(string username);
 
         Course GetCourseById(int courseId);
+        IEnumerable<Course> GetLast(int count);
 
         CourseInfoData GetCourseInfoDataByName(string courseName);
 

@@ -10,46 +10,46 @@ using LearnIt.Data.Models;
 
 namespace LearnIt.Data.Services
 {
-    public class DepartmentService : IDepartmenService
+    public class PositionService : IPositionService
     {
-
         private readonly ApplicationDbContext dbContext;
 
-        public DepartmentService(ApplicationDbContext dbContext)
+        public PositionService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
 
-        public IEnumerable<NameHolder> ReturnAllDepartmentNames()
+        public IEnumerable<NameHolder> ReturnAllPossitionNames()
         {
-            IEnumerable<NameHolder> departmentNames = this.dbContext
-                .Departments
+            IEnumerable<NameHolder> positionNames = this.dbContext
+                .DeptRoles
                 .Select
                 (d => new NameHolder()
                 {
                     Names = d.Name
                 }).ToList();
-            return departmentNames;
+            return positionNames;
         }
-        public async Task AddDepToUserDepartment(string username, string department)
+
+        public async Task AddPosToUserPossition(string username, string position)
         {
-            var isDepartmentTrue = this.dbContext
-                .Departments
-                .Where(d => d.Name == department)
+            var isPositionTrue = this.dbContext
+                .DeptRoles
+                .Where(p=>p.Name==position)
                 .FirstOrDefault();
 
-            if (isDepartmentTrue == null)
+            if (isPositionTrue == null)
             {
-                this.dbContext.Departments.Add(new Department { Name = department });
+                this.dbContext.DeptRoles.Add(new Position { Name = position });
                 await this.ExecuteQuery();
             }
 
-            var userDepartment = this.dbContext.Departments.Where(d => d.Name == department).FirstOrDefault();
+            var userPosition = this.dbContext.DeptRoles.Where(p => p.Name == position).FirstOrDefault();
 
             this.dbContext
                 .Users
                 .FirstOrDefault(u => u.UserName == username)
-                .Department = userDepartment;
+                .Position = userPosition;
 
             await this.ExecuteQuery();
         }

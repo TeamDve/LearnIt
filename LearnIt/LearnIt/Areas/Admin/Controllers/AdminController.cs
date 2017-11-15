@@ -10,6 +10,7 @@ using System.IO;
 using LearnIt.Data.Models;
 using System.Threading.Tasks;
 using LearnIt.Data.Enums;
+using Bytes2you.Validation;
 
 namespace LearnIt.Areas.Admin.Controllers
 {
@@ -20,15 +21,22 @@ namespace LearnIt.Areas.Admin.Controllers
         private readonly ICourseService courseService;
         private readonly IUserServices userServices;
         private readonly IDepartmenService departmentService;
-        private readonly IPossitionService possitionService;
+        private readonly IPositionService possitionService;
 
         public AdminController(
             IJsonParserService jsonParser,
             ICourseService courseService,
             IUserServices userServices,
             IDepartmenService departmentService,
-            IPossitionService possitionService)
+            IPositionService possitionService)
         {
+
+            Guard.WhenArgument(jsonParser, "jsonParser").IsNull().Throw();
+            Guard.WhenArgument(courseService, "courseService").IsNull().Throw();
+            Guard.WhenArgument(userServices, "userServices").IsNull().Throw();
+            Guard.WhenArgument(departmentService, "departmentService").IsNull().Throw();
+            Guard.WhenArgument(possitionService, "possitionService").IsNull().Throw();
+
             this.jsonParser = jsonParser;
             this.courseService = courseService;
             this.userServices = userServices;
@@ -98,11 +106,20 @@ namespace LearnIt.Areas.Admin.Controllers
                return RedirectToAction("ViewUsers");
             }
 
-            BinaryReader b = new BinaryReader(file.InputStream);
-            byte[] binData = b.ReadBytes(file.ContentLength);
+            try
+            {
 
-            var test = jsonParser.Execute(binData);
-            await courseService.AddCourseToDb(test);
+                BinaryReader b = new BinaryReader(file.InputStream);
+                byte[] binData = b.ReadBytes(file.ContentLength);
+
+                var test = jsonParser.Execute(binData);
+                await courseService.AddCourseToDb(test);
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "File was in the wrong format";
+                return this.View();
+            }
 
             return this.View(); 
         }
@@ -113,7 +130,7 @@ namespace LearnIt.Areas.Admin.Controllers
         }
 
 
-        public ViewResult SinglePersonCourseAssign()
+        public ActionResult SinglePersonCourseAssign()
         {
             UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
             {
@@ -123,19 +140,34 @@ namespace LearnIt.Areas.Admin.Controllers
 
             ViewBag.userAndProjectNames = userAndProjectNames;
 
-            return this.View("_SinglePersonCourseAssign");
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SinglePersonCourseAssign(CourseToUser singleCourseAsignModel)
         {
-            await this.courseService.AssignCourseToUser(
+            try
+            {
+                await this.courseService.AssignCourseToUser(
                 singleCourseAsignModel.CourseName,
                 singleCourseAsignModel.Username,
                 singleCourseAsignModel.DueDate,
                 singleCourseAsignModel.IsMandatory);
+            }
+            catch( ArgumentNullException ex)
+            {
+                UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+                {
+                    UsernameList = this.userServices.ReturnAllUserNames(),
+                    CourseNameList = this.courseService.ReturnAllCourseNames()
+                };
 
+                ViewBag.userAndProjectNames = userAndProjectNames;
+                ViewBag.Error = ex.Message;
+
+                return this.View(singleCourseAsignModel);
+            }
             return this.RedirectToAction("AssignCourse");
         }
 
@@ -150,19 +182,36 @@ namespace LearnIt.Areas.Admin.Controllers
 
             ViewBag.courseDepPosNames = courseDepPosNames;
 
-            return this.View("_BulkCourseAssign");
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> BulkCourseAssign(CourseToPosDep singleCourseAsignModel)
+        public async Task<ActionResult> BulkCourseAssign(CourseToPosDep bulkCourseAsignModel)
         {
-            await this.courseService.AssignExistingCourseToPosAndDept(
-                singleCourseAsignModel.CourseName,
-                singleCourseAsignModel.Department,
-                singleCourseAsignModel.Possition,
-                singleCourseAsignModel.DueDate,
-                singleCourseAsignModel.IsMandatory);
+            try
+            {
+                await this.courseService.AssignExistingCourseToPosAndDept(
+                    bulkCourseAsignModel.CourseName,
+                    bulkCourseAsignModel.Department,
+                    bulkCourseAsignModel.Possition,
+                    bulkCourseAsignModel.DueDate,
+                    bulkCourseAsignModel.IsMandatory);
+            }
+            catch (ArgumentException ex)
+            {
+                DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+                {
+                    DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                    PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                    CourseNameList = this.courseService.ReturnAllCourseNames()
+                };
+
+                ViewBag.courseDepPosNames = courseDepPosNames;
+                ViewBag.Error = ex.Message;
+
+                return this.View(bulkCourseAsignModel);
+            }
 
             return this.RedirectToAction("AssignCourse");
         }
@@ -172,7 +221,7 @@ namespace LearnIt.Areas.Admin.Controllers
             return this.View();
         }
 
-        public ViewResult SinglePersonCourseDeassign()
+        public ActionResult SinglePersonCourseDeassign()
         {
             UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
             {
@@ -182,21 +231,38 @@ namespace LearnIt.Areas.Admin.Controllers
 
             ViewBag.userAndProjectNames = userAndProjectNames;
 
-            return this.View("_SinglePersonCourseDeassign");
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SinglePersonCourseDeassign(CourseToUserDeassign singleCourseDeassignModel)
         {
-            await this.courseService.DeassignCourseFromUser(
-                singleCourseDeassignModel.CourseName,
-                singleCourseDeassignModel.Username,
-                singleCourseDeassignModel.DueDate);
+            try
+            {
+                await this.courseService.DeassignCourseFromUser(
+                    singleCourseDeassignModel.CourseName,
+                    singleCourseDeassignModel.Username,
+                    singleCourseDeassignModel.DueDate);
+            }
+            catch (Exception ex)
+            {
+                UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+                {
+                    UsernameList = this.userServices.ReturnAllUserNames(),
+                    CourseNameList = this.courseService.ReturnAllCourseNames()
+                };
+
+                ViewBag.userAndProjectNames = userAndProjectNames;
+                ViewBag.Error = ex.Message;
+
+                return this.View(singleCourseDeassignModel);
+            }
 
             return this.RedirectToAction("DeassignCourse");
         }
-        public ActionResult BulkCourseDeassign(string something)
+
+        public ActionResult BulkCourseDeassign()
         {
             DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
             {
@@ -207,17 +273,35 @@ namespace LearnIt.Areas.Admin.Controllers
 
             ViewBag.courseDepPosNames = courseDepPosNames;
 
-            return this.View("_BulkCourseDeassign");
+            return this.View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> BulkCourseDeassign(CourseToPosDepDeassign bulkCourseDeassignModel)
         {
-            await this.courseService.DeassignExistingCourseToPosAndDept(
-                bulkCourseDeassignModel.CourseName,
-                bulkCourseDeassignModel.Department,
-                bulkCourseDeassignModel.Possition,
-                bulkCourseDeassignModel.DueDate);
+            try
+            {
+                await this.courseService.DeassignExistingCourseToPosAndDept(
+                    bulkCourseDeassignModel.CourseName,
+                    bulkCourseDeassignModel.Department,
+                    bulkCourseDeassignModel.Possition,
+                    bulkCourseDeassignModel.DueDate);
+            }
+            catch(Exception ex)
+            {
+                DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+                {
+                    DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                    PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                    CourseNameList = this.courseService.ReturnAllCourseNames()
+                };
+
+                ViewBag.courseDepPosNames = courseDepPosNames;
+                ViewBag.Error = ex.Message;
+
+                return this.View(bulkCourseDeassignModel);
+            }
 
             return this.RedirectToAction("DeassignCourse");
         }

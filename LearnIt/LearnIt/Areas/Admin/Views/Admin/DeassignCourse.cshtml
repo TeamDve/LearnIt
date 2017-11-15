@@ -1,22 +1,11 @@
-﻿<h2>Deassign Project gggg</h2>
+﻿<h2>Deassign Course</h2>
 
 
 
-@Ajax.ActionLink("Single Person Course", "SinglePersonCourseDeassign",
-       new AjaxOptions
-       {
-           InsertionMode = InsertionMode.Replace,
-           UpdateTargetId = "generateUserArea"
-       })
+<a href="@Url.Action("SinglePersonCourseDeassign", "Admin")"><p>Single person course deassign</p></a>
 
+<a href="@Url.Action("BulkCourseDeassign", "Admin")"><p>Bulk course deassign</p></a>
 
-
-@Ajax.ActionLink("Bulk Course", "BulkCourseDeassign",
-       new AjaxOptions
-       {
-           InsertionMode = InsertionMode.Replace,
-           UpdateTargetId = "generateUserArea"
-       })
 
 <div id="generateUserArea">
 

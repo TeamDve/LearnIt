@@ -97,10 +97,6 @@ namespace LearnIt.Areas.Courses.Controllers
             return this.View("Results",examResults);
         }
 
-        //public ActionResult Results(ExamResults examResults)
-        //{
-        //    return this.View(examResults)
-        //}
 
         [ChildActionOnly]
         public ActionResult Questions(string name)

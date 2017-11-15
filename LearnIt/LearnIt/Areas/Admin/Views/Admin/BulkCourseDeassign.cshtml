@@ -1,42 +1,46 @@
 ﻿
-@{
-    Layout = "";
-}
-@model CourseToPosDep
+@model CourseToPosDepDeassign
 
-<h2>Bulk</h2>
+<h2>Bulk Deassign Course</h2>
 
 
-@using (Html.BeginForm("BulkCourseAssign", "Admin", FormMethod.Post))
+@using (Html.BeginForm("BulkCourseDeassign", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="ui-widget">
+    <div>
         <label class="label-input" for="DepNameInputField"> Department: </label>
         @Html.TextBoxFor(model => model.Department, new { id = "DepNameInputField" })
-    </div>
-    <div class="ui-widget">
-        <label class="label-input" for="PosNameInputField"> Possition: </label>
-        @Html.TextBoxFor(model => model.Possition, new { id = "PosNameInputField" })
-    </div>
-    <div class="ui-widget">
-        <label class="label-input" for="CourseNameInputField"> Course Name: </label>
-        @Html.TextBoxFor(model => model.CourseName, new { id = "CourseNameInputField" })
-    </div>
-    <div class="ui-widget">
-        <label class="label-input" for="DateInputField"> Due Date: </label>
-        @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
+        @Html.ValidationMessageFor(m => m.Department, null , new { @class = "text-danger" })
     </div>
     <div>
-        @Html.LabelFor(m => m.IsMandatory)
-        @Html.EditorFor(m => m.IsMandatory)
+        <label class="label-input" for="PosNameInputField"> Possition: </label>
+        @Html.TextBoxFor(model => model.Possition, new { id = "PosNameInputField" })
+        @Html.ValidationMessageFor(m => m.Possition, null, new { @class = "text-danger" })
     </div>
+    <div>
+        <label class="label-input" for="CourseNameInputField"> Course Name: </label>
+        @Html.TextBoxFor(model => model.CourseName, new { id = "CourseNameInputField" })
+        @Html.ValidationMessageFor(m => m.CourseName, null, new { @class = "text-danger" })
+    </div>
+    <div>
+        <label class="label-input" for="DateInputField"> Due Date: </label>
+        @Html.TextBoxFor(model => model.DueDate, new { id = "DateInputField" })
+        @Html.ValidationMessageFor(m => m.DueDate, null, new { @class = "text-danger" })
+    </div>
+
+    if (ViewBag.Error != null)
+    {
+        <p class="col-form-label text-danger">@ViewBag.Error</p>
+    }
     <div>
         <input type="submit" value="Save" />
     </div>
 }
 
-
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @Scripts.Render("~/bundles/jqueryajax")
 <script>
     LearnItAutocomplete("#DepNameInputField", "Names",@Html.Raw(Json.Encode(ViewBag.courseDepPosNames.DepartmentList)));

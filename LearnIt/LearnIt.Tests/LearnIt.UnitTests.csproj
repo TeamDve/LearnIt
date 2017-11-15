@@ -122,9 +122,11 @@
     <Compile Include="Services\DataServices\CourseServiceTests\GetCourseById_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetLast_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetUserCourses_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfoByStatus_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfo_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\ReturnAllCourseNames_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
-    <Compile Include="Web\Controllers\HomeControllerTests\Index_Should.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -148,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\DataServices\JsonParserServiceTests\" />
+    <Folder Include="Web\Controllers\HomeControllerTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

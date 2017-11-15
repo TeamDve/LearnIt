@@ -94,8 +94,8 @@ namespace LearnIt.App_Start
                 .To<UserServices>()
                 .InRequestScope();
 
-            kernel.Bind<IPossitionService>()
-                .To<PossitionService>()
+            kernel.Bind<IPositionService>()
+                .To<PositionService>()
                 .InRequestScope();
 
             kernel.Bind<IDepartmenService>()
