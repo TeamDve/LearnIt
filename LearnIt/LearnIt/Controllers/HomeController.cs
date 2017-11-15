@@ -16,7 +16,7 @@ namespace LearnIt.Controllers
             this.courseService = courseService;
         }
 
-
+        [OutputCache(CacheProfile = "Home")]
         public ActionResult Index()
         {
 

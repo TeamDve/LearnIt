@@ -225,11 +225,13 @@ namespace LearnIt.Data.Services
 
 
             var course = dbContext.Courses.FirstOrDefault(c => c.Name == courseName) ??
-                         throw new ArgumentNullException(null,"The course is not found!");
+                         throw new ArgumentNullException(null, "No such course was found.");
            
            
 
             var user = this.GetUserByName(username);
+
+
             if (!user.UsersCourses
                 .Any(courses =>courses.Course.Name==courseName 
                 && courses.DueDate==dueDate))
@@ -271,7 +273,7 @@ namespace LearnIt.Data.Services
             }
             else
             {
-                throw new ArgumentNullException(null, "No such course was found");
+                throw new ArgumentNullException(null, "No such course was found.");
             }
             await ExecuteQuery();
         }
