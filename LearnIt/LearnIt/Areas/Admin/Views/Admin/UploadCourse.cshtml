@@ -10,7 +10,11 @@
 }
 @if (ViewBag.Error != null)
 {
-    <p class="col-form-label text-danger">@ViewBag.Error</p>
+    <h4 class="col-form-label text-danger">@ViewBag.Error</h4>
+}
+@if (ViewBag.Success != null)
+{
+    <h4 class="col-form-label text-success">@ViewBag.Success</h4>
 }
 @*<button type="button" class="btn btn-primary btn-lg">Upload a project</button>*@
 
