@@ -131,6 +131,7 @@
     <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\Constructor_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
