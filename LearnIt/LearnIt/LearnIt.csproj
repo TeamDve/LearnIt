@@ -226,6 +226,7 @@
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Areas\Courses\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Courses\Models\AllCourseInfo.cs" />
+    <Compile Include="Areas\Courses\Models\ExamResults.cs" />
     <Compile Include="Areas\Courses\Models\MyCourseInfo.cs" />
     <Compile Include="Areas\Courses\Models\QuestionInfo.cs" />
     <Compile Include="Areas\Courses\Models\SlideImage.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Content\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\swiper.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -293,6 +295,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Courses\Views\Courses\Results.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -313,6 +316,7 @@
     <Content Include="Scripts\presenteer.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\swiper.min.js" />
     <Content Include="Scripts\sylvester.js" />
     <Content Include="Scripts\sylvester.min.js" />
     <Content Include="Web.config">

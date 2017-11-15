@@ -1,15 +1,30 @@
-﻿@model IEnumerable<QuestionInfo>
-    <h2>Questions</h2>
+﻿@model List<QuestionInfo>
+<h2>Questions</h2>
 
-@foreach(var qstn in Model)
+
+@using (Html.BeginForm("SendAnswers", "Courses", FormMethod.Post))
 {
-   <h3>@(qstn.Qstn)</h3>
-    foreach (var answer in qstn.Answers)
-    {
-        <div>
-            @Html.RadioButton(qstn.Qstn, answer) @answer
-            <br />
+    @Html.AntiForgeryToken()
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="swiper-slide">
+                    <h3>@Model[i].Qstn</h3>
+                    @Html.HiddenFor(m => @Model[i].Qstn)
+                    @foreach (var answer in Model[i].Answers)
+                    {
+                        <label>
+                            @Html.RadioButtonFor(m => Model[i].SelectedAnswer, answer)
+                            @answer
+                        </label>
+                        <br />
+                    }
+                </div>
+            }
+            <div class="swiper-slide">
+                <input type="submit" value="Send results" class="btn btn-primary btn-lg" />
+            </div>
         </div>
-    }
-
+    </div>
 }

@@ -37,7 +37,7 @@ namespace LearnIt.Data.Services
                                 Description = x.Description,
                                 ScoreToPass = x.ScoreToPass
                             })
-                            .ToList(); ;
+                            .ToList();
         }
         public IEnumerable<CourseSlidesBinary> GetAllCourseSlides(string courseName)
         {
@@ -66,6 +66,33 @@ namespace LearnIt.Data.Services
                                         .Select(x => x.areQuestionsOpened)
                                         .First();
             return result;
+        }
+
+        public async Task SetCourseCompletionRate(string courseName, bool completed)
+        {
+            UserCourse course = this.dbContext.UsersCourses
+                                        .Where(x => x.Course.Name == courseName)
+                                        .First();
+            if (completed)
+            {
+                course.Status = CourseStatus.Completed;
+            }
+            else
+            {
+                course.Status = CourseStatus.Pending;
+                course.areQuestionsOpened = false;
+            }
+            
+            await ExecuteQuery();
+        }
+
+        public async Task TryCompleteCourse(string courseName)
+        {
+            this.dbContext.UsersCourses
+                                        .Where(x => x.Course.Name == courseName)
+                                        .First()
+                                        .areQuestionsOpened = true;
+            await ExecuteQuery();
         }
 
         public IEnumerable<CourseQuestions> GetAllCourseQuestions(string courseName)
@@ -125,6 +152,20 @@ namespace LearnIt.Data.Services
                 .FirstOrDefault(x => x.Id == courseId);
 
             return course;
+        }
+
+        public CourseInfoData GetCourseInfoDataByName(string courseName)
+        {
+            return this.dbContext.Courses
+                            .Where(x => x.Name == courseName)
+                            .Select(x => new CourseInfoData()
+                            {
+                                DateAdded = x.DateAdded,
+                                Description = x.Description,
+                                Name = x.Name,
+                                ScoreToPass = x.ScoreToPass
+                            })
+                            .First();
         }
 
         //Change Course to DataModel if data must be hidden OR assign to same models with fewer details in them

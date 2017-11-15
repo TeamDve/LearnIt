@@ -29,12 +29,17 @@ namespace LearnIt
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.css",
+                      "~/Content/swiper.min.css",
                       "~/Content/Site.css"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
                          "~/Scripts/jquery.unobtrusive-ajax.js",
                          "~/Scripts/learnItAutofill.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/swiper").Include(
+             "~/Scripts/swiper.min.js"));
+
         }
     }
 }

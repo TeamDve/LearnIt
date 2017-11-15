@@ -1,13 +1,21 @@
 ﻿@model IEnumerable<SlideImage>
 
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+
         @foreach (var img in Model)
         {
-            <div>
+            <div class="swiper-slide">
                 <img alt="Embedded Image" src="data:image/png;base64,@(img.ImageBase64)" />
             </div>
         }
-
-
-
-
-
+        <div class="swiper-slide">
+            @using (Html.BeginForm("GoStudy", "Courses", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("courseName", (string)ViewBag.HiddenInput)
+                <input type="submit" value="To Quiz" class="btn btn-primary btn-lg" />
+            }
+        </div>
+    </div>
+</div>

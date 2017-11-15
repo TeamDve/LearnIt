@@ -1,0 +1,23 @@
+﻿@model ExamResults
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Results</h2>
+
+@if (Model.Pass)
+{
+    <h3>
+        Passed:@Model.Score
+        <text>/</text>
+        @Model.ScoreToPass
+    </h3>
+}
+else
+{
+    <h3>
+        Fail:@Model.Score
+        <text>/</text>
+        @Model.ScoreToPass
+    </h3>
+}

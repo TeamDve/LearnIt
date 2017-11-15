@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LearnIt.Areas.Courses.Models;
+using System.Threading.Tasks;
 
 namespace LearnIt.Areas.Courses.Controllers
 {
@@ -31,6 +32,7 @@ namespace LearnIt.Areas.Courses.Controllers
             return this.View(viewModel);
         }
 
+        
         public ActionResult MyCourses()
         {
             var viewModel = courseService.GetUsersCourseInfo(this.User.Identity.Name)
@@ -43,28 +45,79 @@ namespace LearnIt.Areas.Courses.Controllers
             return this.View(viewModel);
         }
 
+        [HttpGet]
         [ActionName("GoStudy")]
         public ActionResult StartPresentation(string name)
         {
-            ViewBag.smth = courseService.GetCourseCompletionRate(name);
+            ViewBag.areQuestionsAvailable = courseService.GetCourseCompletionRate(name);
+            ViewBag.HiddenInput = name;
             return this.View();
         }
+
+        [HttpPost]
+        [ActionName("GoStudy")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ContinuePresentation(string courseName)
+        {
+            await courseService.TryCompleteCourse(courseName);
+            return RedirectToAction("GoStudy","Courses", new { name = courseName });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendAnswers(IEnumerable<QuestionInfo> questionsEnumerable)
+        {
+            List<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions((string)Session["currentCourse"])
+                                                   .Select(x => new QuestionInfo()
+                                                   {
+                                                       Qstn = x.Qstn,
+                                                       Answers = (x.Answers).Split('/'),
+                                                       RightAnswer = x.RightAnswer
+                                                   }).ToList();
+            var scoreToPass = courseService.GetCourseInfoDataByName((string)Session["currentCourse"]);
+            int pointsPerQuestion = (scoreToPass.ScoreToPass / questionsAndAnswers.Count)+15;
+            ExamResults examResults = new ExamResults() { ScoreToPass = scoreToPass.ScoreToPass};
+            foreach (var qstn in questionsEnumerable)
+            {
+                if (questionsAndAnswers
+                    .Where(x=>x.Qstn==qstn.Qstn)
+                    .Select(x => x.RightAnswer)
+                    .Contains(qstn.SelectedAnswer)) 
+                {
+                    examResults.Score += pointsPerQuestion;
+                }
+            }
+
+            if (examResults.Score >= examResults.ScoreToPass)
+            {
+                examResults.Pass = true;
+                
+            }
+            await courseService.SetCourseCompletionRate((string)Session["currentCourse"], examResults.Pass);
+            return this.View("Results",examResults);
+        }
+
+        //public ActionResult Results(ExamResults examResults)
+        //{
+        //    return this.View(examResults)
+        //}
 
         [ChildActionOnly]
         public ActionResult Questions(string name)
         {
-            IEnumerable<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions(name)
+            List<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions(name)
                                                                .Select(x => new QuestionInfo()
                                                                {
                                                                    Qstn = x.Qstn,
                                                                    Answers = (x.Answers).Split('/'),
                                                                    RightAnswer = x.RightAnswer
-                                                               });
+                                                               }).ToList();
+            Session["currentCourse"] = name;
             return this.PartialView("_Questions",questionsAndAnswers);
         }
 
         [ChildActionOnly]
-        public ActionResult Slides(string name)
+        public ActionResult Slides(string name, string courseName)
         {
             IEnumerable<SlideImage> slideImages = courseService.GetAllCourseSlides(name)
                                                     .Select(x => new SlideImage()
@@ -72,6 +125,7 @@ namespace LearnIt.Areas.Courses.Controllers
                                                         Order = x.Order,
                                                         ImageBase64 = Convert.ToBase64String(x.ImageBinary)
                                                     });
+            ViewBag.HiddenInput = courseName;
             return this.PartialView("_Slides", slideImages);
         }
 

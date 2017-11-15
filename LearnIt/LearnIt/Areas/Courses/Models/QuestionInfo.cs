@@ -12,5 +12,7 @@ namespace LearnIt.Areas.Courses.Models
         public string[] Answers { get; set; }
 
         public string RightAnswer { get; set; }
+
+        public string SelectedAnswer { get; set; }
     }
 }

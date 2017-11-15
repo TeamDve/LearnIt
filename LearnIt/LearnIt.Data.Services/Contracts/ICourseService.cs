@@ -16,11 +16,17 @@ namespace LearnIt.Data.Services.Contracts
 
         Course GetCourseById(int courseId);
 
+        CourseInfoData GetCourseInfoDataByName(string courseName);
+
         IEnumerable<CourseSlidesBinary> GetAllCourseSlides(string courseName);
 
         IEnumerable<CourseQuestions> GetAllCourseQuestions(string courseName);
 
         bool GetCourseCompletionRate(string courseName);
+
+        Task SetCourseCompletionRate(string courseName, bool completed);
+
+        Task TryCompleteCourse(string courseName);
 
         Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required);
 

@@ -2,15 +2,21 @@
 @*@Html.Action("Questions")
 @Html.Action("Slides")*@
 
-@if (ViewBag.smth)
+@if (ViewBag.areQuestionsAvailable)
     {
-        @Html.Action("Questions")
-        <input type="submit" value ="Upload a course" class="btn btn-primary btn-lg" />
+        @Html.Action("Questions", new { courseName = (string)ViewBag.HiddenInput })
+        
     }
     else
     {
-        @Html.Action("Slides")
+        @Html.Action("Slides",new { courseName = (string)ViewBag.HiddenInput })
     }
 
-
+@section scripts{
+    @Scripts.Render("~/bundles/swiper")
+    @Scripts.Render("~/bundles/jqueryajax")
+    <script>
+        var swiper = new Swiper('.swiper-container');
+    </script>
+}
 
