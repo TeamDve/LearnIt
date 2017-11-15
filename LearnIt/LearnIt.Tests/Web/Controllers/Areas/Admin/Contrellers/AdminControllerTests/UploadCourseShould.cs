@@ -4,15 +4,17 @@ using LearnIt.Data.Services.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.IO;
+using System.Web;
 using TestStack.FluentMVCTesting;
 
 namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerTests
 {
     [TestClass]
-    public class SinglePersonCourseAssignShould
+    public class UploadCourseShould
     {
         [TestMethod]
-        public void RedirectToAssignCourse_WhenParamsAreCorrect()
+        public void ReturnDefaulView_WhenNoParametersAreGiven()
         {
             //Arrange
             var jsonParserMock = new Mock<IJsonParserService>();
@@ -28,29 +30,14 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
-            {
-                Username = "fake@user.com",
-                CourseName = "SomeCourse",
-                DueDate = DateTime.Now,
-                IsMandatory = true
-            };
-
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
-                .ShouldRedirectToRoute("");
-
-            courseServiceMock.Verify(c=>c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory),Times.Once);
-
+               .WithCallTo(c => c.UploadCourse())
+               .ShouldRenderDefaultView();
         }
 
         [TestMethod]
-        public void RedirectToDefaultView_WhenNoParamsAreGiven()
+        public void RedirectToAssignCourse_WhenParameterIsNull()
         {
             //Arrange
             var jsonParserMock = new Mock<IJsonParserService>();
@@ -66,17 +53,16 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
+            HttpPostedFileBase fileMock = null;
+
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign())
-                .ShouldRenderDefaultView();
-
-            courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
-            userServicesMock.Verify(u => u.ReturnAllUserNames(), Times.Once);
+               .WithCallTo(c => c.UploadCourse(fileMock))
+               .ShouldRedirectToRoute("");
         }
 
         [TestMethod]
-        public void ReturDefaultView_WhenParamsAreNotCorrect()
+        public void RedirectToDefault_WhenParametersAreGiven()
         {
             //Arrange
             var jsonParserMock = new Mock<IJsonParserService>();
@@ -92,27 +78,20 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
-            {
-                Username = "fake@user.com",
-                CourseName = "SomeCourse",
-                DueDate = DateTime.Now,
-                IsMandatory = true
-            };
+            var fileMock = new Mock<HttpPostedFileBase>();
 
-            courseServiceMock.Setup(c => c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory))
-                .Throws<ArgumentNullException>();
+            //var binaryReaderMock = new BinaryReader(fileMock.Object.InputStream);
+
+            //var binDataMock= binaryReaderMock.ReadBytes(fileMock.Object.ContentLength);
+
+            //var testMock = jsonParserMock.Object.Execute(binDataMock);
+
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
-                .ShouldRenderDefaultView().WithModel<CourseToUser>();
+               .WithCallTo(c => c.UploadCourse(fileMock.Object))
+               .ShouldRenderDefaultView();
 
-            courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
-            userServicesMock.Verify(u => u.ReturnAllUserNames(), Times.Once);
+            //courseServiceMock.Verify(c => c.AddCourseToDb(testMock), Times.Once);
         }
     }
 }

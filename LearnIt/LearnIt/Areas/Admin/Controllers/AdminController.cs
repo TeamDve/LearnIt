@@ -103,7 +103,7 @@ namespace LearnIt.Areas.Admin.Controllers
         {
             if (file == null)
             {
-               return RedirectToAction("ViewUsers");
+                return RedirectToAction("ViewUsers");
             }
 
             try
@@ -112,8 +112,8 @@ namespace LearnIt.Areas.Admin.Controllers
                 BinaryReader b = new BinaryReader(file.InputStream);
                 byte[] binData = b.ReadBytes(file.ContentLength);
 
-                var test = jsonParser.Execute(binData);
-                await courseService.AddCourseToDb(test);
+                var test = this.jsonParser.Execute(binData);
+                await this.courseService.AddCourseToDb(test);
             }
             catch (Exception)
             {
@@ -122,7 +122,7 @@ namespace LearnIt.Areas.Admin.Controllers
             }
 
             ViewBag.Success = "You have succesfully uploaded a course!";
-            return this.View(); 
+            return this.View();
         }
 
         public ActionResult AssignCourse()
@@ -156,7 +156,7 @@ namespace LearnIt.Areas.Admin.Controllers
                 singleCourseAsignModel.DueDate,
                 singleCourseAsignModel.IsMandatory);
             }
-            catch( Exception ex)
+            catch (Exception ex)
             {
                 UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
                 {
@@ -172,13 +172,13 @@ namespace LearnIt.Areas.Admin.Controllers
             return this.RedirectToAction("AssignCourse");
         }
 
-        public ActionResult BulkCourseAssign(string something)
+        public ActionResult BulkCourseAssign()
         {
             DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
             {
                 DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
-                PossitionList=this.possitionService.ReturnAllPossitionNames(),
-                CourseNameList=this.courseService.ReturnAllCourseNames()
+                PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
             };
 
             ViewBag.courseDepPosNames = courseDepPosNames;
@@ -289,7 +289,7 @@ namespace LearnIt.Areas.Admin.Controllers
                     bulkCourseDeassignModel.Possition,
                     bulkCourseDeassignModel.DueDate);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
                 {
