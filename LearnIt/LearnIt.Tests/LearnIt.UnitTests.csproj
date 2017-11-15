@@ -137,10 +137,13 @@
     <Compile Include="Services\DataServices\PositionServiceTests\RetrunAllPossitionNames_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\AssignCoursShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseAssignShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseDeassignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\DeassignCourseShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\EditUserShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\LoadUserShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseDeassignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\UploadCourseShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ViewUsersShould.cs" />
   </ItemGroup>
