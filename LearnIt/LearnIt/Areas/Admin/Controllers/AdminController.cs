@@ -121,6 +121,7 @@ namespace LearnIt.Areas.Admin.Controllers
                 return this.View();
             }
 
+            ViewBag.Success = "You have succesfully uploaded a course!";
             return this.View(); 
         }
 
