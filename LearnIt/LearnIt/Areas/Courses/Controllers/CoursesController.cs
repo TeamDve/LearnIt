@@ -29,6 +29,7 @@ namespace LearnIt.Areas.Courses.Controllers
                                     Description = x.Description,
                                     ScoreToPass = x.ScoreToPass
                                 });
+            
             return this.View(viewModel);
         }
 

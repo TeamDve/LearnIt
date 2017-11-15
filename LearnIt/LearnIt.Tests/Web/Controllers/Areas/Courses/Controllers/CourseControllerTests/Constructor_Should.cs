@@ -23,5 +23,12 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Courses.Controllers.CourseControll
             //Assert
             Assert.IsNotNull(controller);
         }
+
+        [TestMethod]
+        public void ThrowException_WhenWrongArgumentsAreGive()
+        {
+            //Arrange && Act && Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new CoursesController(null));
+        }
     }
 }

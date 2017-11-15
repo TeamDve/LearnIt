@@ -13,12 +13,12 @@ namespace LearnIt.Data.Services
     public class PositionService : IPositionService
     {
         private readonly ApplicationDbContext dbContext;
-
+        //Tested
         public PositionService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
-
+        //----------------------------------------------
         public IEnumerable<NameHolder> ReturnAllPossitionNames()
         {
             IEnumerable<NameHolder> positionNames = this.dbContext
@@ -30,6 +30,7 @@ namespace LearnIt.Data.Services
                 }).ToList();
             return positionNames;
         }
+        //----------------------------------------------
 
         public async Task AddPosToUserPossition(string username, string position)
         {

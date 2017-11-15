@@ -18,7 +18,7 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
         [TestMethod]
         public void ReturnAllCoursesInDb_WhenParametersAreCorrect()
         {
-            //Arrenge
+            //Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
             var dateTime = DateTime.Now;
             var course = new Course()

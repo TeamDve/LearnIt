@@ -14,11 +14,13 @@ namespace LearnIt.Data.Services
     {
 
         private readonly ApplicationDbContext dbContext;
+        //----------------------------------------------
 
         public UserServices(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
         }
+        //----------------------------------------------
 
         public IEnumerable<NameHolder> ReturnAllUserNames()
         {
@@ -31,6 +33,7 @@ namespace LearnIt.Data.Services
                 }).ToList();
             return userNames;
         }
+        //----------------------------------------------
 
         public async Task AsignUserToAdmin(string id)
         {
@@ -47,6 +50,7 @@ namespace LearnIt.Data.Services
 
             await this.ExecuteQuery();
         }
+        //----------------------------------------------
 
         public async Task DeasignUserFromAdmin(string id)
         {
@@ -64,6 +68,7 @@ namespace LearnIt.Data.Services
 
             await this.ExecuteQuery();
         }
+        //----------------------------------------------
 
         public ApplicationUser ReturnUserByUsername(string username)
         {
@@ -73,6 +78,7 @@ namespace LearnIt.Data.Services
 
             return user;
         }
+        //----------------------------------------------
 
         public bool IsUserAdmin(string id)
         {
