@@ -111,6 +111,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TestStack.FluentMVCTesting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.FluentMVCTesting.3.0.0\lib\NET45\TestStack.FluentMVCTesting.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Services\DataServices\CourseServiceTests\ReturnAllCourseNames_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

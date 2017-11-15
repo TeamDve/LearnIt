@@ -156,7 +156,7 @@ namespace LearnIt.Areas.Admin.Controllers
                 singleCourseAsignModel.DueDate,
                 singleCourseAsignModel.IsMandatory);
             }
-            catch( ArgumentNullException ex)
+            catch( Exception ex)
             {
                 UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
                 {
@@ -199,7 +199,7 @@ namespace LearnIt.Areas.Admin.Controllers
                     bulkCourseAsignModel.DueDate,
                     bulkCourseAsignModel.IsMandatory);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
                 {
