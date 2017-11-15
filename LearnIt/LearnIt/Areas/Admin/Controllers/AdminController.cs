@@ -148,28 +148,42 @@ namespace LearnIt.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SinglePersonCourseAssign(CourseToUser singleCourseAsignModel)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                await this.courseService.AssignCourseToUser(
-                singleCourseAsignModel.CourseName,
-                singleCourseAsignModel.Username,
-                singleCourseAsignModel.DueDate,
-                singleCourseAsignModel.IsMandatory);
-            }
-            catch (Exception ex)
-            {
-                UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+                try
                 {
-                    UsernameList = this.userServices.ReturnAllUserNames(),
-                    CourseNameList = this.courseService.ReturnAllCourseNames()
-                };
+                    await this.courseService.AssignCourseToUser(
+                    singleCourseAsignModel.CourseName,
+                    singleCourseAsignModel.Username,
+                    singleCourseAsignModel.DueDate,
+                    singleCourseAsignModel.IsMandatory);
+                }
+                catch (Exception ex)
+                {
+                    UserNameAndProjectNameModel userAndProjectNamesInError = new UserNameAndProjectNameModel
+                    {
+                        UsernameList = this.userServices.ReturnAllUserNames(),
+                        CourseNameList = this.courseService.ReturnAllCourseNames()
+                    };
 
-                ViewBag.userAndProjectNames = userAndProjectNames;
-                ViewBag.Error = ex.Message;
+                    ViewBag.userAndProjectNames = userAndProjectNamesInError;
+                    ViewBag.Error = ex.Message;
 
-                return this.View(singleCourseAsignModel);
+                    return this.View(singleCourseAsignModel);
+                }
+                return this.RedirectToAction("AssignCourse");
             }
-            return this.RedirectToAction("AssignCourse");
+
+
+            UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+            {
+                UsernameList = this.userServices.ReturnAllUserNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
+            };
+
+            ViewBag.userAndProjectNames = userAndProjectNames;
+
+            return this.View(singleCourseAsignModel);
         }
 
         public ActionResult BulkCourseAssign()
@@ -190,31 +204,45 @@ namespace LearnIt.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> BulkCourseAssign(CourseToPosDep bulkCourseAsignModel)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                await this.courseService.AssignExistingCourseToPosAndDept(
-                    bulkCourseAsignModel.CourseName,
-                    bulkCourseAsignModel.Department,
-                    bulkCourseAsignModel.Possition,
-                    bulkCourseAsignModel.DueDate,
-                    bulkCourseAsignModel.IsMandatory);
-            }
-            catch (Exception ex)
-            {
-                DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+                try
                 {
-                    DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
-                    PossitionList = this.possitionService.ReturnAllPossitionNames(),
-                    CourseNameList = this.courseService.ReturnAllCourseNames()
-                };
+                    await this.courseService.AssignExistingCourseToPosAndDept(
+                        bulkCourseAsignModel.CourseName,
+                        bulkCourseAsignModel.Department,
+                        bulkCourseAsignModel.Possition,
+                        bulkCourseAsignModel.DueDate,
+                        bulkCourseAsignModel.IsMandatory);
+                }
+                catch (Exception ex)
+                {
+                    DepartPossitionAndCourseNames courseDepPosNamesInError = new DepartPossitionAndCourseNames
+                    {
+                        DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                        PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                        CourseNameList = this.courseService.ReturnAllCourseNames()
+                    };
 
-                ViewBag.courseDepPosNames = courseDepPosNames;
-                ViewBag.Error = ex.Message;
+                    ViewBag.courseDepPosNames = courseDepPosNamesInError;
+                    ViewBag.Error = ex.Message;
 
-                return this.View(bulkCourseAsignModel);
+                    return this.View(bulkCourseAsignModel);
+                }
+
+                return this.RedirectToAction("AssignCourse");
             }
 
-            return this.RedirectToAction("AssignCourse");
+            DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+            {
+                DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
+            };
+
+            ViewBag.courseDepPosNames = courseDepPosNames;
+
+            return this.View(bulkCourseAsignModel);
         }
 
         public ActionResult DeassignCourse()
@@ -239,28 +267,41 @@ namespace LearnIt.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SinglePersonCourseDeassign(CourseToUserDeassign singleCourseDeassignModel)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                await this.courseService.DeassignCourseFromUser(
-                    singleCourseDeassignModel.CourseName,
-                    singleCourseDeassignModel.Username,
-                    singleCourseDeassignModel.DueDate);
-            }
-            catch (Exception ex)
-            {
-                UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+                try
                 {
-                    UsernameList = this.userServices.ReturnAllUserNames(),
-                    CourseNameList = this.courseService.ReturnAllCourseNames()
-                };
+                    await this.courseService.DeassignCourseFromUser(
+                        singleCourseDeassignModel.CourseName,
+                        singleCourseDeassignModel.Username,
+                        singleCourseDeassignModel.DueDate);
+                }
+                catch (Exception ex)
+                {
+                    UserNameAndProjectNameModel userAndProjectNamesInError = new UserNameAndProjectNameModel
+                    {
+                        UsernameList = this.userServices.ReturnAllUserNames(),
+                        CourseNameList = this.courseService.ReturnAllCourseNames()
+                    };
 
-                ViewBag.userAndProjectNames = userAndProjectNames;
-                ViewBag.Error = ex.Message;
+                    ViewBag.userAndProjectNames = userAndProjectNamesInError;
+                    ViewBag.Error = ex.Message;
 
-                return this.View(singleCourseDeassignModel);
+                    return this.View(singleCourseDeassignModel);
+                }
+
+                return this.RedirectToAction("DeassignCourse");
             }
 
-            return this.RedirectToAction("DeassignCourse");
+            UserNameAndProjectNameModel userAndProjectNames = new UserNameAndProjectNameModel
+            {
+                UsernameList = this.userServices.ReturnAllUserNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
+            };
+
+            ViewBag.userAndProjectNames = userAndProjectNames;
+
+            return this.View(singleCourseDeassignModel);
         }
 
         public ActionResult BulkCourseDeassign()
@@ -281,30 +322,44 @@ namespace LearnIt.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> BulkCourseDeassign(CourseToPosDepDeassign bulkCourseDeassignModel)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                await this.courseService.DeassignExistingCourseToPosAndDept(
-                    bulkCourseDeassignModel.CourseName,
-                    bulkCourseDeassignModel.Department,
-                    bulkCourseDeassignModel.Possition,
-                    bulkCourseDeassignModel.DueDate);
-            }
-            catch (Exception ex)
-            {
-                DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+                try
                 {
-                    DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
-                    PossitionList = this.possitionService.ReturnAllPossitionNames(),
-                    CourseNameList = this.courseService.ReturnAllCourseNames()
-                };
+                    await this.courseService.DeassignExistingCourseToPosAndDept(
+                        bulkCourseDeassignModel.CourseName,
+                        bulkCourseDeassignModel.Department,
+                        bulkCourseDeassignModel.Possition,
+                        bulkCourseDeassignModel.DueDate);
+                }
+                catch (Exception ex)
+                {
+                    DepartPossitionAndCourseNames courseDepPosNamesInError = new DepartPossitionAndCourseNames
+                    {
+                        DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                        PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                        CourseNameList = this.courseService.ReturnAllCourseNames()
+                    };
 
-                ViewBag.courseDepPosNames = courseDepPosNames;
-                ViewBag.Error = ex.Message;
+                    ViewBag.courseDepPosNames = courseDepPosNamesInError;
+                    ViewBag.Error = ex.Message;
 
-                return this.View(bulkCourseDeassignModel);
+                    return this.View(bulkCourseDeassignModel);
+                }
+
+                return this.RedirectToAction("DeassignCourse");
             }
 
-            return this.RedirectToAction("DeassignCourse");
+            DepartPossitionAndCourseNames courseDepPosNames = new DepartPossitionAndCourseNames
+            {
+                DepartmentList = this.departmentService.ReturnAllDepartmentNames(),
+                PossitionList = this.possitionService.ReturnAllPossitionNames(),
+                CourseNameList = this.courseService.ReturnAllCourseNames()
+            };
+
+            ViewBag.courseDepPosNames = courseDepPosNames;
+
+            return this.View(bulkCourseDeassignModel);
         }
     }
 }
