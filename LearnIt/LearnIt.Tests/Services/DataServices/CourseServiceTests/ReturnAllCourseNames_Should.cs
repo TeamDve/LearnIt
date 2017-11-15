@@ -9,6 +9,7 @@ using LearnIt.Data.Models;
 using LearnIt.Data.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using LearnIt.Data.DataModels;
 
 namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
 {
@@ -63,12 +64,9 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
             CourseService courseService = new CourseService(dbContextMock.Object);
 
             var test = courseService.ReturnAllCourseNames();
-            var testname = course.Name;
-            var testname1=course1.Name;
-            var testname2 = course2.Name;
             //Assert
             Assert.AreEqual(3,test.Count());
-
+            Assert.IsInstanceOfType(test, typeof(IEnumerable<NameHolder>));
 
         }
     }

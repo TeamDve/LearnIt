@@ -135,15 +135,23 @@
     <Compile Include="Services\DataServices\PositionServiceTests\AddPosToUserPossition_Should.cs" />
     <Compile Include="Services\DataServices\PositionServiceTests\Constructor_Should.cs" />
     <Compile Include="Services\DataServices\PositionServiceTests\RetrunAllPossitionNames_Should.cs" />
+    <Compile Include="Services\DataServices\UserServicesTests\AssignUserToAdminShould.cs" />
+    <Compile Include="Services\DataServices\UserServicesTests\ReturnAllUserNamesShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\AssignCoursShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseAssignShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseDeassignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ConstructorShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\DeassignCourseShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\EditUserShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\LoadUserShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
+<<<<<<< HEAD
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\AllCourses_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\Constructor_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\MyCourses_Should.cs" />
+=======
+    <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseDeassignShould.cs" />
+>>>>>>> e36c3a930a708954abc3ee207d54804176c7fe0b
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\UploadCourseShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ViewUsersShould.cs" />
   </ItemGroup>

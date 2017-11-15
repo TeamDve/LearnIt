@@ -74,7 +74,6 @@ namespace LearnIt.Tests.Services.DataServices.CourseServiceTests
         {
             //Arrange
             var dateTime = DateTime.Now;
-            string userName = "wrong";
             var dbContextMock = new Mock<ApplicationDbContext>();
             List<Course> courseList = new List<Course>()
             {
