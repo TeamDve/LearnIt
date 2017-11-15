@@ -106,11 +106,20 @@ namespace LearnIt.Areas.Admin.Controllers
                return RedirectToAction("ViewUsers");
             }
 
-            BinaryReader b = new BinaryReader(file.InputStream);
-            byte[] binData = b.ReadBytes(file.ContentLength);
+            try
+            {
 
-            var test = jsonParser.Execute(binData);
-            await courseService.AddCourseToDb(test);
+                BinaryReader b = new BinaryReader(file.InputStream);
+                byte[] binData = b.ReadBytes(file.ContentLength);
+
+                var test = jsonParser.Execute(binData);
+                await courseService.AddCourseToDb(test);
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "File was in the wrong format";
+                return this.View();
+            }
 
             return this.View(); 
         }

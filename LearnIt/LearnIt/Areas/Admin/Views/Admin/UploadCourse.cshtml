@@ -8,5 +8,9 @@
     <input type="submit" value ="Upload a course" class="btn btn-primary btn-lg" />
 
 }
+@if (ViewBag.Error != null)
+{
+    <p class="col-form-label text-danger">@ViewBag.Error</p>
+}
 @*<button type="button" class="btn btn-primary btn-lg">Upload a project</button>*@
 
