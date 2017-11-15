@@ -10,6 +10,7 @@ using System.IO;
 using LearnIt.Data.Models;
 using System.Threading.Tasks;
 using LearnIt.Data.Enums;
+using Bytes2you.Validation;
 
 namespace LearnIt.Areas.Admin.Controllers
 {
@@ -29,6 +30,13 @@ namespace LearnIt.Areas.Admin.Controllers
             IDepartmenService departmentService,
             IPositionService possitionService)
         {
+
+            Guard.WhenArgument(jsonParser, "jsonParser").IsNull().Throw();
+            Guard.WhenArgument(courseService, "courseService").IsNull().Throw();
+            Guard.WhenArgument(userServices, "userServices").IsNull().Throw();
+            Guard.WhenArgument(departmentService, "departmentService").IsNull().Throw();
+            Guard.WhenArgument(possitionService, "possitionService").IsNull().Throw();
+
             this.jsonParser = jsonParser;
             this.courseService = courseService;
             this.userServices = userServices;

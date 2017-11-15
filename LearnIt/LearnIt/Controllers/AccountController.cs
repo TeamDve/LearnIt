@@ -91,7 +91,7 @@ namespace LearnIt.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("MyCourses", "Courses", new { area = "Courses" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
