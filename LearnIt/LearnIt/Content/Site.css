@@ -57,13 +57,6 @@ td,th{
     display: block;
     margin: auto;
 }
-#learning {
-    filter: contrast(60%);
-    height:175px;
-    width: 90%;
-    display: block;
-    margin: auto;
-}
 #logo-container {
     box-sizing: border-box;
     width: 100%;
@@ -94,4 +87,37 @@ td,th{
     margin-left: 10px;
     display:inline-block;
      vertical-align:top;
+}
+
+h2, .h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.panel-default {
+    border-color: #dddddd;
+    width: 300px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+.panel:hover {
+    text-decoration: none;
+    border-color: #05BA65;
+    box-shadow: 0px 8px 10px #05BA65;
+}
+
+#learning {
+    filter: contrast(80%);
+    width: 80%;
+    margin: auto;
+    margin-bottom: 40px;
+    margin-top:30px;
+}
+#logo-container {
+    margin: 20px;
 }

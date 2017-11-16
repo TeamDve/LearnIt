@@ -1,14 +1,8 @@
 ﻿@model MyCourseInfo
 <a href='@Url.Action("GoStudy", "Courses",new { name = Model.Name })'>
-    <div>
-        <div class="ui-widget">
-            @Model.Name
-        </div>
-        <div class="ui-widget">
-            @Model.DueDate.ToString()
-        </div>
-        <div class="ui-widget">
-            @(Model.IsMandatory ? "Mandatory" : "Optional")
-        </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">@Model.Name</div>
+        <div class="panel-body"><p>Due date: @Model.DueDate.ToString("dd/MM/yyyy")</p></div>
+        <div class="panel-body"><p>Type: @(Model.IsMandatory ? "Mandatory" : "Optional")</p></div>
     </div>
 </a>
