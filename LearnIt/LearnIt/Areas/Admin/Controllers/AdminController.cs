@@ -70,7 +70,7 @@ namespace LearnIt.Areas.Admin.Controllers
             ViewBag.CompletedCourses = this.courseService
                 .GetUsersCourseInfoByStatus(
                 user.UserName,
-                CourseStatus.Completed) ?? (new List<Data.DataModels.UserCourseInfo>());
+                CourseStatus.Completed) ;
             return this.View("_LoadUser", userViewModel);
         }
 
