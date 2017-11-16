@@ -128,6 +128,7 @@
     <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfoByStatus_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\GetUsersCourseInfo_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\ReturnAllCourseNames_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServiceTests\SetCourseCompletionRate_Should.cs" />
     <Compile Include="Services\DataServices\CourseServiceTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Services\DataServices\DepartmentTest\AddDepToUserDepartment_Should.cs" />
     <Compile Include="Services\DataServices\DepartmentTest\Constructor_should.cs" />

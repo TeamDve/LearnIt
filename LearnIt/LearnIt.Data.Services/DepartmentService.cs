@@ -34,10 +34,7 @@ namespace LearnIt.Data.Services
         //----------------------------------------------
         public async Task AddDepToUserDepartment(string username, string department)
         {
-            var isDepartmentTrue = this.dbContext
-                .Departments
-                .Where(d => d.Name == department)
-                .FirstOrDefault();
+            var isDepartmentTrue = this.dbContext.Departments.Where(d => d.Name == department).FirstOrDefault();
 
             if (isDepartmentTrue == null)
             {

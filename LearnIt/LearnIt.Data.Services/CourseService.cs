@@ -68,7 +68,7 @@ namespace LearnIt.Data.Services
                                         .First();
             return result;
         }
-
+        //Tested
         public async Task SetCourseCompletionRate(string courseName, bool completed)
         {
             UserCourse course = this.dbContext.UsersCourses
