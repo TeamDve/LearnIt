@@ -14,7 +14,9 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("courseName", (string)ViewBag.HiddenInput)
-                <input type="submit" value="To Quiz" class="btn btn-primary btn-lg" />
+                <div class="questions">
+                    <input type="submit" value="To Quiz" class="btn btn-primary btn-lg" />
+                </div>
             }
         </div>
     </div>
