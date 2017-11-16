@@ -33,8 +33,8 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Courses.Controllers.CourseControll
             mockContext.SetupGet(p => p.HttpContext.User).Returns(mockPrincipal.Object);
             mockContext.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
 
-            var courseService = new Mock<ICourseService>();
-            CoursesController courseController = new CoursesController(courseService.Object) { ControllerContext = mockContext.Object };
+            var courseServiceMock = new Mock<ICourseService>();
+            CoursesController courseController = new CoursesController(courseServiceMock.Object) { ControllerContext = mockContext.Object };
             //var resultViewModel = users.AsQueryable().Select(UserViewModel.Create).ToList()
             List<MyCourseInfo> resultViewModel = new List<MyCourseInfo>()
             {
@@ -50,12 +50,10 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Courses.Controllers.CourseControll
 
             
 
-            courseService.Setup(x => x.GetUsersCourseInfo(It.IsAny<string>())).Returns(resultViewModel.Select(x => new UserCourseInfo() { Name = x.Name }));
-            courseController.MyCourses();
+            courseServiceMock.Setup(x => x.GetUsersCourseInfo(It.IsAny<string>())).Returns(resultViewModel.Select(x => new UserCourseInfo() { Name = x.Name }));
+            //courseController.MyCourses();
            
             //Act && Assert
-            courseService.Verify(x => x.GetUsersCourseInfo(It.IsAny<string>()), Times.Once);
-
             courseController
                 .WithCallTo(c => c.MyCourses())
                 .ShouldRenderDefaultView()
@@ -68,6 +66,8 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Courses.Controllers.CourseControll
                         cnt++;
                     }
                 });
+
+            courseServiceMock.Verify(x => x.GetUsersCourseInfo(It.IsAny<string>()), Times.Once);
         }
 
     }

@@ -43,7 +43,7 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 .WithCallTo(c => c.EditUser(userMock))
                 .ShouldRedirectToRoute("");
 
-            userServicesMock.Verify(u => u.AsignUserToAdmin(userMock.Id), Times.Once);
+            userServicesMock.Verify(u => u.AssignUserToAdmin(userMock.Id), Times.Once);
         }
 
         [TestMethod]
