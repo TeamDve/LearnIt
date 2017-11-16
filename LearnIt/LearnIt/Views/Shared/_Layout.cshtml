@@ -25,7 +25,7 @@
                     @if (this.User.Identity.IsAuthenticated)
                     {
                         <li class="dropdown">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle my-button" data-toggle="dropdown">
                                 <b>Courses</b> <div class="caret"></div>
                             </button>
                             <ul class="dropdown-menu">
@@ -41,7 +41,7 @@
                     @if (this.User.IsInRole("Admin"))
                     {
                         <li class="dropdown">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle my-button" data-toggle="dropdown">
                                 <b>Admin</b> <div class="caret"></div>
                             </button>
                             <ul class="dropdown-menu">

@@ -19,7 +19,8 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Courses.Controllers.CourseControll
     {
         [TestMethod]
         public void ReturnDefaultView_WhenParametersAreCorrect()
-        {   //Arrange
+        {   
+            //Arrange
             var courseService = new Mock<ICourseService>();
             CoursesController courseController = new CoursesController(courseService.Object);
             //var resultViewModel = users.AsQueryable().Select(UserViewModel.Create).ToList()

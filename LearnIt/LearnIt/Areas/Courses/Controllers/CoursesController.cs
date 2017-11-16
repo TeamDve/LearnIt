@@ -120,9 +120,9 @@ namespace LearnIt.Areas.Courses.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Slides(string name, string courseName)
+        public ActionResult Slides(string courseName)
         {
-            IEnumerable<SlideImage> slideImages = courseService.GetAllCourseSlides(name)
+            IEnumerable<SlideImage> slideImages = courseService.GetAllCourseSlides(courseName)
                                                     .Select(x => new SlideImage()
                                                     {
                                                         Order = x.Order,

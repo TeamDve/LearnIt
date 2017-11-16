@@ -25,7 +25,7 @@ textarea {
 
 .dropdown{
     margin-left:5px;
-    margin-top:7px;
+    margin-top:10px;
 }
 
 #hiddenSearch {
@@ -120,4 +120,18 @@ h2, .h2 {
 }
 #logo-container {
     margin: 20px;
+}
+h3{
+    text-align:center;
+}
+.questions{
+    width:400px;
+    margin:auto;
+}
+.questions h3{
+    text-align:left;
+}
+.questions .btn {
+    display: block;
+    margin: auto;
 }

@@ -151,10 +151,14 @@
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseAssignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\AllCourses_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\Constructor_Should.cs" />
+    <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\ContinuePresentation_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\MyCourses_Should.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\SinglePersonCourseDeassignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\UploadCourseShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\ViewUsersShould.cs" />
+    <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\Questions_Should.cs" />
+    <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\Slides_Should.cs" />
+    <Compile Include="Web\Controllers\Areas\Courses\Controllers\CourseControllerTests\StartPresentation_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
