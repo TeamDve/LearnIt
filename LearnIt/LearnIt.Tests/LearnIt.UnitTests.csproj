@@ -136,7 +136,10 @@
     <Compile Include="Services\DataServices\PositionServiceTests\Constructor_Should.cs" />
     <Compile Include="Services\DataServices\PositionServiceTests\RetrunAllPossitionNames_Should.cs" />
     <Compile Include="Services\DataServices\UserServicesTests\AssignUserToAdminShould.cs" />
+    <Compile Include="Services\DataServices\UserServicesTests\DeasignUserFromAdminShould.cs" />
+    <Compile Include="Services\DataServices\UserServicesTests\IsUserAdminShould.cs" />
     <Compile Include="Services\DataServices\UserServicesTests\ReturnAllUserNamesShould.cs" />
+    <Compile Include="Services\DataServices\UserServicesTests\ReturnUserByUsernameShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\AssignCoursShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseAssignShould.cs" />
     <Compile Include="Web\Controllers\Areas\Admin\Contrellers\AdminControllerTests\BulkCourseDeassignShould.cs" />

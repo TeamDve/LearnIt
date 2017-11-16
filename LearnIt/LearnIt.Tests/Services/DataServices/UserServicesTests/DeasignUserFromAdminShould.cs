@@ -14,10 +14,10 @@ using System.Collections.Generic;
 namespace LearnIt.Tests.Services.DataServices.UserServicesTests
 {
     [TestClass]
-    public class AssignUserToAdminShould
+    public class DeasignUserFromAdminShould
     {
         [TestMethod]
-        public async Task MakeUserAdmin_WhenIdIsValid()
+        public async Task RemoveUserFromAdmin_WhenIdIsValid()
         {
             //Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
@@ -34,6 +34,12 @@ namespace LearnIt.Tests.Services.DataServices.UserServicesTests
             List<ApplicationUser> userList = new List<ApplicationUser>()
             {
                 userMockOne
+            };
+
+            var identityUserRoleMock = new IdentityUserRole
+            {
+                RoleId = "1",
+                UserId = "1"
             };
 
             var identityRoleMock = new IdentityRole
@@ -54,12 +60,13 @@ namespace LearnIt.Tests.Services.DataServices.UserServicesTests
 
             UserServices userService = new UserServices(dbContextMock.Object);
 
+            dbContextMock.Object.Users.First().Roles.Add(identityUserRoleMock);
             //act
 
-            await userService.AssignUserToAdmin("1");
+            await userService.DeasignUserFromAdmin("1");
 
-            //Assert
-            Assert.AreEqual(1, dbContextMock.Object.Users.First().Roles.Count);
+            //
+            Assert.AreEqual(0, dbContextMock.Object.Users.First().Roles.Count);
         }
     }
 }

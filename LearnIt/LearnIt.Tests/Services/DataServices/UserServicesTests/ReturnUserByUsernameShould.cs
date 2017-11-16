@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LearnIt.Data.Context;
@@ -10,56 +7,45 @@ using LearnIt.Data.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using LearnIt.Data.DataModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace LearnIt.Tests.Services.DataServices.UserServicesTests
 {
     [TestClass]
-    public class ReturnAllUserNamesShould
+    public class ReturnUserByUsernameShould
     {
         [TestMethod]
-        public void ReturnAnEnumerationOfAllUserNames()
+        public void ReturnUser_WhenUsernameIsCorrect()
         {
             //Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
             var userMockOne = new ApplicationUser
             {
                 Id = "1",
-                UserName="fake@mail.com",
-                EmailConfirmed=true,
-                PhoneNumberConfirmed=true,
-                TwoFactorEnabled=true,
-                LockoutEnabled=true,
-                AccessFailedCount=4
-            };
-
-            var userMock2 = new ApplicationUser
-            {
-                Id = "2",
-                UserName = "notfake@mail.com",
+                UserName = "fake@mail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 TwoFactorEnabled = true,
                 LockoutEnabled = true,
                 AccessFailedCount = 4
             };
-
             List<ApplicationUser> userList = new List<ApplicationUser>()
             {
-                userMockOne,userMock2
+                userMockOne
             };
 
             var usersMock = new Mock<DbSet<ApplicationUser>>().SetupData(userList);
             dbContextMock.SetupGet(x => x.Users).Returns(usersMock.Object);
-            
+
             UserServices userService = new UserServices(dbContextMock.Object);
 
             //Act
-
-            var listOfUserNamesMock = userService.ReturnAllUserNames();
+            var resultUser = userService.ReturnUserByUsername("fake@mail.com");
 
             //Assert
-            Assert.AreEqual(2, listOfUserNamesMock.Count());
-            Assert.IsInstanceOfType(listOfUserNamesMock, typeof(IEnumerable<NameHolder>));
+            Assert.AreEqual(resultUser, userMockOne);
         }
     }
 }
