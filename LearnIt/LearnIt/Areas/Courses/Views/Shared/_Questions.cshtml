@@ -10,6 +10,7 @@
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <div class="swiper-slide">
+                        <div class="questions">
                         <h3>@Model[i].Qstn</h3>
                         @Html.HiddenFor(m => @Model[i].Qstn)
                         @foreach (var answer in Model[i].Answers)
@@ -20,10 +21,13 @@
                             </label>
                             <br />
                         }
+                         </div>
                     </div>
                 }
                 <div class="swiper-slide">
-                    <input type="submit" value="Send results" class="btn btn-primary btn-lg" />
+                    <div class="questions">
+                        <input type="submit" value="Send results" class="btn btn-primary btn-lg" />
+                    </div>
                 </div>
             </div>
         </div>
