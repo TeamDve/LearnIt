@@ -35,7 +35,7 @@ namespace LearnIt.Data.Services
         }
         //----------------------------------------------
 
-        public async Task AsignUserToAdmin(string id)
+        public async Task AssignUserToAdmin(string id)
         {
             var role = this.dbContext.Roles.Single();
             var user = this.dbContext.Users.Single(u => u.Id == id);

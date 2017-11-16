@@ -9,8 +9,35 @@ using TestStack.FluentMVCTesting;
 namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerTests
 {
     [TestClass]
-    public class SinglePersonCourseAssignShould
+    public class BulkCourseDeassignShould
     {
+        [TestMethod]
+        public void ReturnDefaultView_WhenNoParametersAreGiven()
+        {
+            //Arrange
+            var jsonParserMock = new Mock<IJsonParserService>();
+            var courseServiceMock = new Mock<ICourseService>();
+            var userServicesMock = new Mock<IUserServices>();
+            var departmentServiceMock = new Mock<IDepartmenService>();
+            var possitionServiceMock = new Mock<IPositionService>();
+
+            var adminContoller = new AdminController(
+                jsonParserMock.Object,
+                courseServiceMock.Object,
+                userServicesMock.Object,
+                departmentServiceMock.Object,
+                possitionServiceMock.Object);
+
+            //Act & Assert
+            adminContoller
+               .WithCallTo(c => c.BulkCourseDeassign())
+                   .ShouldRenderDefaultView();
+
+            courseServiceMock.Verify(c => c.ReturnAllCourseNames());
+            departmentServiceMock.Verify(d => d.ReturnAllDepartmentNames());
+            possitionServiceMock.Verify(p => p.ReturnAllPossitionNames());
+        }
+
         [TestMethod]
         public void RedirectToAssignCourse_WhenParamsAreCorrect()
         {
@@ -28,53 +55,26 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
+            var bulkCourseDeassignModelMock = new CourseToPosDepDeassign
             {
-                Username = "fake@user.com",
+                Department = "DepMock",
+                Possition = "PosMock",
                 CourseName = "SomeCourse",
                 DueDate = DateTime.Now,
-                IsMandatory = true
             };
 
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
+                .WithCallTo(c => c.BulkCourseDeassign(bulkCourseDeassignModelMock))
                 .ShouldRedirectToRoute("");
 
-            courseServiceMock.Verify(c=>c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory),Times.Once);
+            courseServiceMock.Verify(c => c.DeassignExistingCourseToPosAndDept(
+                bulkCourseDeassignModelMock.CourseName,
+                bulkCourseDeassignModelMock.Department,
+                bulkCourseDeassignModelMock.Possition,
+                bulkCourseDeassignModelMock.DueDate), Times.Once);
 
         }
-
-        [TestMethod]
-        public void RedirectToDefaultView_WhenNoParamsAreGiven()
-        {
-            //Arrange
-            var jsonParserMock = new Mock<IJsonParserService>();
-            var courseServiceMock = new Mock<ICourseService>();
-            var userServicesMock = new Mock<IUserServices>();
-            var departmentServiceMock = new Mock<IDepartmenService>();
-            var possitionServiceMock = new Mock<IPositionService>();
-
-            var adminContoller = new AdminController(
-                jsonParserMock.Object,
-                courseServiceMock.Object,
-                userServicesMock.Object,
-                departmentServiceMock.Object,
-                possitionServiceMock.Object);
-
-            //Act & Assert
-            adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign())
-                .ShouldRenderDefaultView();
-
-            courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
-            userServicesMock.Verify(u => u.ReturnAllUserNames(), Times.Once);
-        }
-
         [TestMethod]
         public void ReturDefaultView_WhenParamsAreNotCorrect()
         {
@@ -92,27 +92,29 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
+            var bulkCourseDeassignModelMock = new CourseToPosDepDeassign
             {
-                Username = "fake@user.com",
+                Department = "DepMock",
+                Possition = "PosMock",
                 CourseName = "SomeCourse",
-                DueDate = DateTime.Now,
-                IsMandatory = true
+                DueDate = DateTime.Now
             };
 
-            courseServiceMock.Setup(c => c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory))
+            courseServiceMock.Setup(c => c.DeassignExistingCourseToPosAndDept(
+                bulkCourseDeassignModelMock.CourseName,
+                bulkCourseDeassignModelMock.Department,
+                bulkCourseDeassignModelMock.Possition,
+                bulkCourseDeassignModelMock.DueDate))
                 .Throws<ArgumentNullException>();
+
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
-                .ShouldRenderDefaultView().WithModel<CourseToUser>();
+                .WithCallTo(c => c.BulkCourseDeassign(bulkCourseDeassignModelMock))
+                .ShouldRenderDefaultView().WithModel<CourseToPosDepDeassign>();
 
-            courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
-            userServicesMock.Verify(u => u.ReturnAllUserNames(), Times.Once);
+            courseServiceMock.Verify(c => c.ReturnAllCourseNames());
+            departmentServiceMock.Verify(d => d.ReturnAllDepartmentNames());
+            possitionServiceMock.Verify(p => p.ReturnAllPossitionNames());
         }
     }
 }

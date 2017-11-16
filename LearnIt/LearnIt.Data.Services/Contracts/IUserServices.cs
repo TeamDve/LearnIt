@@ -12,7 +12,7 @@ namespace LearnIt.Data.Services.Contracts
     {
         IEnumerable<NameHolder> ReturnAllUserNames();
 
-        Task AsignUserToAdmin(string username);
+        Task AssignUserToAdmin(string username);
 
         Task DeasignUserFromAdmin(string id);
 

@@ -12,6 +12,9 @@ namespace LearnIt.Areas.Courses.Controllers
     [Authorize]
     public class CoursesController : Controller
     {
+        private const string pending = "Pending";
+        private const string started = "Started";
+        private const string completed = "Completed";
         private readonly ICourseService courseService;
 
         public CoursesController(ICourseService courseService)
@@ -29,6 +32,7 @@ namespace LearnIt.Areas.Courses.Controllers
                                     Description = x.Description,
                                     ScoreToPass = x.ScoreToPass
                                 });
+            
             return this.View(viewModel);
         }
 
@@ -47,10 +51,12 @@ namespace LearnIt.Areas.Courses.Controllers
 
         [HttpGet]
         [ActionName("GoStudy")]
-        public ActionResult StartPresentation(string name)
+        public async Task<ActionResult> StartPresentation(string name)
         {
             ViewBag.areQuestionsAvailable = courseService.GetCourseCompletionRate(name);
             ViewBag.HiddenInput = name;
+            Session["currentCourse"] = name;
+            await courseService.ChangeUserCourseStatus(name, started);
             return this.View();
         }
 
@@ -67,14 +73,15 @@ namespace LearnIt.Areas.Courses.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendAnswers(IEnumerable<QuestionInfo> questionsEnumerable)
         {
-            List<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions((string)Session["currentCourse"])
+            var courseName = (string)Session["currentCourse"];
+            List<QuestionInfo> questionsAndAnswers = courseService.GetAllCourseQuestions(courseName)
                                                    .Select(x => new QuestionInfo()
                                                    {
                                                        Qstn = x.Qstn,
                                                        Answers = (x.Answers).Split('/'),
                                                        RightAnswer = x.RightAnswer
                                                    }).ToList();
-            var scoreToPass = courseService.GetCourseInfoDataByName((string)Session["currentCourse"]);
+            var scoreToPass = courseService.GetCourseInfoDataByName(courseName);
             int pointsPerQuestion = (scoreToPass.ScoreToPass / questionsAndAnswers.Count)+15;
             ExamResults examResults = new ExamResults() { ScoreToPass = scoreToPass.ScoreToPass};
             foreach (var qstn in questionsEnumerable)
@@ -91,9 +98,9 @@ namespace LearnIt.Areas.Courses.Controllers
             if (examResults.Score >= examResults.ScoreToPass)
             {
                 examResults.Pass = true;
-                
+                //await courseService.ChangeUserCourseStatus(courseName, completed);
             }
-            await courseService.SetCourseCompletionRate((string)Session["currentCourse"], examResults.Pass);
+            await courseService.SetCourseCompletionRate(courseName, examResults.Pass);
             return this.PartialView("_Results",examResults);
         }
 
@@ -108,7 +115,7 @@ namespace LearnIt.Areas.Courses.Controllers
                                                                    Answers = (x.Answers).Split('/'),
                                                                    RightAnswer = x.RightAnswer
                                                                }).ToList();
-            Session["currentCourse"] = name;
+            
             return this.PartialView("_Questions",questionsAndAnswers);
         }
 

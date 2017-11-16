@@ -2,7 +2,7 @@
     @{
         ViewBag.Title = "Home Page";
     }
-<h2>Your hole life is a learning quest.Don`t let someone take the lead!</h2>
+<h2>Your whole life is a learning quest.Don`t let anyone else choose your path!</h2>
 
 <div  id="image-container" style="float:left">
     <img id="learning" src="../../Content/images/Learning.png" margin-right:5px>
@@ -15,9 +15,10 @@
 
 @foreach (var item in Model)
 {
+    <hr>
     <div id ="course">@item.Name <br>
          @item.Description<br>
-         @item.DateAdded</div>
+         @item.DateAdded.ToString("dd/MM/yyyy")</div>
 
 
 }

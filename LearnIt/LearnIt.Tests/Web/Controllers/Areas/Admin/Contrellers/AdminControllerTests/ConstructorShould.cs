@@ -1,14 +1,8 @@
 ﻿using LearnIt.Areas.Admin.Controllers;
-using LearnIt.Data.Context;
-using LearnIt.Data.Models;
-using LearnIt.Data.Services;
 using LearnIt.Data.Services.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
 namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerTests
 {

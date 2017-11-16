@@ -29,6 +29,8 @@ namespace LearnIt.Data.Services.Contracts
 
         Task TryCompleteCourse(string courseName);
 
+        Task ChangeUserCourseStatus(string courseName, string status);
+
         Task AddCourseToDb(string name, string desc, DateTime date, int scoreToPass, bool required);
 
         Task AddCourseToDb(Course courseToAdd);

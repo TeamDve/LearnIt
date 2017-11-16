@@ -96,6 +96,19 @@ namespace LearnIt.Data.Services
             await ExecuteQuery();
         }
 
+        public async Task ChangeUserCourseStatus(string courseName, string status)
+        {
+
+            var usersCourse = this.dbContext.UsersCourses
+                                        .Where(x => x.Course.Name == courseName)
+                                        .First();
+
+            Enum.TryParse(status, out CourseStatus courseStatus);
+
+            usersCourse.Status = courseStatus;
+            await ExecuteQuery();
+        }
+
         public IEnumerable<CourseQuestions> GetAllCourseQuestions(string courseName)
         {
 

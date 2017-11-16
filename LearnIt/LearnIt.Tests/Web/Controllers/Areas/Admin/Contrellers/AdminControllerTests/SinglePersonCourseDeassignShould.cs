@@ -9,7 +9,7 @@ using TestStack.FluentMVCTesting;
 namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerTests
 {
     [TestClass]
-    public class SinglePersonCourseAssignShould
+    public class SinglePersonCourseDeassignShould
     {
         [TestMethod]
         public void RedirectToAssignCourse_WhenParamsAreCorrect()
@@ -28,24 +28,22 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
+            var singleCourseDeassignModelMock = new CourseToUserDeassign
             {
                 Username = "fake@user.com",
                 CourseName = "SomeCourse",
                 DueDate = DateTime.Now,
-                IsMandatory = true
             };
 
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
+                .WithCallTo(c => c.SinglePersonCourseDeassign(singleCourseDeassignModelMock))
                 .ShouldRedirectToRoute("");
 
-            courseServiceMock.Verify(c=>c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory),Times.Once);
+            courseServiceMock.Verify(c => c.DeassignCourseFromUser(
+                singleCourseDeassignModelMock.CourseName,
+                singleCourseDeassignModelMock.Username,
+                singleCourseDeassignModelMock.DueDate), Times.Once);
 
         }
 
@@ -68,7 +66,7 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
 
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign())
+                .WithCallTo(c => c.SinglePersonCourseDeassign())
                 .ShouldRenderDefaultView();
 
             courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
@@ -92,24 +90,22 @@ namespace LearnIt.Tests.Web.Controllers.Areas.Admin.Contrellers.AdminControllerT
                 departmentServiceMock.Object,
                 possitionServiceMock.Object);
 
-            var singleCourseAsignModelMock = new CourseToUser
+            var singleCourseDeassignModelMock = new CourseToUserDeassign
             {
                 Username = "fake@user.com",
                 CourseName = "SomeCourse",
                 DueDate = DateTime.Now,
-                IsMandatory = true
             };
 
-            courseServiceMock.Setup(c => c.AssignCourseToUser(
-                singleCourseAsignModelMock.CourseName,
-                singleCourseAsignModelMock.Username,
-                singleCourseAsignModelMock.DueDate,
-                singleCourseAsignModelMock.IsMandatory))
+            courseServiceMock.Setup(c => c.DeassignCourseFromUser(
+                singleCourseDeassignModelMock.CourseName,
+                singleCourseDeassignModelMock.Username,
+                singleCourseDeassignModelMock.DueDate))
                 .Throws<ArgumentNullException>();
             //Act & Assert
             adminContoller
-                .WithCallTo(c => c.SinglePersonCourseAssign(singleCourseAsignModelMock))
-                .ShouldRenderDefaultView().WithModel<CourseToUser>();
+                .WithCallTo(c => c.SinglePersonCourseDeassign(singleCourseDeassignModelMock))
+                .ShouldRenderDefaultView().WithModel<CourseToUserDeassign>();
 
             courseServiceMock.Verify(c => c.ReturnAllCourseNames(), Times.Once);
             userServicesMock.Verify(u => u.ReturnAllUserNames(), Times.Once);
