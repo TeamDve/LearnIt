@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bytes2you.Validation;
 using LearnIt.Data.DataModels;
 using LearnIt.Data.Context;
 using LearnIt.Data.Models;
@@ -16,7 +17,9 @@ namespace LearnIt.Data.Services
         //Tested
         public PositionService(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+
+            this.dbContext = dbContext;
         }
         //----------------------------------------------
         public IEnumerable<NameHolder> ReturnAllPossitionNames()

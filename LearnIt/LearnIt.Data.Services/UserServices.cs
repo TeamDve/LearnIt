@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bytes2you.Validation;
 
 namespace LearnIt.Data.Services
 {
@@ -18,7 +19,9 @@ namespace LearnIt.Data.Services
 
         public UserServices(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext cannot be null");
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+
+            this.dbContext = dbContext;
         }
         //----------------------------------------------
 
