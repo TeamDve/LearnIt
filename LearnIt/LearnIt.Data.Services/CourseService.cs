@@ -240,8 +240,7 @@ namespace LearnIt.Data.Services
         {
 
 
-            var course = dbContext.Courses.FirstOrDefault(c => c.Name == courseName) ??
-                         throw new ArgumentNullException(null, "No such course was found.");
+            var course = dbContext.Courses.FirstOrDefault(c => c.Name == courseName);// ?? throw new ArgumentNullException(null, "No such course was found.");
            
            
 
